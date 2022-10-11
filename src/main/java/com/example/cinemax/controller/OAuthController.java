@@ -17,6 +17,9 @@ public class OAuthController {
         this.userService = userService;
     }
 
-
     // methods login
+
+    public void checkCredentials() {
+        userService.getCredentials();
+    }
 }

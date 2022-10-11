@@ -12,4 +12,7 @@ public class UserServiceImpl implements UserService {
     // field inject
     @Autowired
     private UserRepository userRepository;
+
+    public void getCredentials() {
+    }
 }
