@@ -2,15 +2,12 @@ package com.example.cinemax.repository.impl;
 
 import lombok.*;
 
+@Data
 @AllArgsConstructor
 public class UserCredentials {
     @NonNull
-    @Getter
-    @Setter
     private String login;
 
     @Getter
-    @Setter
-    @NonNull
     private String password;
 }
