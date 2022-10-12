@@ -1,5 +1,6 @@
 package com.example.cinemax.controller;
 
+import com.example.cinemax.repository.impl.UserCredentials;
 import com.example.cinemax.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,10 @@ public class OAuthController {
         this.userService = userService;
     }
 
-
     // methods login
+
+    public void checkCredentials() {
+        UserCredentials myUser = userService.getCredentials("myLogin");
+        // do some checks...
+    }
 }
