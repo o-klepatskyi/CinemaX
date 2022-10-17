@@ -4,8 +4,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import org.springframework.context.annotation.Configuration;
 import ua.edu.ukma.cinemax.stat.service.StatisticsService;
 
+@Configuration
 @EnableAutoConfiguration
 @ConditionalOnClass(StatisticsService.class)
 @ConditionalOnProperty(prefix = "stat", name = "enabled", havingValue = "true")
