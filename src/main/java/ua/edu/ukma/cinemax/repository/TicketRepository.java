@@ -1,9 +1,7 @@
-package ua.edu.ukma.cinemax.stat.repository;
+package ua.edu.ukma.cinemax.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 

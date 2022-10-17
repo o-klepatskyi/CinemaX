@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.stat.repository;
+package ua.edu.ukma.cinemax.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
