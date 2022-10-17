@@ -1,6 +1,6 @@
-package com.example.cinemax.repository;
+package ua.edu.ukma.cinemax.repository;
 
-import com.example.cinemax.repository.impl.UserCredentials;
+import ua.edu.ukma.cinemax.repository.impl.UserCredentials;
 import lombok.NonNull;
 
 public interface UserRepository {

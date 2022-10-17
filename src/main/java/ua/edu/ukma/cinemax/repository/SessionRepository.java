@@ -1,4 +1,4 @@
-package com.example.cinemax.repository;
+package ua.edu.ukma.cinemax.repository;
 
 public interface SessionRepository {
 }

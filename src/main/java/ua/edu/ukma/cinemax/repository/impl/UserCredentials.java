@@ -1,4 +1,4 @@
-package com.example.cinemax.repository.impl;
+package ua.edu.ukma.cinemax.repository.impl;
 
 import lombok.*;
 

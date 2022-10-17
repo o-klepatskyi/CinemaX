@@ -1,4 +1,4 @@
-package com.example.cinemax;
+package ua.edu.ukma.cinemax;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

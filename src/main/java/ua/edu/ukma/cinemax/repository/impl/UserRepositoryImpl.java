@@ -1,6 +1,6 @@
-package com.example.cinemax.repository.impl;
+package ua.edu.ukma.cinemax.repository.impl;
 
-import com.example.cinemax.repository.UserRepository;
+import ua.edu.ukma.cinemax.repository.UserRepository;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
-package com.example.cinemax.service.impl;
+package ua.edu.ukma.cinemax.service.impl;
 
-import com.example.cinemax.repository.UserRepository;
-import com.example.cinemax.repository.impl.UserCredentials;
-import com.example.cinemax.service.UserService;
+import ua.edu.ukma.cinemax.repository.UserRepository;
+import ua.edu.ukma.cinemax.repository.impl.UserCredentials;
+import ua.edu.ukma.cinemax.service.UserService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

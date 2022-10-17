@@ -1,7 +1,6 @@
-package com.example.cinemax.controller;
+package ua.edu.ukma.cinemax.controller;
 
-import com.example.cinemax.service.FilmService;
-import com.example.cinemax.service.SessionService;
+import ua.edu.ukma.cinemax.service.SessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
