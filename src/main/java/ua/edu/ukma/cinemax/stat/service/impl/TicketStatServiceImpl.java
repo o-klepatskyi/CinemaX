@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import ua.edu.ukma.cinemax.repository.TicketRepository;
+import ua.edu.ukma.cinemax.repository.TicketStats;
 import ua.edu.ukma.cinemax.stat.service.StatisticsService;
 
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.Date;
 @EnableScheduling
 public class TicketStatServiceImpl implements StatisticsService {
     @Autowired
-    private TicketRepository ticketRepository;
+    private TicketStats ticketRepository;
 
     @Scheduled(fixedRateString = "${stat.updateTimeMs}")
     public void updateStatistics() {

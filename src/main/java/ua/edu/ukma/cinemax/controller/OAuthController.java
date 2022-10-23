@@ -1,5 +1,6 @@
 package ua.edu.ukma.cinemax.controller;
 
+import ua.edu.ukma.cinemax.model.User;
 import ua.edu.ukma.cinemax.repository.impl.UserCredentials;
 import ua.edu.ukma.cinemax.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class OAuthController {
     // methods login
 
     public void checkCredentials() {
-        UserCredentials myUser = userService.getCredentials("myLogin");
+        User myUser = userService.get("myLogin");
         // do some checks...
     }
 }
