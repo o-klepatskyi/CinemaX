@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FilmServiceImpl implements FilmService {
-    private FilmRepository filmRepository;
+    private final FilmRepository filmRepository;
 
     @Autowired
     public FilmServiceImpl(FilmRepository filmRepository) {
