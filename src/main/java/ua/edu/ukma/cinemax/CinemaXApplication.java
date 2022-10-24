@@ -14,14 +14,14 @@ public class CinemaXApplication {
         SpringApplication.run(CinemaXApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner run(FilmService filmService) {
-        return (String[] args) -> {
-            Film shrek = new Film();
-            shrek.setTitle("Shrek");
-            shrek.setReleaseYear(2001);
-            shrek.setDescription("Amazing start of the 21st century!");
-            filmService.add(shrek);
-        };
-    }
+//    @Bean
+////    public CommandLineRunner run(FilmService filmService) {
+////        return (String[] args) -> {
+////            Film shrek = new Film();
+////            shrek.setTitle("Shrek");
+////            shrek.setReleaseYear(2001);
+////            shrek.setDescription("Amazing start of the 21st century!");
+////            filmService.add(shrek);
+////        };
+////    }
 }
