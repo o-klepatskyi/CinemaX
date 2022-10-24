@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.controller;
+package ua.edu.ukma.cinemax.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.controller;
+package ua.edu.ukma.cinemax.api.controller;
 
 import ua.edu.ukma.cinemax.service.SessionService;
 import lombok.AllArgsConstructor;

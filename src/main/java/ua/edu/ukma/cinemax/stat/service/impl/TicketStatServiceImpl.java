@@ -15,7 +15,6 @@ public class TicketStatServiceImpl implements StatisticsService {
     @Autowired
     private TicketStats ticketRepository;
 
-    @Scheduled(fixedRateString = "${stat.updateTimeMs}")
     public void updateStatistics() {
         ticketRepository.updateData(); // !!! this needs to be database query
         System.out.println(new Date() + " | Updated statistics!");
