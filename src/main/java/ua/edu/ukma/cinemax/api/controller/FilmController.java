@@ -1,5 +1,7 @@
 package ua.edu.ukma.cinemax.api.controller;
 
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
@@ -14,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/film")
 public class FilmController {
+    final static Logger logger = LoggerFactory.getLogger(FilmController.class);
 
     private final FilmService filmService;
 

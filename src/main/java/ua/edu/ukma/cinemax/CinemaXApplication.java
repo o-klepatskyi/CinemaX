@@ -14,20 +14,20 @@ public class CinemaXApplication {
     public static void main(String[] args) {
         SpringApplication.run(CinemaXApplication.class, args);
     }
-    @Bean
-    @Profile("dev")
-    public CommandLineRunner run(FilmService filmService) {
-        return (String[] args) -> {
-            Film shrek = new Film();
-            shrek.setTitle("Shrek");
-            shrek.setReleaseYear(2001);
-            shrek.setDescription("Amazing start of the 21st century!");
-            filmService.add(shrek);
-            Film test = new Film();
-            test.setTitle("Test film");
-            test.setReleaseYear(9999);
-            test.setDescription("Testing description...");
-            filmService.add(test);
-       };
-   }
+//    @Bean
+//    @Profile("dev")
+//    public CommandLineRunner run(FilmService filmService) {
+//        return (String[] args) -> {
+//            Film shrek = new Film();
+//            shrek.setTitle("Shrek");
+//            shrek.setReleaseYear(2001);
+//            shrek.setDescription("Amazing start of the 21st century!");
+//            filmService.add(shrek);
+//            Film test = new Film();
+//            test.setTitle("Test film");
+//            test.setReleaseYear(9999);
+//            test.setDescription("Testing description...");
+//            filmService.add(test);
+//       };
+//   }
 }

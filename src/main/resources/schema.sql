@@ -54,6 +54,12 @@ CREATE TABLE tickets
     CONSTRAINT pk_tickets PRIMARY KEY (id)
 );
 
+CREATE TABLE logger
+(
+    id              BIGINT AUTO_INCREMENT NOT NULL,
+    message         TEXT
+);
+
 
 ALTER TABLE orders
     ADD CONSTRAINT FK_ORDERS_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
