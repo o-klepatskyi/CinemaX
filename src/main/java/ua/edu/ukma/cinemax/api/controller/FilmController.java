@@ -16,13 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/film")
 public class FilmController {
+    private static int requestId = 0;
     final static Logger logger = LoggerFactory.getLogger(FilmController.class);
 
     private final FilmService filmService;
 
     @PostMapping("/add")
     public void add(@RequestBody ApiFilm film) {
+        MDC.put("request_id", "film/add/:request_id: " + requestId++);
         filmService.add(film.toModel());
+        MDC.clear();
     }
 
     @GetMapping(
