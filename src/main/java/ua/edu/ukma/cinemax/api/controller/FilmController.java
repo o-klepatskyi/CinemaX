@@ -2,20 +2,22 @@ package ua.edu.ukma.cinemax.api.controller;
 
 import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
-import ua.edu.ukma.cinemax.exception.InvalidFilmDataException;
-import ua.edu.ukma.cinemax.exception.InvalidUserDataException;
 import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -27,14 +29,10 @@ public class FilmController {
     private final FilmService filmService;
 
     @PostMapping("/add")
-    public void add(@Validated @RequestBody ApiFilm film) {
-        try {
-            MDC.put("request_id", "film/add/:request_id: " + requestId++);
-            filmService.add(film.toModel());
-            MDC.clear();
-        } catch (MethodArgumentNotValidException e) {
-            throw new InvalidFilmDataException("Invalid film data", e);
-        }
+    public void add(@Valid @RequestBody ApiFilm film) {
+        MDC.put("request_id", "film/add/:request_id: " + requestId++);
+        filmService.add(film.toModel());
+        MDC.clear();
     }
 
     @GetMapping(
@@ -77,8 +75,18 @@ public class FilmController {
         filmService.delete(id);
     }
 
-    @ExceptionHandler(InvalidFilmDataException.class)
-    public void handleException() {
-
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+            logger.info("Validation: " + fieldName + " " + errorMessage);
+        });
+        return errors;
     }
+
 }

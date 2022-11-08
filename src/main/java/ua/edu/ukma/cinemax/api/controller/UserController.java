@@ -34,13 +34,9 @@ public class UserController {
 
     @PostMapping("/add")
     public void add(@Validated @RequestBody ApiUser user) {
-        try {
-            MDC.put("request_id", "user/add/:request_id: " + requestId++);
-            userService.add(user.toModel());
-            MDC.clear();
-        } catch (MethodArgumentNotValidException e) {
-            throw new InvalidUserDataException("Invalid user data", e);
-        }
+        MDC.put("request_id", "user/add/:request_id: " + requestId++);
+        userService.add(user.toModel());
+        MDC.clear();
     }
 
     @GetMapping(

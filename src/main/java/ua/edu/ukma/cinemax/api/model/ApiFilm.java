@@ -1,14 +1,24 @@
 package ua.edu.ukma.cinemax.api.model;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import ua.edu.ukma.cinemax.model.Film;
+
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
 public class ApiFilm {
+    @Id
     private Long id;
+    @Length(max=100)
+    @NotBlank
     private String title;
-    private int releaseYear;
+    @Min(1900)
+    private Integer releaseYear;
+    @Length(max=200)
     private String description;
     private Long tmdbId;
 
