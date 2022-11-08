@@ -21,4 +21,6 @@ public class Film {
     @Column(name = "release_year")
     private int releaseYear;
     private String description;
+    @Column(name = "tmdb_id")
+    private Long tmdbId;
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
 import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
@@ -18,7 +19,7 @@ import java.util.List;
 public class FilmController {
     private static int requestId = 0;
     final static Logger logger = LoggerFactory.getLogger(FilmController.class);
-
+    private final String TMDB_API_KEY = "f01d701a4e11f965d65f4fce27d098e5";
     private final FilmService filmService;
 
     @PostMapping("/add")
@@ -38,14 +39,32 @@ public class FilmController {
         return apiFilms;
     }
 
-    @PutMapping(path = "edit/{id}")
+    @GetMapping(path = "/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ApiFilm select(@PathVariable Long id) {
+        return new ApiFilm(filmService.get(id));
+    }
+
+    @GetMapping(path = "/details/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String selectDetails(@PathVariable Long id) {
+        Film film = filmService.get(id);
+        final String uri = String.format(
+                "https://api.themoviedb.org/3/movie/%d?api_key=%s",
+                film.getTmdbId(), TMDB_API_KEY);
+        logger.info("Sending api request: " + uri);
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, String.class);
+    }
+
+    @PutMapping(path = "/{id}")
     public void edit(@PathVariable Long id,
                      @RequestBody ApiFilm film) {
         film.setId(id);
         filmService.update(film.toModel());
     }
 
-    @DeleteMapping(path = "delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable Long id) {
         filmService.delete(id);
     }
