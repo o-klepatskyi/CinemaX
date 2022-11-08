@@ -1,16 +1,14 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.slf4j.MarkerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class FilmServiceImpl implements FilmService {
