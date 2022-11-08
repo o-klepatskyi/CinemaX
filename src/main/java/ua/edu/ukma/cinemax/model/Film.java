@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "films")
@@ -17,6 +18,7 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String title;
     @Column(name = "release_year")
     private int releaseYear;
