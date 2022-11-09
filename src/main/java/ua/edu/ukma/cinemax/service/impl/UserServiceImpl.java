@@ -23,11 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        try {
-            return userRepository.save(user);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidUserDataException("Can't save the user " + user , e);
-        }
+        return userRepository.save(user);
     }
 
     @Override
@@ -56,10 +52,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<String> handleException(InvalidUserDataException e) {
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
     }
 }

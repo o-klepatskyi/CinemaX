@@ -1,16 +1,19 @@
 package ua.edu.ukma.cinemax.api.controller;
 
+import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
+import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 import lombok.AllArgsConstructor;
@@ -54,7 +57,11 @@ public class FilmController {
     @GetMapping(path = "/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ApiFilm select(@PathVariable Long id) {
-        return new ApiFilm(filmService.get(id));
+        try {
+            return new ApiFilm(filmService.get(id));
+        } catch (EntityNotFoundException e) {
+            throw new InvalidIDException("There's no such film with id = " + id, e);
+        }
     }
 
     @GetMapping(path = "/details/{id}",
@@ -78,7 +85,11 @@ public class FilmController {
 
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable Long id) {
-        filmService.delete(id);
+        try {
+            filmService.delete(id);
+        } catch (EntityNotFoundException e) {
+            throw new InvalidIDException("There's no such film with id = " + id, e);
+        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -95,4 +106,8 @@ public class FilmController {
         return errors;
     }
 
+    @ExceptionHandler
+    public ResponseEntity<String> handleException(InvalidIDException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
 }

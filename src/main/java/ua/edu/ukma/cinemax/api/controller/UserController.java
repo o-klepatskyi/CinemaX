@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,9 +37,13 @@ public class UserController {
 
     @PostMapping("/add")
     public void add(@Valid @RequestBody ApiUser user) {
-        MDC.put("request_id", "user/add/:request_id: " + requestId++);
-        userService.add(user.toModel());
-        MDC.clear();
+        try {
+            MDC.put("request_id", "user/add/:request_id: " + requestId++);
+            userService.add(user.toModel());
+            MDC.clear();
+        } catch (IllegalArgumentException e) {
+            throw new InvalidUserDataException("Can't save the user " + user , e);
+        }
     }
 
     @GetMapping(
@@ -60,5 +66,10 @@ public class UserController {
     @DeleteMapping(path = "delete/{id}")
     public void delete(@PathVariable Long id) {
         userService.delete(id);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleException(InvalidUserDataException e) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
     }
 }

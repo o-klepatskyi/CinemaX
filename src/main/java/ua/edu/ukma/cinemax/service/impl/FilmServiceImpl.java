@@ -36,11 +36,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Film get(Long id) {
-        try {
-            return filmRepository.getReferenceById(id);
-        } catch (EntityNotFoundException e) {
-            throw new InvalidIDException("There's no such film with id = " + id, e);
-        }
+        return filmRepository.getReferenceById(id);
     }
 
     @Override
@@ -59,15 +55,6 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void delete(Long id) {
-        try {
-            filmRepository.deleteById(id);
-        } catch (EntityNotFoundException e) {
-            throw new InvalidIDException("There's no such film with id = " + id, e);
-        }
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<String> handleException(InvalidIDException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        filmRepository.deleteById(id);
     }
 }
