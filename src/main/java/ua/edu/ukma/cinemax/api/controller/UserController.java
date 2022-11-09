@@ -2,6 +2,7 @@ package ua.edu.ukma.cinemax.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public void add(@Validated @RequestBody ApiUser user) {
+    public void add(@Valid @RequestBody ApiUser user) {
         MDC.put("request_id", "user/add/:request_id: " + requestId++);
         userService.add(user.toModel());
         MDC.clear();
@@ -59,10 +60,5 @@ public class UserController {
     @DeleteMapping(path = "delete/{id}")
     public void delete(@PathVariable Long id) {
         userService.delete(id);
-    }
-
-    @ExceptionHandler(InvalidUserDataException.class)
-    public void handleException() {
-        
     }
 }
