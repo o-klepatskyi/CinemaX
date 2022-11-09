@@ -8,6 +8,7 @@ public interface SessionService {
     Session add(Session session);
 
     Session get(Long id);
+    List<Session> get();
 
     List<Session> getAvailableSessions(Long filmId, LocalDate date);
 
