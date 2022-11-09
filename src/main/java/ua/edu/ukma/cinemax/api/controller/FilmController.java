@@ -2,6 +2,8 @@ package ua.edu.ukma.cinemax.api.controller;
 
 import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.FieldError;
@@ -20,13 +22,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/film")
 public class FilmController {
     private static int requestId = 0;
     final static Logger logger = LoggerFactory.getLogger(FilmController.class);
-    private final String TMDB_API_KEY = "f01d701a4e11f965d65f4fce27d098e5";
+    private final String TMDB_API_KEY;
     private final FilmService filmService;
+
+    public FilmController(@Value("${tmdb_api_key}") String key, @Autowired FilmService filmService) {
+        this.TMDB_API_KEY = key;
+        this.filmService = filmService;
+    }
 
     @PostMapping("/add")
     public void add(@Valid @RequestBody ApiFilm film) {
