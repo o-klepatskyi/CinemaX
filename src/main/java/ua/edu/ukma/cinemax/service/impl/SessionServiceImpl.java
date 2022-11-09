@@ -1,7 +1,6 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import ua.edu.ukma.cinemax.model.Session;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionServiceImpl implements SessionService {
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59, 59);
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
 
     @Autowired
     public SessionServiceImpl(SessionRepository sessionRepository) {
@@ -29,6 +28,9 @@ public class SessionServiceImpl implements SessionService {
     public Session get(Long id) {
         return sessionRepository.getReferenceById(id);
     }
+
+    @Override
+    public List<Session> get() {return sessionRepository.findAll();}
 
     @Override
     public List<Session> getAvailableSessions(Long filmId, LocalDate date) {

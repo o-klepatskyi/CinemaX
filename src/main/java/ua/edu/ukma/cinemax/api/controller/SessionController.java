@@ -36,6 +36,14 @@ public class SessionController {
         MDC.clear();
     }
 
+    @GetMapping("/all")
+    public List<ApiSession> all() {
+        List<Session> sessions = sessionService.get();
+        List<ApiSession> apiSessions = new ArrayList<>(sessions.size());
+        sessions.forEach(s -> apiSessions.add(new ApiSession(s)));
+        return apiSessions;
+    }
+
     @GetMapping(
             path = "/available/{id}/{date}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
