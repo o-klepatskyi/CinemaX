@@ -67,7 +67,7 @@ public class FilmController {
     @GetMapping(path = "/details/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public String selectDetails(@PathVariable Long id) {
-        Film film = filmService.get(id);
+        ApiFilm film = select(id);
         final String uri = String.format(
                 "https://api.themoviedb.org/3/movie/%d?api_key=%s",
                 film.getTmdbId(), TMDB_API_KEY);
@@ -80,7 +80,11 @@ public class FilmController {
     public void edit(@PathVariable Long id,
                      @RequestBody ApiFilm film) {
         film.setId(id);
-        filmService.update(film.toModel());
+        try {
+            filmService.update(film.toModel());
+        } catch (EntityNotFoundException e) {
+            throw new InvalidIDException("There's no such film with id = " + id, e);
+        }
     }
 
     @DeleteMapping(path = "/{id}")
