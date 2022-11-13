@@ -23,6 +23,10 @@ repositories {
 
 dependencies {
     /* implementation("org.springframework.boot:spring-boot-starter-jdbc") */
+    // http://localhost:8080/docs
+    // http://localhost:8080/docs.yaml
+    // http://localhost:8080/swagger-ui.html
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.4");
     implementation("org.springframework.boot:spring-boot-starter-data-jpa");
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
