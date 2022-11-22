@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
     /* implementation("org.springframework.boot:spring-boot-starter-jdbc") */
+    implementation("org.springframework.boot:spring-boot-starter-security")
     // http://localhost:8080/docs
     // http://localhost:8080/docs.yaml
     // http://localhost:8080/swagger-ui.html
