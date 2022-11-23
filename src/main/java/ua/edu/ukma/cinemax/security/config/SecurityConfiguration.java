@@ -1,5 +1,7 @@
 package ua.edu.ukma.cinemax.security.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,33 +18,46 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import ua.edu.ukma.cinemax.api.controller.FilmController;
+
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
     public static final String USER = "USER";
     public static final String ADMIN = "ADMIN";
+
+    final static Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.csrf().disable()
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http//.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("film/all", "film/{id}", "film/{id}", "film/{id}").hasRole(ADMIN)
-                .antMatchers(HttpMethod.GET, "film/{id}").anonymous()
-                .and().httpBasic();
+                .antMatchers("/film/add").hasAuthority(ADMIN)
+                .antMatchers(HttpMethod.DELETE, "/film/**").hasAuthority(ADMIN)
+                .antMatchers(HttpMethod.POST, "/film/**").hasAuthority(ADMIN)
+                .antMatchers(HttpMethod.PUT, "/film/**").hasAuthority(ADMIN)
+                .antMatchers("/film/details/**").authenticated()
+                .anyRequest().permitAll()
+//                .antMatchers(HttpMethod.GET, "film/details/**").authenticated()
+
+                 //                 .antMatchers("film/all", "film/{id}").hasAuthority(ADMIN)
+//                 .antMatchers(HttpMethod.GET, "film/{id}").anonymous()
+                 .and().httpBasic();
+        return http.build();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("user").roles(USER).and()
-                .withUser("admin").password("admin").roles(ADMIN);
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user = User.withUsername("user").password("user").authorities(USER).build();
+        UserDetails admin = User.withUsername("admin").password("admin").authorities(ADMIN).build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
