@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Films</title>
+  <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+  <div>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <hr/>
+    <h2>All Films:</h2>
+    <table border="2">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Release Year</th>
+          <th>Description</th>
+          <th>TMDB ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="film: ${films}">
+          <td th:text="${film.id}"></td>
+          <td th:text="${film.title}"></td>
+          <td th:text="${film.releaseYear}"></td>
+          <td th:text="${film.description}"></td>
+          <td th:text="${film.tmdbId}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div sec:authorize="hasRole('ADMIN')">
+    <hr/>
+    <button onclick="window.location.href='/film/add'">Add Film</button>
+  </div>
+  <div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

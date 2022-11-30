@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Film</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+    <div>
+        <h1>Add Film</h1>
+        <form action="#" th:action="@{/film/add}" method="post" th:object="${film}">
+            <label>Title:</label>
+            <input type="text" th:field="*{title}" /><br/>
+
+            <label>Release Year:</label>
+            <input type="number" th:field="*{releaseYear}" /><br/>
+
+            <label>Description:</label>
+            <input type="text" th:field="*{description}" /><br/>
+
+            <label>TMDB ID:</label>
+            <input type="number" th:field="*{tmdbId}" /><br/>
+
+            <button type="submit" >Add Film</button>
+        </form>
+    </div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selected Film</title>
+</head>
+<body>
+    <div>
+        <h1>Selected film</h1>
+        </hr>
+        <p th:text="'ID: ' + ${film.id}"></p>
+        <p th:text="'Title: ' + ${film.title}"></p>
+        <p th:text="'Release Year: ' + ${film.releaseYear}"></p>
+        <p th:text="'Description: ' + ${film.description}"></p>
+        <!--a th:href="@{/film/details/${film.id}}">See Details</a!-->
+    </div>
+</body>
+</html>

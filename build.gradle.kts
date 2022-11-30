@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
     /* implementation("org.springframework.boot:spring-boot-starter-jdbc") */
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-security")
     // http://localhost:8080/docs
     // http://localhost:8080/docs.yaml

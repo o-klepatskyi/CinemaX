@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +38,11 @@ public class SessionController {
     }
 
     @GetMapping("/all")
-    public List<ApiSession> all() {
+    public List<ApiSession> all(Model model) {
         List<Session> sessions = sessionService.get();
         List<ApiSession> apiSessions = new ArrayList<>(sessions.size());
         sessions.forEach(s -> apiSessions.add(new ApiSession(s)));
+        model.addAttribute("sessions", apiSessions);
         return apiSessions;
     }
 

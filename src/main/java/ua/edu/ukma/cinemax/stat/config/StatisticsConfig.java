@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import ua.edu.ukma.cinemax.stat.service.StatisticsService;
 
 @Configuration
-@EnableAutoConfiguration
 @ConditionalOnClass(StatisticsService.class)
 @ConditionalOnProperty(prefix = "stat", name = "enabled", havingValue = "true")
 @ConditionalOnResource(resources = {"${stat.path}"})
