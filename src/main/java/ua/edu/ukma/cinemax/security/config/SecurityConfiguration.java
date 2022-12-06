@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -40,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST).hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.PUT).hasRole(ADMIN.name())
                 .antMatchers("/**/add").hasRole(ADMIN.name())
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated().and().httpBasic();
         // TODO how to make login page show only for html page request and not /api/** ???
 
@@ -84,4 +86,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        UserDetails admin = User.withUsername("admin").password("admin").authorities(ADMIN.name()).build();
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
+
+    @Bean
+    public static PasswordEncoder getPasswordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
 }

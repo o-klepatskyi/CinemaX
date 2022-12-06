@@ -40,9 +40,12 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-validation:2.4.0")
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.2.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:2.23.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:4.9.0")
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +21,17 @@ import ua.edu.ukma.cinemax.model.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/cinema_hall")
 public class CinemaHallController {
     private static int requestId = 0;
     final static Logger logger = LoggerFactory.getLogger(CinemaHallController.class);
 
-    private final CinemaHallService cinemaHallService;
+    private CinemaHallService cinemaHallService;
+
+    @Autowired
+    public CinemaHallController(CinemaHallService cinemaHallService) {
+        this.cinemaHallService = cinemaHallService;
+    }
 
     @PostMapping("/add")
     public void add(@RequestBody ApiCinemaHall cinemaHall) {
