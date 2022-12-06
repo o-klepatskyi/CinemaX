@@ -17,7 +17,7 @@ import static ua.edu.ukma.cinemax.security.model.Roles.USER;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public SecurityConfiguration(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -30,20 +30,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/api/**").hasRole(ADMIN.name())
+//                .and().httpBasic();
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE).hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.POST).hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.PUT).hasRole(ADMIN.name())
                 .antMatchers("/**/add").hasRole(ADMIN.name())
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/film/all", true)
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .anyRequest().authenticated().and().httpBasic();
+        // TODO how to make login page show only for html page request and not /api/** ???
+
+//                .and()
+//                .formLogin()
+//                    .loginPage("/login")
+//                    .defaultSuccessUrl("/film/all", true)
+//                    .permitAll()
+//                .and()
+//                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Autowired

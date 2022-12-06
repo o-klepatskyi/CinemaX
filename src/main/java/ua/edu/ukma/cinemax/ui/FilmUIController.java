@@ -35,13 +35,13 @@ import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 
 @Controller
-public class FilmController {
+public class FilmUIController {
     private static int requestId = 0;
-    final static Logger logger = LoggerFactory.getLogger(FilmController.class);
+    final static Logger logger = LoggerFactory.getLogger(FilmUIController.class);
     private final String TMDB_API_KEY;
     private final FilmService filmService;
 
-    public FilmController(@Value("${tmdb_api_key}") String key, @Autowired FilmService filmService) {
+    public FilmUIController(@Value("${tmdb_api_key}") String key, @Autowired FilmService filmService) {
         this.TMDB_API_KEY = key;
         this.filmService = filmService;
     }

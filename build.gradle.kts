@@ -41,6 +41,8 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:2.23.0")
 }
 
 tasks.withType<KotlinCompile> {
