@@ -18,11 +18,12 @@ import static ua.edu.ukma.cinemax.security.model.Roles.USER;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private final PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
-    public SecurityConfiguration(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+//    public SecurityConfiguration(PasswordEncoder passwordEncoder) {
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
@@ -37,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .and().httpBasic();
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.DELETE).hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.POST).hasRole(ADMIN.name())
                 .antMatchers(HttpMethod.PUT).hasRole(ADMIN.name())
@@ -57,9 +59,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder.encode("user")).roles(USER.name())
+                .withUser("user").password("user").roles(USER.name())
                 .and()
-                .withUser("admin").password(passwordEncoder.encode("admin")).roles(ADMIN.name());
+                .withUser("admin").password("admin").roles(ADMIN.name());
     }
 
     //    @Bean
@@ -87,8 +89,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
 
-    @Bean
-    public static PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+//    @Bean
+//    public static PasswordEncoder getPasswordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 }

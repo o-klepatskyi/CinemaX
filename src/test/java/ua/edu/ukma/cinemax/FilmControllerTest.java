@@ -20,10 +20,6 @@ public class FilmControllerTest {
     @MockBean
     private FilmService filmService;
 
-    @Test
-    public void anonymousAccessToAllFilms() throws Exception {
-        mockMvc.perform(get("/api/film/all")).andDo(print()).andExpect(status().isOk());
-    }
 
 }
 

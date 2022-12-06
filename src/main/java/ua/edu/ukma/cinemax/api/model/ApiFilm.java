@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+@Builder
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class ApiFilm {
     @Id
