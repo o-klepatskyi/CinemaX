@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.api.controller;
+package ua.edu.ukma.cinemax.ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
