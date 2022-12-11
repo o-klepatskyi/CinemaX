@@ -13,6 +13,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
+import ua.edu.ukma.cinemax.aspects.DelayMethod;
+import ua.edu.ukma.cinemax.aspects.ParametersMethod;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
@@ -47,6 +49,7 @@ public class FilmController {
     @GetMapping(
             path = "/all",
             produces = {MediaType.APPLICATION_JSON_VALUE})
+    @DelayMethod
     public List<ApiFilm> selectAll() {
         List<Film> films = filmService.getAll();
         List<ApiFilm> apiFilms = new ArrayList<>(films.size());
@@ -56,6 +59,7 @@ public class FilmController {
 
     @GetMapping(path = "/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ParametersMethod
     public ApiFilm select(@PathVariable Long id) {
         try {
             return new ApiFilm(filmService.get(id));

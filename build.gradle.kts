@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     /* implementation("org.springframework.boot:spring-boot-starter-jdbc") */
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
