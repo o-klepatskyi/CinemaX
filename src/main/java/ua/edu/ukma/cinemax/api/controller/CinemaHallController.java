@@ -2,7 +2,7 @@ package ua.edu.ukma.cinemax.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.edu.ukma.cinemax.api.model.ApiCinemaHall;
-import ua.edu.ukma.cinemax.model.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
 
 @RestController

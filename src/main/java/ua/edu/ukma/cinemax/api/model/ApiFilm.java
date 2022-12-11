@@ -2,7 +2,7 @@ package ua.edu.ukma.cinemax.api.model;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import ua.edu.ukma.cinemax.model.Film;
+import ua.edu.ukma.cinemax.persistance.model.Film;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Min;

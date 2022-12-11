@@ -1,7 +1,7 @@
 package ua.edu.ukma.cinemax.service;
 
 import java.util.List;
-import ua.edu.ukma.cinemax.model.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
 
 public interface CinemaHallService {
     CinemaHall add(CinemaHall cinemaHall);

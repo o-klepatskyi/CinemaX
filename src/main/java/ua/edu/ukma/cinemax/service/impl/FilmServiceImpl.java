@@ -1,19 +1,14 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import ua.edu.ukma.cinemax.exception.InvalidIDException;
-import ua.edu.ukma.cinemax.model.Film;
-import ua.edu.ukma.cinemax.repository.FilmRepository;
+import ua.edu.ukma.cinemax.persistance.model.Film;
+import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
 
 @Service

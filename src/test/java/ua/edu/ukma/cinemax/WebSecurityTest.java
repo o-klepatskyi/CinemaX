@@ -1,7 +1,6 @@
 package ua.edu.ukma.cinemax;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,10 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ua.edu.ukma.cinemax.api.controller.FilmController;
 import ua.edu.ukma.cinemax.api.model.ApiFilm;
-import ua.edu.ukma.cinemax.model.Film;
-import ua.edu.ukma.cinemax.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
-import ua.edu.ukma.cinemax.service.impl.FilmServiceImpl;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -3,12 +3,12 @@ package ua.edu.ukma.cinemax.service.impl;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.edu.ukma.cinemax.model.Session;
-import ua.edu.ukma.cinemax.model.ShoppingCart;
-import ua.edu.ukma.cinemax.model.Ticket;
-import ua.edu.ukma.cinemax.model.User;
-import ua.edu.ukma.cinemax.repository.ShoppingCartRepository;
-import ua.edu.ukma.cinemax.repository.TicketRepository;
+import ua.edu.ukma.cinemax.persistance.model.Session;
+import ua.edu.ukma.cinemax.persistance.model.ShoppingCart;
+import ua.edu.ukma.cinemax.persistance.model.Ticket;
+import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.repository.ShoppingCartRepository;
+import ua.edu.ukma.cinemax.persistance.repository.TicketRepository;
 import ua.edu.ukma.cinemax.service.ShoppingCartService;
 
 @Service

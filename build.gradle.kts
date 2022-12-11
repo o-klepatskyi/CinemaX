@@ -24,8 +24,9 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     /* implementation("org.springframework.boot:spring-boot-starter-jdbc") */
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5")
-    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+//    implementation("org.thymeleaf:thymeleaf")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.springframework.boot:spring-boot-starter-security")
     // http://localhost:8080/docs
     // http://localhost:8080/docs.yaml
@@ -37,7 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
-    implementation("com.h2database:h2:1.4.200")
+    implementation("com.h2database:h2:2.1.214")
     implementation ("org.springframework.boot:spring-boot-starter-validation:2.4.0")
 
     compileOnly("org.projectlombok:lombok:1.18.24")

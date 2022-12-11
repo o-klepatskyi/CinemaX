@@ -1,6 +1,6 @@
 package ua.edu.ukma.cinemax.api.controller;
 
-import ua.edu.ukma.cinemax.model.User;
+import ua.edu.ukma.cinemax.persistance.model.User;
 import ua.edu.ukma.cinemax.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

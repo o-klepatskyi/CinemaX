@@ -1,7 +1,7 @@
 package ua.edu.ukma.cinemax.service;
 
 import java.util.List;
-import ua.edu.ukma.cinemax.model.Film;
+import ua.edu.ukma.cinemax.persistance.model.Film;
 
 public interface FilmService {
     Film add(Film film);

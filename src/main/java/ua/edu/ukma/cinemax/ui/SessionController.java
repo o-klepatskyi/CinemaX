@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.edu.ukma.cinemax.api.model.ApiSession;
-import ua.edu.ukma.cinemax.model.Session;
+import ua.edu.ukma.cinemax.persistance.model.Session;
 import ua.edu.ukma.cinemax.service.SessionService;
 
 @RestController

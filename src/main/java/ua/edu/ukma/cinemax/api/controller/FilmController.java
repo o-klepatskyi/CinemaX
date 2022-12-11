@@ -16,9 +16,8 @@ import ua.edu.ukma.cinemax.api.model.ApiFilm;
 import ua.edu.ukma.cinemax.aspects.DelayMethod;
 import ua.edu.ukma.cinemax.aspects.ParametersMethod;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
-import ua.edu.ukma.cinemax.model.Film;
+import ua.edu.ukma.cinemax.persistance.model.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
-import lombok.AllArgsConstructor;
 
 import javax.validation.Valid;
 import java.util.ArrayList;

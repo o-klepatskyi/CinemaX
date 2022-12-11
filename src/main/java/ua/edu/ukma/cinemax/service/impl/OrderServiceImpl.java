@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.edu.ukma.cinemax.model.Order;
-import ua.edu.ukma.cinemax.model.ShoppingCart;
-import ua.edu.ukma.cinemax.model.User;
-import ua.edu.ukma.cinemax.repository.OrderRepository;
+import ua.edu.ukma.cinemax.persistance.model.Order;
+import ua.edu.ukma.cinemax.persistance.model.ShoppingCart;
+import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.repository.OrderRepository;
 import ua.edu.ukma.cinemax.service.OrderService;
 import ua.edu.ukma.cinemax.service.ShoppingCartService;
 
