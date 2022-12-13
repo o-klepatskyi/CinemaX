@@ -3,7 +3,6 @@ package ua.edu.ukma.cinemax.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ua.edu.ukma.cinemax.security.config.CustomAccessDeniedHandler;
-import ua.edu.ukma.cinemax.security.model.UserDetailsServiceImpl;
 
 import static ua.edu.ukma.cinemax.security.model.Roles.ADMIN;
 
@@ -54,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/register/admin/**").hasAuthority(ADMIN.name())
-                .antMatchers("/users").hasRole("ADMIN")
+                .antMatchers("/users").hasAuthority(ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(
