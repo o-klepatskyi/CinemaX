@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.persistance.model.User;
@@ -16,14 +15,14 @@ import ua.edu.ukma.cinemax.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public ModelAndView loginForm() {
-        return new ModelAndView("login");
+    public String loginForm() {
+        return "login";
     }
 
     @GetMapping("/logout")
@@ -60,10 +59,10 @@ public class AuthController {
     }
 
     @GetMapping("/users")
-    public String users(Model model){
+    public ModelAndView users(Model model){
         List<UserDto> users = userService.getAll();
         model.addAttribute("users", users);
-        return "users";
+        return new ModelAndView("users");
     }
 
 }
