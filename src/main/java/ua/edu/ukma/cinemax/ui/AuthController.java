@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.security.model.Roles;
 import ua.edu.ukma.cinemax.service.UserService;
+import ua.edu.ukma.cinemax.validation.Validator;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
+    private final Validator<UserDto> userValidator;
 
     @GetMapping("/login")
     public String loginForm() {
@@ -54,7 +55,7 @@ public class AuthController {
     public String registration(@Valid @ModelAttribute("user") UserDto user,
                                BindingResult result,
                                Model model) {
-        checkForDuplicateUser(user, result);
+        userValidator.validateFieldConstraints(user, result);
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "register";
@@ -68,7 +69,7 @@ public class AuthController {
     public String adminRegistration(@Valid @ModelAttribute("user") UserDto user,
                                BindingResult result,
                                Model model) {
-        checkForDuplicateUser(user, result);
+        userValidator.validateFieldConstraints(user, result);
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "admin-register";
@@ -83,17 +84,6 @@ public class AuthController {
         List<UserDto> users = userService.getAll();
         model.addAttribute("users", users);
         return new ModelAndView("users");
-    }
-
-    private void checkForDuplicateUser(UserDto user, BindingResult result) {
-        User existing = userService.getByUsername(user.getUsername());
-        if (existing != null) {
-            result.rejectValue("username", null, "There is already an account registered with that username");
-        }
-        existing = userService.getByEmail(user.getEmail());
-        if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
-        }
     }
 
 }

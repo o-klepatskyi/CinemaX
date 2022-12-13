@@ -59,8 +59,11 @@ public class FilmServiceImpl implements FilmService {
                 "https://api.themoviedb.org/3/movie/%d?api_key=%s",
                 film.getTmdbId(), TMDB_API_KEY);
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        if (result == null) return null;
-        return JsonParser.parseString(result).getAsJsonObject();
+        try {
+            String result = restTemplate.getForObject(uri, String.class);
+            return JsonParser.parseString(result).getAsJsonObject();
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 }

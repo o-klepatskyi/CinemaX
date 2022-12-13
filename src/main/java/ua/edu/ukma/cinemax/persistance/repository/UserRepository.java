@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findUserByUsername(String username);
+    User findByUsername(String username);
     User findByEmail(String email);
 }

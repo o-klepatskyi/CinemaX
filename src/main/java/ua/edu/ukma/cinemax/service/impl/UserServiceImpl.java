@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserDto userDto) {
-        User entityToUpdate = userRepository.findUserByUsername(userDto.getUsername());
+        User entityToUpdate = userRepository.findByUsername(userDto.getUsername());
         userConverter.update(userDto, entityToUpdate);
         userRepository.save(entityToUpdate);
     }
