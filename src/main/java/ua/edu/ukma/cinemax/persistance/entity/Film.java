@@ -18,12 +18,12 @@ public class Film extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @Column(nullable = false)
     private String title;
-    @Column(name = "release_year")
+    @Column(name = "release_year", nullable = false)
     private int releaseYear;
     private String description;
-    @Column(name = "tmdb_id")
+    @Column(name = "tmdb_id", nullable = false, unique = true)
     private Long tmdbId;
 
     @Override

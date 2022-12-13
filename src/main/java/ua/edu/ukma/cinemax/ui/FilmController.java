@@ -3,6 +3,7 @@ package ua.edu.ukma.cinemax.ui;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
@@ -26,20 +27,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
-import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
+import ua.edu.ukma.cinemax.service.ImageService;
 
 @Controller
 @RequiredArgsConstructor
 public class FilmController {
     private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
-    @Value("${tmdb_api_key}")
-    private String TMDB_API_KEY;
     private final FilmService filmService;
+    private final ImageService imageService;
 
     @GetMapping("/film/add")
     public String getAddFrom(Model model) {
@@ -72,21 +71,21 @@ public class FilmController {
     }
 
     @GetMapping("/film/all")
-    public ModelAndView selectAll() {
-        ModelAndView mav = new ModelAndView("film/all");
+    public ModelAndView selectAll(Model model) {
         List<FilmDto> films = filmService.getAll();
-        mav.addObject("films", films);
-        return mav;
+        model.addAttribute("films", films);
+        List<String> imglinks = films.stream()
+                .map(FilmDto::getId)
+                .map(imageService::getImageLink)
+                .map(x-> "" + x)
+                .collect(Collectors.toList());
+        model.addAttribute("imglinks", );
+        return "film/all";
     }
 
     @GetMapping(path = "/film/details/{id}")
     public String selectDetails(@PathVariable Long id) {
-        Film film = filmService.get(id);
-        final String uri = String.format(
-                "https://api.themoviedb.org/3/movie/%d?api_key=%s",
-                film.getTmdbId(), TMDB_API_KEY);
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, String.class);
+        return filmService.getDetails(id).getAsString();
     }
 
     @PutMapping(path = "film/{id}")

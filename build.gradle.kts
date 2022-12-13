@@ -40,7 +40,7 @@ dependencies {
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
     implementation("com.h2database:h2:2.1.214")
     implementation ("org.springframework.boot:spring-boot-starter-validation:2.4.0")
-
+    implementation("com.google.code.gson:gson")
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok")
 

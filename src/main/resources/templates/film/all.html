@@ -9,6 +9,11 @@
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -16,24 +21,15 @@
     <hr/>
     <h2>All Films:</h2>
     <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Release Year</th>
-          <th>Description</th>
-          <th>TMDB ID</th>
+        <tr th:each="film: ${films}" th:each="imgsrc: ${imglinks}">
+          <td><img th:src="@{${'' + film.id}}" th:alt="${film.id}" width="500"/></td>
+          <td>
+            <h3 th:text="${film.title}"></h3>
+            <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>
+            <b>Description:</b>
+            <p th:text="${film.description}"></p>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <tr th:each="film: ${films}">
-          <td th:text="${film.id}"></td>
-          <td th:text="${film.title}"></td>
-          <td th:text="${film.releaseYear}"></td>
-          <td th:text="${film.description}"></td>
-          <td th:text="${film.tmdbId}"></td>
-        </tr>
-      </tbody>
     </table>
   </div>
   <div sec:authorize="hasRole('ADMIN')">
