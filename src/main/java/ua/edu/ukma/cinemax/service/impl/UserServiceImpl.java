@@ -23,10 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(UserDto userDto) {
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User user = userConverter.createFrom(userDto);
         user.setRoles(List.of(roleRepository.findByName("USER")));
         userRepository.save(user);
     }
