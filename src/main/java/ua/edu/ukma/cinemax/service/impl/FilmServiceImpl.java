@@ -2,31 +2,23 @@ package ua.edu.ukma.cinemax.service.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MarkerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.edu.ukma.cinemax.persistance.model.Film;
+import ua.edu.ukma.cinemax.dto.FilmDto;
+import ua.edu.ukma.cinemax.dto.converters.FilmConverter;
+import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
 
 @Service
+@RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
-    private static final Logger logger = LoggerFactory.getLogger(FilmServiceImpl.class);
     private final FilmRepository filmRepository;
-
-    @Autowired
-    public FilmServiceImpl(FilmRepository filmRepository) {
-        this.filmRepository = filmRepository;
-    }
+    private final FilmConverter filmConverter;
 
     @Override
-    public Film add(Film film) {
-        logger.info("Adding film: {}", film);
-        Film f = filmRepository.save(film);
-        logger.info(MarkerFactory.getMarker("DATABASE"),"Added film with id " + f.getId());
-        return f;
+    public void add(FilmDto film) {
+        filmRepository.save(filmConverter.createFrom(film));
     }
 
     @Override
@@ -35,16 +27,14 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> getAll() {
-        return filmRepository.findAll();
+    public List<FilmDto> getAll() {
+        return filmConverter.createFromEntities(filmRepository.findAll());
     }
 
     @Override
-    public void update(Film film) {
+    public void update(FilmDto film) {
         Film filmToUpdate = filmRepository.getReferenceById(film.getId());
-        filmToUpdate.setTitle(film.getTitle());
-        filmToUpdate.setReleaseYear(film.getReleaseYear());
-        filmToUpdate.setDescription(film.getDescription());
+        filmConverter.update(film, filmToUpdate);
         filmRepository.save(filmToUpdate);
     }
 

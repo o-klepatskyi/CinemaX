@@ -3,7 +3,7 @@ package ua.edu.ukma.cinemax.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.repository.CinemaHallRepository;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
 

@@ -1,12 +1,11 @@
 package ua.edu.ukma.cinemax.security.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.edu.ukma.cinemax.persistance.model.Role;
-import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.entity.Role;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 
 import java.util.ArrayList;
 import java.util.Collection;

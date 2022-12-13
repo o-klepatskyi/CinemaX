@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.persistance.model.Role;
-import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.entity.Role;
 import ua.edu.ukma.cinemax.persistance.repository.RoleRepository;
 import ua.edu.ukma.cinemax.security.model.Roles;
-import ua.edu.ukma.cinemax.service.UserService;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

@@ -1,15 +1,14 @@
 package ua.edu.ukma.cinemax.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,54 +28,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import ua.edu.ukma.cinemax.api.model.ApiFilm;
+import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
-import ua.edu.ukma.cinemax.persistance.model.Film;
+import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 
 @Controller
-public class FilmUIController {
-    private static int requestId = 0;
-    final static Logger logger = LoggerFactory.getLogger(FilmUIController.class);
-    private final String TMDB_API_KEY;
+@RequiredArgsConstructor
+public class FilmController {
+    private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
+    @Value("${tmdb_api_key}")
+    private String TMDB_API_KEY;
     private final FilmService filmService;
 
-    public FilmUIController(@Value("${tmdb_api_key}") String key, @Autowired FilmService filmService) {
-        this.TMDB_API_KEY = key;
-        this.filmService = filmService;
+    @GetMapping("/film/add")
+    public String getAddFrom(Model model) {
+        FilmDto film = new FilmDto();
+        model.addAttribute("film", film);
+        return "film/add";
     }
 
-//    @PostMapping("film/add")
-//    public void add(@Valid @RequestBody ApiFilm film) {
-//        MDC.put("request_id", "film/add/:request_id: " + requestId++);
-//        filmService.add(film.toModel());
-//        MDC.clear();
-//    }
-
-    @GetMapping("film/add")
-    public ModelAndView add() {
-        ModelAndView mav = new ModelAndView("add-film");
-        ApiFilm apiFilm = new ApiFilm();
-        mav.addObject("film", apiFilm);
-        return mav;
-    }
-
-    @PostMapping("film/add")
-    public String submitNewFilm(@Valid @RequestBody @ModelAttribute("film") ApiFilm film,
+    @PostMapping("/film/add")
+    public String submitNewFilm(@Valid @ModelAttribute("film") FilmDto film,
                                 BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("errorMessage", "Invalid film data");
-            return "redirect:/film/add";
+            model.addAttribute("film", film);
+            return "film/add";
         }
-        filmService.add(film.toModel());
-        return "redirect:/film/all";
+        filmService.add(film);
+        return "redirect:/film/add?success";
     }
 
-    @GetMapping("film/{id}")
+    @GetMapping("/film/{id}")
     public ModelAndView select(@PathVariable Long id) {
         try {
-            ModelAndView mav = new ModelAndView("selected-film");
-            mav.addObject("film", new ApiFilm(filmService.get(id)));
+            ModelAndView mav = new ModelAndView("film/details");
+            mav.addObject("film", filmService.get(id));
             //mav.addObject("details", selectDetails(id));
             return mav;
         } catch (EntityNotFoundException e) {
@@ -86,31 +73,28 @@ public class FilmUIController {
 
     @GetMapping("/film/all")
     public ModelAndView selectAll() {
-        ModelAndView mav = new ModelAndView("list-films");
-        List<Film> films = filmService.getAll();
-        List<ApiFilm> apiFilms = new ArrayList<>(films.size());
-        films.forEach((f) -> apiFilms.add(new ApiFilm(f)));
-        mav.addObject("films", apiFilms);
+        ModelAndView mav = new ModelAndView("film/all");
+        List<FilmDto> films = filmService.getAll();
+        mav.addObject("films", films);
         return mav;
     }
 
-    @GetMapping(path = "film/details/{id}")
+    @GetMapping(path = "/film/details/{id}")
     public String selectDetails(@PathVariable Long id) {
-        ApiFilm film = new ApiFilm(filmService.get(id));
+        Film film = filmService.get(id);
         final String uri = String.format(
                 "https://api.themoviedb.org/3/movie/%d?api_key=%s",
                 film.getTmdbId(), TMDB_API_KEY);
-        logger.info("Sending api request: " + uri);
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, String.class);
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "film/{id}")
     public void edit(@PathVariable Long id,
-                     @RequestBody ApiFilm film) {
+                     @RequestBody FilmDto film) {
         film.setId(id);
         try {
-            filmService.update(film.toModel());
+            filmService.update(film);
         } catch (EntityNotFoundException e) {
             throw new InvalidIDException("There's no such film with id = " + id, e);
         }

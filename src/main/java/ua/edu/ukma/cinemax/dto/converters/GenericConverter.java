@@ -1,7 +1,7 @@
 package ua.edu.ukma.cinemax.dto.converters;
 
 import ua.edu.ukma.cinemax.dto.AbstractDto;
-import ua.edu.ukma.cinemax.persistance.model.AbstractEntity;
+import ua.edu.ukma.cinemax.persistance.entity.AbstractEntity;
 
 import java.util.Collection;
 import java.util.List;

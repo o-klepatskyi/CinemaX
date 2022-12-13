@@ -1,8 +1,8 @@
 package ua.edu.ukma.cinemax.service;
 
-import ua.edu.ukma.cinemax.persistance.model.Session;
-import ua.edu.ukma.cinemax.persistance.model.ShoppingCart;
-import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.entity.Session;
+import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 
 public interface ShoppingCartService {
     void addSession(Session session, User user);

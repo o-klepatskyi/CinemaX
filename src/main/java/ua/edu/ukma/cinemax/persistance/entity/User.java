@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.persistance.model;
+package ua.edu.ukma.cinemax.persistance.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;

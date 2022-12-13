@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.dto.converters.UserConverter;
-import ua.edu.ukma.cinemax.persistance.model.User;
-import ua.edu.ukma.cinemax.persistance.repository.RoleRepository;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.UserRepository;
 import ua.edu.ukma.cinemax.service.UserService;
 
@@ -15,7 +14,6 @@ import ua.edu.ukma.cinemax.service.UserService;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final UserConverter userConverter;
 
     @Override
@@ -55,6 +53,5 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
-
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDto extends AbstractDto {
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Username should not be empty")
     private String username;
     @NotEmpty(message = "Email should not be empty")
     @Email

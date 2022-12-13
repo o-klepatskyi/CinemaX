@@ -1,0 +1,41 @@
+package ua.edu.ukma.cinemax.persistance.entity;
+
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
+@Entity
+@Table(name = "films")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class Film extends AbstractEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
+    private String title;
+    @Column(name = "release_year")
+    private int releaseYear;
+    private String description;
+    @Column(name = "tmdb_id")
+    private Long tmdbId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Film film = (Film) o;
+        return id != null && Objects.equals(id, film.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+}

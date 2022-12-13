@@ -2,7 +2,7 @@ package ua.edu.ukma.cinemax.api.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 
 @Data
 @NoArgsConstructor

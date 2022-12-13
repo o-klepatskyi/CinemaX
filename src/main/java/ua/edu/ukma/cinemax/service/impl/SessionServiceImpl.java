@@ -3,7 +3,7 @@ package ua.edu.ukma.cinemax.service.impl;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import ua.edu.ukma.cinemax.persistance.model.Session;
+import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package ua.edu.ukma.cinemax.service;
 import java.util.List;
 
 import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 
 public interface UserService {
     void add(UserDto user);

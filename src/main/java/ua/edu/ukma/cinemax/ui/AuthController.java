@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.security.model.Roles;
 import ua.edu.ukma.cinemax.service.UserService;
 

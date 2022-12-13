@@ -2,7 +2,7 @@ package ua.edu.ukma.cinemax.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import ua.edu.ukma.cinemax.persistance.model.Session;
+import ua.edu.ukma.cinemax.persistance.entity.Session;
 
 public interface SessionService {
     Session add(Session session);

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.edu.ukma.cinemax.api.model.ApiCinemaHall;
-import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
 
 @RestController

@@ -3,9 +3,9 @@ package ua.edu.ukma.cinemax.api.model;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ua.edu.ukma.cinemax.persistance.model.CinemaHall;
-import ua.edu.ukma.cinemax.persistance.model.Film;
-import ua.edu.ukma.cinemax.persistance.model.Session;
+import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.entity.Film;
+import ua.edu.ukma.cinemax.persistance.entity.Session;
 
 @Data
 @NoArgsConstructor

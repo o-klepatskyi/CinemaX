@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.persistance.model;
+package ua.edu.ukma.cinemax.persistance.entity;
 
 import java.util.List;
 import javax.persistence.Entity;
