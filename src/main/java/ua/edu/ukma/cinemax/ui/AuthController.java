@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.security.model.Roles;
 import ua.edu.ukma.cinemax.service.UserService;
 
 import javax.validation.Valid;
@@ -42,20 +43,39 @@ public class AuthController {
         return "register";
     }
 
+    @GetMapping("/register/admin")
+    public String showAdminRegistrationForm(Model model){
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "admin-register";
+    }
+
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto user,
                                BindingResult result,
-                               Model model){
-        User existing = userService.get(user.getUsername());
-        if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
-        }
+                               Model model) {
+        checkForDuplicateUser(user, result);
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "register";
         }
+        user.setRoles(List.of(Roles.USER.name()));
         userService.add(user);
         return "redirect:/register?success";
+    }
+
+    @PostMapping("/register/admin/save")
+    public String adminRegistration(@Valid @ModelAttribute("user") UserDto user,
+                               BindingResult result,
+                               Model model) {
+        checkForDuplicateUser(user, result);
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
+            return "admin-register";
+        }
+        user.setRoles(List.of(Roles.ADMIN.name(), Roles.USER.name()));
+        userService.add(user);
+        return "redirect:/register/admin?success";
     }
 
     @GetMapping("/users")
@@ -63,6 +83,17 @@ public class AuthController {
         List<UserDto> users = userService.getAll();
         model.addAttribute("users", users);
         return new ModelAndView("users");
+    }
+
+    private void checkForDuplicateUser(UserDto user, BindingResult result) {
+        User existing = userService.getByUsername(user.getUsername());
+        if (existing != null) {
+            result.rejectValue("username", null, "There is already an account registered with that username");
+        }
+        existing = userService.getByEmail(user.getEmail());
+        if (existing != null) {
+            result.rejectValue("email", null, "There is already an account registered with that email");
+        }
     }
 
 }

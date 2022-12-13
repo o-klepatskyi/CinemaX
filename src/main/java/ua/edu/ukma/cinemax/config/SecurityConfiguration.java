@@ -53,11 +53,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register/**").permitAll()
+                .antMatchers("/register/admin/**").hasAuthority(ADMIN.name())
+                .antMatchers("/users").hasRole("ADMIN")
                 .anyRequest().authenticated()
-//                .antMatchers("/index").permitAll()
-//                .antMatchers("/users").hasRole("ADMIN")
-                .and().
-                formLogin(
+                .and()
+                .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
@@ -68,23 +68,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll())
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-//                .antMatchers("/register/**").permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-//                .antMatchers(HttpMethod.DELETE).hasAnyAuthority(ADMIN.name())
-//                .antMatchers(HttpMethod.POST).hasAnyAuthority(ADMIN.name())
-//                .antMatchers(HttpMethod.PUT).hasAnyAuthority(ADMIN.name())
-//                .antMatchers("/**/add").hasAnyAuthority(ADMIN.name())
-//                //.antMatchers("/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                    .loginPage("/login")
-//                    .loginProcessingUrl("/login")
-//                    .defaultSuccessUrl("/users", true)
-//                    .permitAll()
-//                .and()
-//                .logout().permitAll()
-
     }
 
 }

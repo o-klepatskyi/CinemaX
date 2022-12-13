@@ -7,4 +7,5 @@ import ua.edu.ukma.cinemax.persistance.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
+    User findByEmail(String email);
 }

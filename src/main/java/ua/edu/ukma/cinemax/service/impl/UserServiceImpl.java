@@ -3,8 +3,6 @@ package ua.edu.ukma.cinemax.service.impl;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.dto.converters.UserConverter;
@@ -18,13 +16,11 @@ import ua.edu.ukma.cinemax.service.UserService;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final UserConverter userConverter;
 
     @Override
     public void add(UserDto userDto) {
         User user = userConverter.createFrom(userDto);
-        user.setRoles(List.of(roleRepository.findByName("USER")));
         userRepository.save(user);
     }
 
@@ -34,8 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(String email) {
-        return userRepository.findUserByUsername(email);
+    public User getByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override

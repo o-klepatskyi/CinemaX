@@ -9,8 +9,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import ua.edu.ukma.cinemax.dto.UserDto;
+import ua.edu.ukma.cinemax.persistance.model.Role;
 import ua.edu.ukma.cinemax.persistance.model.User;
+import ua.edu.ukma.cinemax.persistance.repository.RoleRepository;
+import ua.edu.ukma.cinemax.security.model.Roles;
 import ua.edu.ukma.cinemax.service.UserService;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -31,13 +37,21 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-//    @Bean
-//    @Profile("dev")
-//    public CommandLineRunner run(UserService userService) {
-//        return (String[] args) -> {
-//            for (UserDto u : userService.getAll()) {
-//                logger.info(u.toString());
-//            }
-//       };
-//   }
+    @Bean
+    @Profile("dev")
+    public CommandLineRunner run(RoleRepository roleRepository) {
+        return (String[] args) -> {
+            for (String name : Arrays.stream(Roles.values()).map(Roles::name).collect(Collectors.toList()))
+                addRoleIfNotExists(roleRepository, name);
+       };
+   }
+
+   private void addRoleIfNotExists(RoleRepository roleRepository, String name) {
+        Role role = roleRepository.findByName(name);
+        if (role == null) {
+            role = new Role();
+            role.setName(name);
+            roleRepository.save(role);
+        }
+   }
 }

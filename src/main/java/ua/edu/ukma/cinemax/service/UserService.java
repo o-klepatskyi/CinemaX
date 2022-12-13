@@ -8,7 +8,8 @@ import ua.edu.ukma.cinemax.persistance.model.User;
 public interface UserService {
     void add(UserDto user);
     User get(Long id);
-    User get(String email);
+    User getByUsername(String username);
+    User getByEmail(String email);
     List<UserDto> getAll();
     void update(UserDto user);
     void delete(Long id);
