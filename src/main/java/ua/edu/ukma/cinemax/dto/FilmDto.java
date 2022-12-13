@@ -27,4 +27,5 @@ public class FilmDto extends AbstractDto {
     @Min(0)
     @NotNull
     private Long tmdbId;
+    private String imageLink;
 }

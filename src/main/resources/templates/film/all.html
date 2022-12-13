@@ -21,8 +21,8 @@
     <hr/>
     <h2>All Films:</h2>
     <table>
-        <tr th:each="film: ${films}" th:each="imgsrc: ${imglinks}">
-          <td><img th:src="@{${'' + film.id}}" th:alt="${film.id}" width="500"/></td>
+        <tr th:each="film: ${films}">
+          <td><img th:src="${film.imageLink}" width="250"/></td>
           <td>
             <h3 th:text="${film.title}"></h3>
             <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>

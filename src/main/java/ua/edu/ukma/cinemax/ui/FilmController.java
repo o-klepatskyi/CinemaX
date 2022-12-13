@@ -3,14 +3,12 @@ package ua.edu.ukma.cinemax.ui;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -71,15 +69,10 @@ public class FilmController {
     }
 
     @GetMapping("/film/all")
-    public ModelAndView selectAll(Model model) {
+    public String selectAll(Model model) {
         List<FilmDto> films = filmService.getAll();
+        films.forEach(x -> x.setImageLink(imageService.getImageLink(x.getId())));
         model.addAttribute("films", films);
-        List<String> imglinks = films.stream()
-                .map(FilmDto::getId)
-                .map(imageService::getImageLink)
-                .map(x-> "" + x)
-                .collect(Collectors.toList());
-        model.addAttribute("imglinks", );
         return "film/all";
     }
 
