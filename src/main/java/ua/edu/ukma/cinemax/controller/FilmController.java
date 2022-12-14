@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.ui;
+package ua.edu.ukma.cinemax.controller;
 
 import java.util.List;
 import javax.persistence.EntityNotFoundException;

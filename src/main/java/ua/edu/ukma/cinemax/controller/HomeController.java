@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.ui;
+package ua.edu.ukma.cinemax.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

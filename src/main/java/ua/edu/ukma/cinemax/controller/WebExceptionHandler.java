@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.ui;
+package ua.edu.ukma.cinemax.controller;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
