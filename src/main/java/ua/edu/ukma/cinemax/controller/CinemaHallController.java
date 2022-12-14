@@ -3,6 +3,8 @@ package ua.edu.ukma.cinemax.controller;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,13 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ua.edu.ukma.cinemax.dto.CinemaHallDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
-import ua.edu.ukma.cinemax.validation.CinemaHallValidator;
 
 @Controller
 @RequiredArgsConstructor
 public class CinemaHallController {
+    private static final Logger logger = LoggerFactory.getLogger(CinemaHallController.class);
     private final CinemaHallService cinemaHallService;
-    private final CinemaHallValidator validator;
 
     @GetMapping("/cinema-hall/add")
     public String add(Model model) {
@@ -32,11 +33,15 @@ public class CinemaHallController {
     @PostMapping("/cinema-hall/add")
     public String submitNewCinemaHall(@Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
                                    BindingResult result, Model model) {
-        validator.validateFieldConstraints(cinemaHall, result);
-        if (result.hasErrors()) {
+        if(result.hasErrors()) {
             return "cinema-hall/add";
         }
-        cinemaHallService.add(cinemaHall);
+        try {
+            cinemaHallService.add(cinemaHall);
+        } catch(Exception ex) {
+            logger.debug(ex.getMessage());
+            return "redirect:/cinema-hall/add?error";
+        }
         return "redirect:/cinema-hall/add?success";
     }
 
@@ -55,14 +60,19 @@ public class CinemaHallController {
     }
 
     @PostMapping(path = "/cinema-hall/edit/{id}")
-    public String edit(@Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
+    public String edit(@PathVariable Long id,
+                       @Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
                        BindingResult result, Model model) {
-        validator.validateFieldConstraints(cinemaHall, result);
         if (result.hasErrors()) {
             return "cinema-hall/edit";
         }
-        cinemaHallService.update(cinemaHall);
-        return String.format("redirect:/cinema-hall/edit/%s?success", cinemaHall.getId());
+        try {
+            cinemaHallService.update(cinemaHall);
+        } catch(Exception e) {
+            logger.debug(e.getMessage());
+            return String.format("redirect:/cinema-hall/edit/%s?error", id);
+        }
+        return String.format("redirect:/cinema-hall/edit/%s?success", id);
     }
     @DeleteMapping(path = "cinema-hall/delete/{id}")
     public String delete(@PathVariable Long id) {
