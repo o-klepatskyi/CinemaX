@@ -13,8 +13,11 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
     <div th:if="${param.success}">
-        <div class="alert alert-success">Film was deleted!</div>
+        <div class="alert alert-success">Cinema hall was deleted!</div>
     </div>
+<div th:if="${param.error}">
+    <div class="alert alert-danger">Could not delete cinema hall.</div>
+</div>
 <div class="container">
     <div class="row col-md-10">
         <h2>List of cinema halls</h2>
