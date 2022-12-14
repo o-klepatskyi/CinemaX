@@ -11,7 +11,7 @@ class FilmConverterTest {
 
     @Test
     fun `From DTO to Model`() {
-        val filmDto = FilmDto(1, "Test name", 1999, "Test desc", 2, "Test link")
+        val filmDto = MockDTO.filmDto
 
         val film: Film = instance.createFrom(filmDto)
 
@@ -24,7 +24,7 @@ class FilmConverterTest {
 
     @Test
     fun `From Model to DTO`() {
-        val film = Film(1, "Test name", 1999, "Test desc", 2)
+        val film = MockDTO.film
 
         val filmDto: FilmDto = instance.createFrom(film)
 

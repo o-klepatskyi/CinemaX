@@ -9,6 +9,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "shopping_carts")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ShoppingCart extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

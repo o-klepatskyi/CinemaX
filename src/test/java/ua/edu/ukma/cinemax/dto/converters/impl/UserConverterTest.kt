@@ -18,7 +18,7 @@ class UserConverterTest {
 
     @Test
     fun `From DTO to Model`() {
-        val userDto = UserDto(1, "Test name", "Test email", "Test password", listOf("ROLE_USER"))
+        val userDto = MockDTO.userDto
         `when`(passwordEncoder.encode(userDto.password)).thenReturn("Encoded password")
         `when`(roleRepository.findByName("ROLE_USER")).thenReturn(Role(1, "USER"))
 
@@ -33,7 +33,7 @@ class UserConverterTest {
 
     @Test
     fun `From Model to DTO`() {
-        val user = User(1, "Test name", "Test email", "Test password", true, listOf(Role(1, "USER")))
+        val user = MockDTO.user
 
         val userDto: UserDto = instance.createFrom(user)
 
