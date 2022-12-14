@@ -88,7 +88,17 @@ public class CinemaHallController {
     public String getView(@PathVariable Long id, Model model) {
         CinemaHall cinemaHall = cinemaHallService.get(id);
         model.addAttribute("cinemaHall", cinemaHall);
+        model.addAttribute("occupiedSeats", getOccupiedSeats(cinemaHall));
         return "cinema-hall/view";
+    }
+
+    // todo move this logic to ticket controller etc
+    private boolean[][] getOccupiedSeats(CinemaHall c) {
+        boolean[][] arr = new boolean[c.getAisles()][c.getSeatsPerAisle()];
+        arr[0][0] = true;
+        arr[1][1] = true;
+        arr[2][2] = true;
+        return arr;
     }
 }
 
