@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Sessions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+  <div>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <hr/>
+    <h2>All Sessions:</h2>
+    <table border="2">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film Title</th>
+          <th>Cinema Hall</th>
+          <th>Show Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="session: ${sessions}">
+          <td th:text="${session.film.title}"></td>
+          <td th:text="${session.cinemaHall.capacity} - ${session.cinemaHall.description}"></td>
+          <td th:text="${session.showTime}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div sec:authorize="hasRole('ADMIN')">
+    <hr/>
+    <button onclick="window.location.href='/session/add'">Add Session</button>
+  </div>
+  <div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

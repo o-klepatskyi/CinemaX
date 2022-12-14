@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Cinema Halls</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div>
+    <hr/>
+    <h2>All Cinema Halls:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Capacity</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cinemaHall: ${cinemaHalls}">
+            <td th:text="${cinemaHall.id}"></td>
+            <td th:text="${cinemaHall.capacity}"></td>
+            <td th:text="${cinemaHall.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div sec:authorize="hasRole('ADMIN')">
+    <hr/>
+    <button th:href="@{/cinema-hall/add}">Add Cinema Hall</button>
+</div>
+</body>
+</html>
