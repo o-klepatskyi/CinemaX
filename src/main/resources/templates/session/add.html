@@ -42,7 +42,7 @@
                                 <select class="form-control" th:field="${session.cinemaHall}" id="cinemaHallDropper">
                                     <option value="0">Select Cinema Hall</option>
                                     <option th:each="cinemaHall : ${cinemaHalls}" th:value="${cinemaHall.id}"
-                                            th:text="'Capacity: ' + ${cinemaHall.name} + ' - ' + ${cinemaHall.description}"></option>
+                                            th:text="${cinemaHall.name} + ' - ' + ${cinemaHall.description}"></option>
                                 </select>
                             </div>
                         </div>

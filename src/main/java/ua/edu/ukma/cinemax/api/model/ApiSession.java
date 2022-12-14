@@ -22,6 +22,7 @@ public class ApiSession {
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
 
+
     public ApiSession(Session session) {
         this.id = session.getId();
         this.film = session.getFilm();

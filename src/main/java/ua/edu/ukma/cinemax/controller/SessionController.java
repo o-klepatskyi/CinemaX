@@ -71,7 +71,7 @@ public class SessionController {
 
     @GetMapping("/session/all/{id}/{date}")
     public String selectAllAvailable(@PathVariable Long id,
-                                               @PathVariable Date date) {
+                                               @PathVariable LocalDate date) {
         ModelAndView mav = new ModelAndView("list-sessions");
         List<Session> sessions = sessionService.getAvailableSessions(id, date);
         List<ApiSession> apiSessions = new ArrayList<>(sessions.size());

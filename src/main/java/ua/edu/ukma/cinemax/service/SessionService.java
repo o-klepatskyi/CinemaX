@@ -11,7 +11,7 @@ public interface SessionService {
     Session get(Long id);
     List<Session> get();
 
-    List<Session> getAvailableSessions(Long filmId, Date date);
+    List<Session> getAvailableSessions(Long filmId, LocalDate date);
 
     void update(Session session);
 

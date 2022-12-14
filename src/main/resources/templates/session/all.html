@@ -11,23 +11,26 @@
         crossorigin="anonymous">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
   <div>
     <h2>All Sessions:</h2>
     <table border="2">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Film Title</th>
+          <th>Film</th>
           <th>Cinema Hall</th>
-          <th>Show Time</th>
+          <th>Date</th>
+          <th>Time</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="s: ${sessions}">
-          <td th:text="${s.id}"></td>
-          <td th:text="${s.film.title}"></td>
-          <td th:text="${s.cinemaHall.name}"></td>
-          <td th:text="${s.date} + ' ' + ${s.time}"></td>
+        <tr th:each="filmSession: ${sessions}">
+          <td th:text="${filmSession.id}"></td>
+          <td th:text="${filmSession.film.title}"></td>
+          <td th:text="${filmSession.cinemaHall.name}"></td>
+          <td th:text="${filmSession.date}"></td>
+          <td th:text="${filmSession.time}"></td>
         </tr>
       </tbody>
     </table>

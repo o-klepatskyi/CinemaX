@@ -10,6 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <div>
     <h2>All Availbale Sessions:</h2>
     <table border="2">
@@ -30,6 +31,5 @@
     </table>
 </div>
 <hr/>
-<div th:replace="fragments/footer :: footer"/>
 </body>
 </html>
