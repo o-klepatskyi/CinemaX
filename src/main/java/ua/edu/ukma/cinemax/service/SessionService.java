@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import ua.edu.ukma.cinemax.dto.Seat;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 
@@ -19,4 +20,7 @@ public interface SessionService {
     void update(SessionDto session);
 
     void delete(Long id);
+
+    //int[][] getTicketStatus(Long id);
+    List<List<Seat>> getTicketStatus(Long id);
 }

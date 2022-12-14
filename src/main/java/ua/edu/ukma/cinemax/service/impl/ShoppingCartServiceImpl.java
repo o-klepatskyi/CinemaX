@@ -2,8 +2,7 @@ package ua.edu.ukma.cinemax.service.impl;
 
 import java.util.ArrayList;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
@@ -15,10 +14,10 @@ import ua.edu.ukma.cinemax.service.ShoppingCartService;
 import ua.edu.ukma.cinemax.service.UserService;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private ShoppingCartRepository shoppingCartRepository;
-    private TicketRepository ticketRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
+    private final TicketRepository ticketRepository;
     private final UserService userService;
 
     @Override

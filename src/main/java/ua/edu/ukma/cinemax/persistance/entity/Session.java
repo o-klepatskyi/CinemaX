@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,12 +34,13 @@ public class Session extends AbstractEntity {
     private LocalDate date;
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
+    @OneToMany
+    private List<Ticket> tickets;
 
     public LocalDateTime getDateTime() {
         if (date == null || time == null) return null;
         return LocalDateTime.of(date, time);
     }
-
 
     @Override
     public boolean equals(Object o) {

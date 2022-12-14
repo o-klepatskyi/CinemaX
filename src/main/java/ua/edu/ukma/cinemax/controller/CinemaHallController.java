@@ -8,16 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.edu.ukma.cinemax.dto.CinemaHallDto;
-import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
-import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
+import ua.edu.ukma.cinemax.service.SessionService;
 
 @Controller
 @RequiredArgsConstructor
@@ -78,27 +76,11 @@ public class CinemaHallController {
         return String.format("redirect:/cinema-hall/edit/%s?success", id);
     }
 
-    @GetMapping(path = "cinema-hall/delete/{id}") // todo how to delete method?
+    @GetMapping(path = "cinema-hall/delete/{id}")
     public String delete(@PathVariable Long id) {
         cinemaHallService.delete(id);
         return "redirect:/cinema-hall/all?success";
     }
 
-    @GetMapping(path = "cinema-hall/view/{id}")
-    public String getView(@PathVariable Long id, Model model) {
-        CinemaHall cinemaHall = cinemaHallService.get(id);
-        model.addAttribute("cinemaHall", cinemaHall);
-        model.addAttribute("occupiedSeats", getOccupiedSeats(cinemaHall));
-        return "cinema-hall/view";
-    }
-
-    // todo move this logic to ticket controller etc
-    private boolean[][] getOccupiedSeats(CinemaHall c) {
-        boolean[][] arr = new boolean[c.getAisles()][c.getSeatsPerAisle()];
-        arr[0][0] = true;
-        arr[1][1] = true;
-        arr[2][2] = true;
-        return arr;
-    }
 }
 

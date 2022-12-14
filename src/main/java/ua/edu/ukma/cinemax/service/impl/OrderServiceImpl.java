@@ -3,6 +3,8 @@ package ua.edu.ukma.cinemax.service.impl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.persistance.entity.Order;
@@ -13,16 +15,10 @@ import ua.edu.ukma.cinemax.service.OrderService;
 import ua.edu.ukma.cinemax.service.ShoppingCartService;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    private OrderRepository orderRepository;
-    private ShoppingCartService shoppingCartService;
-
-    @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository,
-                            ShoppingCartService shoppingCartService) {
-        this.orderRepository = orderRepository;
-        this.shoppingCartService = shoppingCartService;
-    }
+    private final OrderRepository orderRepository;
+    private final ShoppingCartService shoppingCartService;
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {
