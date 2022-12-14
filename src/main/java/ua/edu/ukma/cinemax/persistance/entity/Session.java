@@ -29,7 +29,7 @@ public class Session extends AbstractEntity {
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
     @DateTimeFormat(pattern = "HH:MM")
     private LocalTime time;
 }

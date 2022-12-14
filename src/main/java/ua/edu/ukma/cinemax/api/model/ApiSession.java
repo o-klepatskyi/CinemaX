@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
@@ -16,7 +17,9 @@ public class ApiSession {
     private Long id;
     private Film film;
     private CinemaHall cinemaHall;
-    private Date date;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate date;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
 
     public ApiSession(Session session) {

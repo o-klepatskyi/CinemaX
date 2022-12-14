@@ -41,6 +41,7 @@ public class DataSourceConfig {
             for (String name : Arrays.stream(Roles.values()).map(Roles::name).collect(Collectors.toList()))
                 addRoleIfNotExists(roleRepository, name);
             addUsersIfNotExist(userService);
+
        };
    }
 

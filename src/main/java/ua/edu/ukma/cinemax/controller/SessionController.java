@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import ua.edu.ukma.cinemax.service.SessionService;
 @Controller
 @RequiredArgsConstructor
 public class SessionController {
+    Logger logger = LoggerFactory.getLogger(SessionController.class);
     private final SessionService sessionService;
     private final FilmService filmService;
     private final CinemaHallService cinemaHallService;
@@ -44,8 +47,9 @@ public class SessionController {
     }
 
     @PostMapping("/session/add")
-    public String submitNewSession(@Valid @RequestBody @ModelAttribute("session") ApiSession session,
+    public String submitNewSession(@Valid @ModelAttribute("session") ApiSession session,
                                 BindingResult result, Model model) {
+        logger.info(session.toString());
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", "Invalid session data");
             return "session/add";
@@ -59,6 +63,8 @@ public class SessionController {
         List<Session> sessions = sessionService.get();
         List<ApiSession> apiSessions = new ArrayList<>(sessions.size());
         sessions.forEach((s) -> apiSessions.add(new ApiSession(s)));
+        sessions.forEach((s) -> logger.info(s.toString()));
+        apiSessions.forEach((s) -> logger.info(s.toString()));
         model.addAttribute("sessions", apiSessions);
         return "session/all";
     }

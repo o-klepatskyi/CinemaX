@@ -23,10 +23,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="session: ${sessions}">
-          <td th:text="${session.film.title}"></td>
-          <td th:text="${session.cinemaHall.capacity} - ${session.cinemaHall.description}"></td>
-          <td th:text="${session.showTime}"></td>
+        <tr th:each="s: ${sessions}">
+          <td th:text="${s.id}"></td>
+          <td th:text="${s.film.title}"></td>
+          <td th:text="${s.cinemaHall.name}"></td>
+          <td th:text="${s.date} + ' ' + ${s.time}"></td>
         </tr>
       </tbody>
     </table>
@@ -35,6 +36,5 @@
     <hr/>
     <button onclick="window.location.href='/session/add'">Add Session</button>
   </div>
-  <div th:replace="fragments/footer :: footer"/>
 </body>
 </html>
