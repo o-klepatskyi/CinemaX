@@ -28,8 +28,8 @@ public class Session extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    private LocalDate date;
     @DateTimeFormat(pattern = "HH:MM")
     private LocalTime time;
 }

@@ -34,7 +34,7 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> get() {return sessionRepository.findAll();}
 
     @Override
-    public List<Session> getAvailableSessions(Long filmId, Date date) {
+    public List<Session> getAvailableSessions(Long filmId, LocalDate date) {
         return sessionRepository.getAvailableSessions(filmId, date);
     }
 

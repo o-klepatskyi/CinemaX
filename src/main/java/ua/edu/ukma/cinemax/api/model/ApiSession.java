@@ -16,15 +16,15 @@ public class ApiSession {
     private Long id;
     private Film film;
     private CinemaHall cinemaHall;
-    private Date date;
-    private LocalTime time;
+    private String date;
+    private String time;
 
     public ApiSession(Session session) {
         this.id = session.getId();
         this.film = session.getFilm();
         this.cinemaHall = session.getCinemaHall();
-        this.date = session.getDate();
-        this.time = session.getTime();
+        this.date = session.getDate().toString();
+        this.time = session.getTime().toString();
     }
 
     public Session toModel() {
@@ -32,8 +32,8 @@ public class ApiSession {
         model.setId(id);
         model.setFilm(film);
         model.setCinemaHall(cinemaHall);
-        model.setDate(date);
-        model.setTime(time);
+        model.setDate(LocalDate.parse(date));
+        model.setTime(LocalTime.parse(time));
         return model;
     }
 }
