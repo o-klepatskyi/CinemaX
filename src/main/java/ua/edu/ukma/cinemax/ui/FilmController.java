@@ -53,7 +53,6 @@ public class FilmController {
                                 BindingResult result, Model model) {
         filmValidator.validateFieldConstraints(film, result);
         if (result.hasErrors()) {
-//            model.addAttribute("film", film);
             return "film/add";
         }
         filmService.add(film);
@@ -92,7 +91,6 @@ public class FilmController {
         if (result.hasErrors()) {
             return "film/edit";
         }
-//        model.addAttribute("film", film);
         filmService.update(film);
         return String.format("redirect:/film/edit/%s?success", film.getId());
     }
