@@ -1,6 +1,8 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "sessions")
@@ -25,6 +28,8 @@ public class Session extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
-    @Column(name = "show_time")
-    private LocalDateTime showTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+    @DateTimeFormat(pattern = "HH:MM")
+    private LocalTime time;
 }

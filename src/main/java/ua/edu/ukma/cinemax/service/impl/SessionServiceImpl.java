@@ -2,6 +2,7 @@ package ua.edu.ukma.cinemax.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
@@ -33,8 +34,8 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> get() {return sessionRepository.findAll();}
 
     @Override
-    public List<Session> getAvailableSessions(Long filmId, LocalDate date) {
-        return sessionRepository.getAvailableSessions(filmId, date.atStartOfDay(), date.atTime(END_OF_DAY));
+    public List<Session> getAvailableSessions(Long filmId, Date date) {
+        return sessionRepository.getAvailableSessions(filmId, date);
     }
 
     @Override
@@ -42,7 +43,8 @@ public class SessionServiceImpl implements SessionService {
         Session sessionForUpdate = sessionRepository.getReferenceById(session.getId());
         sessionForUpdate.setFilm(session.getFilm());
         sessionForUpdate.setCinemaHall(session.getCinemaHall());
-        sessionForUpdate.setShowTime(session.getShowTime());
+        sessionForUpdate.setDate(session.getDate());
+        sessionForUpdate.setTime(session.getTime());
         sessionRepository.save(sessionForUpdate);
     }
 

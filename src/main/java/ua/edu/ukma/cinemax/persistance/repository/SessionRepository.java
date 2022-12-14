@@ -1,6 +1,6 @@
 package ua.edu.ukma.cinemax.persistance.repository;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +11,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
     @Query("FROM Ticket t LEFT JOIN FETCH t.filmSession fs " +
             "LEFT JOIN FETCH fs.film f " +
-            "WHERE f.id = :id AND fs.showTime BETWEEN :dayStart AND :dayEnd")
+            "WHERE f.id = :id AND fs.date = :day")
     List<Session> getAvailableSessions(@Param("id") Long filmId,
-                                       @Param("dayStart") LocalDateTime start,
-                                       @Param("dayEnd") LocalDateTime end);
+                                       @Param("day") Date day);
 }
