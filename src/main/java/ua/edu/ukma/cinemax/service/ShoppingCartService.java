@@ -5,11 +5,11 @@ import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 
 public interface ShoppingCartService {
-    void addSession(Session session, User user);
+    void addSession(Session session, Long userId);
 
-    ShoppingCart getByUser(User user);
+    ShoppingCart getByUserId(Long id);
 
-    void registerNewShoppingCart(User user);
+    ShoppingCart registerNewShoppingCart(User user);
 
     void clearShoppingCart(ShoppingCart shoppingCart);
 }
