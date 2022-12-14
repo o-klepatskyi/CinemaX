@@ -22,6 +22,9 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
   <div>
+    <div th:if="${param.success}">
+      <div class="alert alert-success">Film was deleted!</div>
+    </div>
     <hr/>
     <h2>All Films:</h2>
     <hr/>
@@ -29,12 +32,15 @@
       <a th:href="@{/film/add}">
         <button class="btn btn-primary">Add new film</button>
       </a>
+      <br/>
     </div>
     <table>
       <div th:each="film: ${films}">
         <tr>
-          <td><img th:src="${film.imageLink}" width="250"/></td>
           <td>
+            <img th:src="${film.imageLink}" width="250"/>
+          </td>
+          <td width="250">
             <h3 th:text="${film.title}"></h3>
             <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>
             <b>Description:</b>
@@ -54,5 +60,8 @@
       </div>
     </table>
   </div>
+<br/>
+<br/>
+<br/>
 </body>
 </html>

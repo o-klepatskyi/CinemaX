@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -87,7 +90,6 @@ public class FilmController {
     public String edit(@Valid @ModelAttribute("film") FilmDto film,
                      BindingResult result, Model model) {
         filmValidator.validateFieldConstraints(film, result);
-        logger.info(String.valueOf(result.getAllErrors()));
         if (result.hasErrors()) {
             return "film/edit";
         }
@@ -95,13 +97,10 @@ public class FilmController {
         return String.format("redirect:/film/edit/%s?success", film.getId());
     }
 
-    @DeleteMapping(path = "film/{id}")
-    public void delete(@PathVariable Long id) {
-        try {
-            filmService.delete(id);
-        } catch (EntityNotFoundException e) {
-            throw new InvalidIDException("There's no such film with id = " + id, e);
-        }
+    @GetMapping(path = "film/delete/{id}") // todo how to delete method?
+    public String delete(@PathVariable Long id) {
+        filmService.delete(id);
+        return "redirect:/film/all?success";
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
