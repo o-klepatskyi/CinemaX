@@ -62,5 +62,12 @@ public class CinemaHallController {
         }
         return "redirect:cinema-hall/all?success";
     }
+
+    @GetMapping(path = "cinema-hall/view/{id}")
+    public String getView(@PathVariable Long id, Model model) {
+        CinemaHall cinemaHall = cinemaHallService.get(id);
+        model.addAttribute("cinemaHall", cinemaHall);
+        return "cinema-hall/view";
+    }
 }
 

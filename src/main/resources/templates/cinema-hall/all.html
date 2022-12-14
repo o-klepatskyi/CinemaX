@@ -44,6 +44,9 @@
                 <td th:text="${cinemaHall.aisles}"></td>
                 <td th:text="${cinemaHall.seatsPerAisle}"></td>
                 <td>
+                    <a th:href="@{/cinema-hall/view/{id}(id=${cinemaHall.id})}">
+                        <button class="btn btn-primary">View</button>
+                    </a>
                     <a th:href="@{/cinema-hall/edit/{id}(id=${cinemaHall.id})}">
                         <button class="btn btn-primary">Edit</button>
                     </a>
