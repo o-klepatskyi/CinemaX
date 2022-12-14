@@ -17,6 +17,7 @@ import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 import ua.edu.ukma.cinemax.service.ImageService;
+import ua.edu.ukma.cinemax.validation.FilmValidator;
 import ua.edu.ukma.cinemax.validation.Validator;
 
 @Controller
@@ -25,7 +26,7 @@ public class FilmController {
     private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
     private final FilmService filmService;
     private final ImageService imageService;
-    private final Validator<FilmDto> filmValidator;
+    private final FilmValidator filmValidator;
 
     @GetMapping("/film/all")
     public String selectAll(Model model) {

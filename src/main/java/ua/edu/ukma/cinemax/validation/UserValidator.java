@@ -11,20 +11,16 @@ import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class UserValidator implements Validator<UserDto> {
+public class UserValidator implements Validator<UserDto, User> {
     private final UserRepository userRepository;
 
     @Override
     public void validateFieldConstraints(UserDto object, BindingResult result) {
-        User existing = userRepository.findByUsername(object.getUsername());
-        if (existing != null && !Objects.equals(object.getId(), existing.getId())) {
-            result.rejectValue("username", null,
-                    "There is already an account registered with that username");
-        }
-        existing = userRepository.findByEmail(object.getEmail());
-        if (existing != null && !Objects.equals(object.getId(), existing.getId())) {
-            result.rejectValue("email", null,
-                    "There is already an account registered with that email");
-        }
+        checkUniqueFieldConstraint(object, result, userRepository,
+                "username",
+                "There is already an account registered with that username");
+        checkUniqueFieldConstraint(object, result, userRepository,
+                "email",
+                "There is already an account registered with that email");
     }
 }

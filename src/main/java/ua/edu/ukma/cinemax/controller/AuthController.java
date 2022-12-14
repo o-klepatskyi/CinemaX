@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.security.model.Roles;
 import ua.edu.ukma.cinemax.service.UserService;
+import ua.edu.ukma.cinemax.validation.UserValidator;
 import ua.edu.ukma.cinemax.validation.Validator;
 
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
-    private final Validator<UserDto> userValidator;
+    private final UserValidator userValidator;
 
     @GetMapping("/login")
     public String loginForm() {
