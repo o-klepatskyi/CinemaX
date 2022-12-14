@@ -1,29 +1,30 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Objects;
+
 @Entity
-@Table(name = "sessions")
-@Data
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sessions", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"cinema_hall_id", "date", "time"})
+})
 public class Session extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "film_id")
     private Film film;
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
@@ -32,4 +33,23 @@ public class Session extends AbstractEntity {
     private LocalDate date;
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
+
+    public LocalDateTime getDateTime() {
+        if (date == null || time == null) return null;
+        return LocalDateTime.of(date, time);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Session session = (Session) o;
+        return id != null && Objects.equals(id, session.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

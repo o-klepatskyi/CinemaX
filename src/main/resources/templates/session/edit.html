@@ -10,6 +10,16 @@
 </head>
 <body>
 <div>
+    <div th:if="${param.success}">
+        <div class="alert alert-info">
+            Session was edited! <a th:href="@{/session/all}">See all sessions</a>
+        </div>
+    </div>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            Cinema hall is occupied on that time.
+        </div>
+    </div>
     <h1>Edit Session</h1>
     <form action="#" th:action="@{/session/edit}" method="post" th:object="${session}">
         <label>Film:</label>
