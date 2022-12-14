@@ -3,17 +3,20 @@ package ua.edu.ukma.cinemax.service;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 
 public interface SessionService {
-    Session add(Session session);
+    void add(SessionDto session);
 
     Session get(Long id);
-    List<Session> get();
 
-    List<Session> getAvailableSessions(Long filmId, LocalDate date);
+    List<SessionDto> get();
 
-    void update(Session session);
+    List<SessionDto> getAvailableSessions(Long filmId, LocalDate date);
+
+    void update(SessionDto session);
 
     void delete(Long id);
 }

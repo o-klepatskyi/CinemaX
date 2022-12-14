@@ -50,7 +50,7 @@ public class FilmController {
             filmService.add(film);
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            return "film/add?error";
+            return "film/add?error"; // todo fix error
         }
 
         return "redirect:/film/add?success";

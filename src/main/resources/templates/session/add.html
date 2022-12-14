@@ -19,6 +19,11 @@
                         Session was created! <a th:href="@{/session/all}">See all sessions</a>
                     </div>
                 </div>
+                <div th:if="${errorValue} != null">
+                    <div class="alert alert-danger">
+                        <span th:text="${errorValue}"></span>
+                    </div>
+                </div>
                 <div class="card-header">
                     <h2 class="text-center">Add session</h2>
                 </div>
@@ -55,7 +60,7 @@
                         <div class="form-group mb-3">
                             <label class="control-label">Show Time</label>
                             <div class="col-md-3">
-                                <input type="time" th:field="${session.time}" id="time"/>
+                                <input type="time" th:field="${session.time}" step="1800" id="time"/>
                             </div>
                         </div>
                         <div class="form-group mb-3">
