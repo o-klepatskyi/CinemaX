@@ -6,11 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "cinema_halls")
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 public class CinemaHall extends AbstractEntity {
     @Id

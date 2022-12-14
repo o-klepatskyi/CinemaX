@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tickets")
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 public class Ticket extends AbstractEntity {
     @Id
