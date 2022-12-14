@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.dto.converters.UserConverter;
+import ua.edu.ukma.cinemax.dto.converter.UserConverter;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.UserRepository;
 import ua.edu.ukma.cinemax.service.UserService;
