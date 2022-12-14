@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.converters.FilmConverter;
+import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
@@ -32,7 +34,10 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Film get(Long id) {
-        return filmRepository.getReferenceById(id);
+        Optional<Film> maybeFilm = filmRepository.findById(id);
+        if (maybeFilm.isEmpty())
+            throw new InvalidIDException("No film with id " + id, null);
+        return maybeFilm.get();
     }
 
     @Override
