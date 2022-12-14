@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.edu.ukma.cinemax.dto.CinemaHallDto;
+import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
+import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
 
 @Controller
@@ -52,15 +54,34 @@ public class CinemaHallController {
         return "cinema-hall/all";
     }
 
-    @GetMapping(path = "cinema-hall/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    @GetMapping(path = "/cinema-hall/edit/{id}")
+    public String getEditPage(@PathVariable Long id, Model model) {
+        CinemaHall cinemaHall = cinemaHallService.get(id);
+        model.addAttribute("cinemaHall", cinemaHall);
+        return "cinema-hall/edit";
+    }
+
+    @PostMapping(path = "/cinema-hall/edit/{id}")
+    public String edit(@PathVariable Long id,
+                       @Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
+                       BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "cinema-hall/edit";
+        }
         try {
-            cinemaHallService.delete(id);
+            cinemaHallService.update(cinemaHall);
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            return "redirect:cinema-hall/all?error";
+            return String.format("redirect:/cinema-hall/edit/%s?error", id);
         }
-        return "redirect:cinema-hall/all?success";
+
+        return String.format("redirect:/cinema-hall/edit/%s?success", id);
+    }
+
+    @GetMapping(path = "cinema-hall/delete/{id}") // todo how to delete method?
+    public String delete(@PathVariable Long id) {
+        cinemaHallService.delete(id);
+        return "redirect:/cinema-hall/all?success";
     }
 
     @GetMapping(path = "cinema-hall/view/{id}")

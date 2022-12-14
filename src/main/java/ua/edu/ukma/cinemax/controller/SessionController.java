@@ -35,9 +35,7 @@ public class SessionController {
         SessionDto sessionDto = new SessionDto();
         model.addAttribute("session", sessionDto)
                 .addAttribute("films", filmService.getAll())
-                .addAttribute("cinemaHalls", cinemaHallService.getAll())
-                .addAttribute("dateValue", LocalDate.now())
-                .addAttribute("timeValue", LocalTime.now());
+                .addAttribute("cinemaHalls", cinemaHallService.getAll());
         return "session/add";
     }
 
@@ -83,7 +81,9 @@ public class SessionController {
     @GetMapping(path = "/session/edit/{id}")
     public String getEditPage(@PathVariable Long id, Model model) {
         Session session = sessionService.get(id);
-        model.addAttribute("session", session);
+        model.addAttribute("session", session)
+                .addAttribute("films", filmService.getAll())
+                .addAttribute("cinemaHalls", cinemaHallService.getAll());;
         return "session/edit";
     }
 
