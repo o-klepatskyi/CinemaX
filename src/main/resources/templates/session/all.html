@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>All Sessions</title>
@@ -12,32 +12,51 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-  <div>
-    <h2>All Sessions:</h2>
-    <table border="2">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Film</th>
-          <th>Cinema Hall</th>
-          <th>Date</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="filmSession: ${sessions}">
-          <td th:text="${filmSession.id}"></td>
-          <td th:text="${filmSession.film.title}"></td>
-          <td th:text="${filmSession.cinemaHall.name}"></td>
-          <td th:text="${filmSession.date}"></td>
-          <td th:text="${filmSession.time}"></td>
-        </tr>
-      </tbody>
-    </table>
+<div th:if="${param.success}">
+  <div class="alert alert-success">Session was deleted!</div>
+</div>
+<div th:if="${param.error}">
+  <div class="alert alert-danger">Could not delete session.</div>
+</div>
+<div class="container">
+  <div class="row col-md-10">
+    <h2>List of sessions</h2>
   </div>
-  <div sec:authorize="hasRole('ADMIN')">
-    <hr/>
-    <button onclick="window.location.href='/session/add'">Add Session</button>
-  </div>
+  <a th:href="@{/session/add}">
+    <button class="btn btn-primary">Add session</button>
+  </a>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Film</th>
+      <th>Cinema Hall</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="filmSession: ${sessions}">
+      <td th:text="${filmSession.id}"></td>
+      <td th:text="${filmSession.film.title}"></td>
+      <td th:text="${filmSession.cinemaHall.name}"></td>
+      <td th:text="${filmSession.date}"></td>
+      <td th:text="${filmSession.time}"></td>
+      <td>
+        <a th:href="@{/session/view/{id}(id=${filmSession.id})}">
+          <button class="btn btn-primary">View</button>
+        </a>
+        <a th:href="@{/session/edit/{id}(id=${filmSession.id})}">
+          <button class="btn btn-primary">Edit</button>
+        </a>
+        <a th:href="@{/session/delete/{id}(id=${filmSession.id})}">
+          <button class="btn btn-primary">Delete</button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
