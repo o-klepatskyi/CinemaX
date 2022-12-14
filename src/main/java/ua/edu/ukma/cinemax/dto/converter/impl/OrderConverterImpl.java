@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.dto.converter.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ua.edu.ukma.cinemax.dto.OrderDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
@@ -14,11 +15,11 @@ import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OrderConverterImpl implements OrderConverter {
-
     private final UserConverter userConverter;
     private final TicketConverter ticketConverter;
+
     @Override
     public Order createFrom(OrderDto dto) {
         Order entity = new Order();
