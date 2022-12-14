@@ -8,33 +8,89 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <style>
+        table, td {
+            border: 1px solid;
+            text-align: center;
+        }
+        td {
+            width: 50px;
+            height:50px;
+        }
+        .reserved {
+            background-color: yellow;
+        }
+        .cell {
+            width: 100%;
+            height: 100%;
+        }
+        .bought {
+            background-color: red;
+        }
+    </style>
 </head>
-<body th:object="${seats}">
-<div class="container" th:fragment="cinema-hall-view">
-    <table th:object="${cinemaHall}">
-        <tr th:each="i:${#numbers.sequence(0, cinemaHall.aisles, 1)}">
-            <td th:each="j:${#numbers.sequence(0, cinemaHall.seatsPerAisle, 1)}">
-                <div th:if="${i}==0">
-                    <div th:if="${j}!=0">
-                        <span th:text="${j}"></span>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container" th:object="${cinemaSession}">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        Successfully bought tickets!
                     </div>
                 </div>
-                <div th:if="${i}!=0">
-                    <div th:if="${j}==0">
-                        <span th:text="${i}"></span>
-                    </div>
-                    <div th:if="${j}!=0">
-                        <div th:if="${occupiedSeats[i-1][j-1]}" class="occupied">
-                            <input type="checkbox" checked="true" onclick="return false;"/>
-                        </div>
-                        <div th:unless="${occupiedSeats[i-1][j-1]}">
-                            <input type="checkbox"/>
-                        </div>
+                <div th:if="${errorValue} != null">
+                    <div class="alert alert-danger">
+                        <span th:text="${errorValue}"></span>
                     </div>
                 </div>
-            </td>
-        </tr>
-    </table>
+                <div th:if="${soldOut}">
+                    <div class="alert alert-danger">
+                        All tickets are sold out for this session! <a th:href="@{/film/all}">Return to film catalog</a>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h2 class="text-center">Reserve Tickets</h2>
+                </div>
+                <div class="card-body" style="text-align: center">
+                    <form method="post"
+                          role="form"
+                          th:action="@{/session/order/save/{id}(id=${cinemaSession.id})}"
+                          th:object="${cinemaHall}">
+                        <table th:object="${cinemaHall}">
+                            <tr>
+                                <td></td>
+                                <td th:each="i:${#numbers.sequence(1, cinemaHall.aisles, 1)}">
+                                    <span th:text="${i}"></span>
+                                </td>
+                            </tr>
+                            <tr th:each="aisle, iStat : ${seats}">
+                                <td>
+                                    <span th:text="${iStat.index} + 1"></span>
+                                </td>
+                                <td th:each="seat: ${aisle}">
+                                    <div th:if="${seat.status} == 0" class="cell">
+                                        <input class="cell"
+                                               type="checkbox"
+                                               th:name="${seat.status}"
+                                               th:value="${#lists.size(aisle)} * ${seat.row} + ${seat.column}"
+                                               th:field="*{seats}">
+                                    </div>
+                                    <div th:unless="${seat.status == 0}"
+                                         th:class="${seat.status} == 1 ? 'cell reserved' : 'cell bought'">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Reserve tickets</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

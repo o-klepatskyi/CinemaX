@@ -31,10 +31,10 @@ public class OrderController {
             seats = sessionService.getTicketStatus(sessionId);
         Session session = sessionService.get(sessionId);
         CinemaHallDto cinemaHallDto = cinemaHallConverter.createFrom(session.getCinemaHall());
-        model.addAttribute("sessionId", session.getId());
+        model.addAttribute("cinemaSession", session);
         model.addAttribute("cinemaHall", cinemaHallDto);
         model.addAttribute("seats", seats);
-        return "session/ordertest";
+        return "session/order";
     }
 
     @PostMapping(path = "session/order/save/{id}")
