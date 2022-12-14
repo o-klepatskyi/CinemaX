@@ -12,18 +12,17 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class FilmDto extends AbstractDto {
+public class CinemaHallDto extends AbstractDto {
     private Long id;
-    @NotBlank
     @Size(max=50)
-    private String title;
-    @Min(1900)
-    @NotNull
-    private Integer releaseYear;
+    @NotBlank
+    private String name;
     @Size(max=100)
     private String description;
     @Min(0)
     @NotNull
-    private Long tmdbId;
-    private String imageLink;
+    private Integer aisles;
+    @Min(0)
+    @NotNull
+    private Integer seatsPerAisle;
 }

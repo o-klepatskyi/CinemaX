@@ -1,8 +1,8 @@
-package ua.edu.ukma.cinemax.dto.converters.impl;
+package ua.edu.ukma.cinemax.dto.converter.impl;
 
 import org.springframework.stereotype.Component;
 import ua.edu.ukma.cinemax.dto.FilmDto;
-import ua.edu.ukma.cinemax.dto.converters.FilmConverter;
+import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 
 @Component

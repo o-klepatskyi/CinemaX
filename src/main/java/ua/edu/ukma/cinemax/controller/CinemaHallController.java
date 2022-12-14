@@ -1,6 +1,5 @@
 package ua.edu.ukma.cinemax.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,40 +11,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import ua.edu.ukma.cinemax.api.model.ApiCinemaHall;
+import ua.edu.ukma.cinemax.dto.CinemaHallDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
+import ua.edu.ukma.cinemax.validation.CinemaHallValidator;
 
 @Controller
 @RequiredArgsConstructor
 public class CinemaHallController {
     private final CinemaHallService cinemaHallService;
+    private final CinemaHallValidator validator;
 
     @GetMapping("/cinema-hall/add")
     public String add(Model model) {
-        ApiCinemaHall apiCinemaHall = new ApiCinemaHall();
-        model.addAttribute("cinemaHall", apiCinemaHall);
+        CinemaHallDto cinemaHall = new CinemaHallDto();
+        model.addAttribute("cinemaHall", cinemaHall);
         return "cinema-hall/add";
     }
 
     @PostMapping("/cinema-hall/add")
-    public String submitNewCinemaHall(@Valid @RequestBody @ModelAttribute("cinema-hall") ApiCinemaHall cinemaHall,
+    public String submitNewCinemaHall(@Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
                                    BindingResult result, Model model) {
+        validator.validateFieldConstraints(cinemaHall, result);
         if (result.hasErrors()) {
-            model.addAttribute("errorMessage", "Invalid cinema hall data");
             return "cinema-hall/add";
         }
-        cinemaHallService.add(cinemaHall.toModel());
+        cinemaHallService.add(cinemaHall);
         return "redirect:/cinema-hall/add?success";
     }
 
     @GetMapping("/cinema-hall/all")
     public String selectAll(Model model) {
-        List<CinemaHall> cinemaHalls = cinemaHallService.getAll();
-        List<ApiCinemaHall> apiCinemaHalls = new ArrayList<>(cinemaHalls.size());
-        cinemaHalls.forEach((ch) -> apiCinemaHalls.add(new ApiCinemaHall(ch)));
-        model.addAttribute("cinemaHalls", apiCinemaHalls);
+        List<CinemaHallDto> cinemaHalls = cinemaHallService.getAll();
+        model.addAttribute("cinemaHalls", cinemaHalls);
         return "cinema-hall/all";
     }
 
@@ -57,13 +55,13 @@ public class CinemaHallController {
     }
 
     @PostMapping(path = "/cinema-hall/edit/{id}")
-    public String edit(@Valid @ModelAttribute("cinemaHall") ApiCinemaHall cinemaHall,
+    public String edit(@Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
                        BindingResult result, Model model) {
+        validator.validateFieldConstraints(cinemaHall, result);
         if (result.hasErrors()) {
             return "cinema-hall/edit";
         }
-//        model.addAttribute("cinemaHall", cinemaHall);
-        cinemaHallService.update(cinemaHall.toModel());
+        cinemaHallService.update(cinemaHall);
         return String.format("redirect:/cinema-hall/edit/%s?success", cinemaHall.getId());
     }
     @DeleteMapping(path = "cinema-hall/delete/{id}")

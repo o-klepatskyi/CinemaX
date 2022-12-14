@@ -1,23 +1,41 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cinema_halls")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
-@NoArgsConstructor
 public class CinemaHall extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int capacity;
+    @Column(nullable = false, unique = true)
+    private String name;
     private String description;
+    @Column(nullable = false)
+    private Integer aisles;
+    @Column(nullable = false)
+    private Integer seatsPerAisle;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CinemaHall that = (CinemaHall) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

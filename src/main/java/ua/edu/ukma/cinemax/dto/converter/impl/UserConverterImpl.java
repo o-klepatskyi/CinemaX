@@ -1,10 +1,10 @@
-package ua.edu.ukma.cinemax.dto.converters.impl;
+package ua.edu.ukma.cinemax.dto.converter.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ua.edu.ukma.cinemax.dto.UserDto;
-import ua.edu.ukma.cinemax.dto.converters.UserConverter;
+import ua.edu.ukma.cinemax.dto.converter.UserConverter;
 import ua.edu.ukma.cinemax.persistance.entity.Role;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.RoleRepository;

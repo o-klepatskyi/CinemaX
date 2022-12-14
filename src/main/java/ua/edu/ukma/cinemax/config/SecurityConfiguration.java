@@ -51,7 +51,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register/admin/**", "/users",
-                        "/**/add/**", "/**/edit/**", "/**/delete/**")
+                        "/**/add/**", "/**/edit/**", "/**/delete/**",
+                        "/cinema-hall/**")
                     .hasAuthority(ADMIN.name())
                 .antMatchers("/register/**",
                         "/film/all",
