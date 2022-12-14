@@ -1,11 +1,18 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
-
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import lombok.*;
+import org.hibernate.Hibernate;
 
 @Entity
 @Table(name = "shopping_carts")

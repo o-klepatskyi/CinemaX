@@ -1,5 +1,4 @@
 package ua.edu.ukma.cinemax.persistance.entity;
-
 import lombok.*;
 import org.hibernate.Hibernate;
 

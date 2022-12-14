@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper=false)
 public class CinemaHallDto extends AbstractDto {
     private Long id;
     @Size(max=50)
