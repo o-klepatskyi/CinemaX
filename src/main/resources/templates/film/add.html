@@ -19,6 +19,11 @@
                         Film was created! <a th:href="@{/film/all}">See all films</a>
                     </div>
                 </div>
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Film with given TMDB ID already exists.
+                    </div>
+                </div>
                 <div class="card-header">
                     <h2 class="text-center">Add film</h2>
                 </div>

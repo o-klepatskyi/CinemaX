@@ -17,7 +17,6 @@ import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 import ua.edu.ukma.cinemax.service.ImageService;
-import ua.edu.ukma.cinemax.validation.Validator;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,7 +24,6 @@ public class FilmController {
     private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
     private final FilmService filmService;
     private final ImageService imageService;
-    private final Validator<FilmDto> filmValidator;
 
     @GetMapping("/film/all")
     public String selectAll(Model model) {
@@ -45,11 +43,16 @@ public class FilmController {
     @PostMapping("/film/add")
     public String submitNewFilm(@Valid @ModelAttribute("film") FilmDto film,
                                 BindingResult result, Model model) {
-        filmValidator.validateFieldConstraints(film, result);
         if (result.hasErrors()) {
             return "film/add";
         }
-        filmService.add(film);
+        try {
+            filmService.add(film);
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return "film/add?error";
+        }
+
         return "redirect:/film/add?success";
     }
 
@@ -78,14 +81,20 @@ public class FilmController {
     }
 
     @PostMapping(path = "/film/edit/{id}")
-    public String edit(@Valid @ModelAttribute("film") FilmDto film,
+    public String edit(@PathVariable Long id,
+                       @Valid @ModelAttribute("film") FilmDto film,
                      BindingResult result, Model model) {
-        filmValidator.validateFieldConstraints(film, result);
         if (result.hasErrors()) {
             return "film/edit";
         }
-        filmService.update(film);
-        return String.format("redirect:/film/edit/%s?success", film.getId());
+        try {
+            filmService.update(film);
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return String.format("redirect:/film/edit/%s?error", id);
+        }
+
+        return String.format("redirect:/film/edit/%s?success", id);
     }
 
     @GetMapping(path = "film/delete/{id}") // todo how to delete method?

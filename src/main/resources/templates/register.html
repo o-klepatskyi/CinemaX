@@ -19,6 +19,11 @@
                     You've successfully registered to our app!
                 </div>
             </div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    User with given username or email already exists.
+                </div>
+            </div>
             <div class="card-header">
                 <h2 class="text-center" th:text="Registration"></h2>
             </div>
