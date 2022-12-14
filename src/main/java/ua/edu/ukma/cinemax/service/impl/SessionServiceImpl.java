@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import ua.edu.ukma.cinemax.dto.SessionDto;
+import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
 import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.exception.InvalidSessionTime;
+import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.service.SessionService;
@@ -24,6 +26,7 @@ public class SessionServiceImpl implements SessionService {
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59, 59);
     private final SessionRepository sessionRepository;
     private final SessionConverter converter;
+    private final CinemaHallConverter cinemaHallConverter;
 
     @Override
     public void add(SessionDto sessionDto) {
@@ -63,9 +66,10 @@ public class SessionServiceImpl implements SessionService {
     }
 
     private void checkAvailableTime(SessionDto sessionDto) {
+        CinemaHall cinemaHall = cinemaHallConverter.createFrom(sessionDto.getCinemaHall());
         LocalDateTime sessionDateTime = sessionDto.getDateTime();
         List<LocalDateTime> sessionsTime = sessionRepository
-                .findByCinemaHall(sessionDto.getCinemaHall())
+                .findByCinemaHall(cinemaHall)
                 .stream()
                 .map(Session::getDateTime)
                 .filter(x -> Math.abs(sessionDateTime.until(x, ChronoUnit.HOURS)) < SESSION_DURATION)
