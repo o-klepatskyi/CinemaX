@@ -13,7 +13,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
 public class CinemaHall extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,6 +2,7 @@ package ua.edu.ukma.cinemax.dto.converters.impl
 
 import org.junit.jupiter.api.Test
 import ua.edu.ukma.cinemax.dto.FilmDto
+import ua.edu.ukma.cinemax.dto.converter.impl.FilmConverterImpl
 import ua.edu.ukma.cinemax.persistance.entity.Film
 
 class FilmConverterTest {

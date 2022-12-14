@@ -10,13 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "sessions")
 @Data
-@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 public class Session extends AbstractEntity {
     @Id
