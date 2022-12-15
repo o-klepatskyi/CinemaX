@@ -67,7 +67,7 @@ public class OrderController {
         shoppingCartService.addTickets(session,
                 cinemaHallDto.getSeats(),
                 principal.getName());
-        return "redirect:/order/session/" + session;
+        return "redirect:/order/session/" + session + "?success";
     }
 
 }
