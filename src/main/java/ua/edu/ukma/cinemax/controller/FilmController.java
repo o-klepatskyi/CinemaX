@@ -105,9 +105,13 @@ public class FilmController {
         return String.format("redirect:/film/edit/%s?success", id);
     }
 
-    @GetMapping(path = "film/delete/{id}") // todo how to delete method?
+    @GetMapping(path = "film/delete/{id}")
     public String delete(@PathVariable Long id) {
-        filmService.delete(id);
+        try {
+            filmService.delete(id);
+        } catch (Exception e) {
+            return "redirect:/film/all?delete_error";
+        }
         return "redirect:/film/all?success";
     }
 
