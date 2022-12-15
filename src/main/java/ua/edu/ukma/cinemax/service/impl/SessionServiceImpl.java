@@ -91,28 +91,6 @@ public class SessionServiceImpl implements SessionService {
         return seats;
     }
 
-    @Override
-    public void createTickets(Long id, List<Integer> ticketsToRegister, String username) {
-        Session session = get(id);
-        User user = userService.getByUsername(username);
-        if (session.getTickets() == null) {
-            session.setTickets(new LinkedList<>());
-        }
-        CinemaHall cinemaHall = session.getCinemaHall();
-        for (Integer reserved : ticketsToRegister) {
-            int x = reserved % cinemaHall.getSeatsPerAisle();
-            int y = reserved / cinemaHall.getSeatsPerAisle();
-            Ticket ticket = new Ticket();
-            ticket.setUser(user);
-            ticket.setIsBought(false);
-            ticket.setFilmSession(session);
-            ticket.setAisle(y);
-            ticket.setSeat(x);
-            session.getTickets().add(ticket);
-        }
-        sessionRepository.save(session);
-    }
-
     private void checkAvailableTime(SessionDto sessionDto) {
         CinemaHall cinemaHall = sessionDto.getCinemaHall();
         LocalDateTime sessionDateTime = sessionDto.getDateTime();

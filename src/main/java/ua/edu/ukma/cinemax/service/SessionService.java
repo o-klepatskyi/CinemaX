@@ -23,5 +23,4 @@ public interface SessionService {
     void delete(Long id);
 
     List<List<Seat>> getTicketStatus(Long id);
-    void createTickets(Long id, List<Integer> ticketsToRegister, String username);
 }
