@@ -28,7 +28,7 @@
         </div>
         <div sec:authorize="hasAuthority('USER')">
             <a class="navbar-brand"
-               th:href="@{/order/user/{username}(username=${#authentication.getPrincipal().getUsername()})}">Shopping Cart</a>
+               th:href="@{/order/{username}(username=${#authentication.getPrincipal().getUsername()})}">Shopping Cart</a>
         </div>
         <div sec:authorize="hasAuthority('ADMIN')">
             <a class="navbar-brand" th:href="@{/users}">Users</a>
