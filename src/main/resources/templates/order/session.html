@@ -38,7 +38,7 @@
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
                         Successfully booked tickets!
-                        <a th:href="@{/order/user/{username}(username=${#authentication.getPrincipal().getUsername()})}">
+                        <a th:href="@{/order/{username}(username=${#authentication.getPrincipal().getUsername()})}">
                            Go to Your shopping cart.
                         </a>
                     </div>

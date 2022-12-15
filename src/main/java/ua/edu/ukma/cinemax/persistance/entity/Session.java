@@ -35,6 +35,7 @@ public class Session extends AbstractEntity {
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
     @OneToMany(cascade=CascadeType.ALL)
+    @ToString.Exclude
     private List<Ticket> tickets;
 
     public LocalDateTime getDateTime() {

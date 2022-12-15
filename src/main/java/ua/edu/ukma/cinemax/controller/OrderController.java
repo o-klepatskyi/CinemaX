@@ -1,15 +1,15 @@
 package ua.edu.ukma.cinemax.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.edu.ukma.cinemax.dto.*;
 import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
-import ua.edu.ukma.cinemax.dto.converter.OrderConverter;
 import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
 import ua.edu.ukma.cinemax.dto.converter.ShoppingCartConverter;
-import ua.edu.ukma.cinemax.persistance.entity.Order;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
 import ua.edu.ukma.cinemax.service.OrderService;
@@ -22,34 +22,43 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
     private final SessionService sessionService;
     private final CinemaHallConverter cinemaHallConverter;
     private final OrderService orderService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartConverter shoppingCartConvertor;
-    private final OrderConverter orderConvertor;
     private final SessionConverter sessionConverter;
 
-    @GetMapping("/order/user/{username}")
-    ShoppingCartDto getCurrentOrder(@PathVariable String username) {
-        ShoppingCart shoppingCart = shoppingCartService.getByUsername(username);
-        return shoppingCartConvertor.createFrom(shoppingCart);
+    @GetMapping("/order/{username}")
+    public String getCurrentOrder(@PathVariable String username, Model model) {
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(username);
+        logger.info(shoppingCart.toString());
+        model.addAttribute("shoppingCart", shoppingCart);
+        return "/order/shopping-cart";
     }
 
-    @PostMapping("/order/complete/{id}")
-    OrderDto completeOrder(@RequestBody final ShoppingCartDto shoppingCartDto) {
-        ShoppingCart shoppingCart = shoppingCartConvertor.createFrom(shoppingCartDto);
-        Order order = orderService.completeOrder(shoppingCart);
-        return orderConvertor.createFrom(order);
+    @PostMapping("/order/{username}/complete")
+    public String completeOrder(@PathVariable String username,
+                                @ModelAttribute("shoppingCart") ShoppingCart shoppingCartDto) {
+        orderService.completeOrder(shoppingCartDto);
+        return "redirect:/order/" + username + "?success";
     }
 
-    @PostMapping("/order/new/{id}")
-    void createNewOrder(@PathVariable Long id, @RequestBody final SessionDto sessionDto) {
-        Session session = sessionConverter.createFrom(sessionDto);
-        shoppingCartService.addSession(session, id);
+    @GetMapping("/order/{username}/remove/{id}")
+    public String deleteTicket(@PathVariable String username, @PathVariable Long id) {
+        shoppingCartService.deleteTicket(id);
+        return "redirect:/order/" + username + "?delete_success";
     }
 
-    @GetMapping(path = "order/session/{id}")
+//    @PostMapping("/new/{id}")
+//    @Deprecated
+//    void createNewOrder(@PathVariable Long id, @RequestBody final SessionDto sessionDto) {
+//        Session session = sessionConverter.createFrom(sessionDto);
+//        shoppingCartService.addSession(session, id);
+//    }
+
+    @GetMapping(path = "/order/session/{id}")
     public String getOrderPage(@PathVariable("id") Long sessionId, Model model) {
         List<List<Seat>> seats = sessionService.getTicketStatus(sessionId);
         Session session = sessionService.get(sessionId);
@@ -57,10 +66,10 @@ public class OrderController {
         model.addAttribute("cinemaSession", session);
         model.addAttribute("cinemaHall", cinemaHallDto);
         model.addAttribute("seats", seats);
-        return "order/session";
+        return "/order/session";
     }
 
-    @PostMapping(path = "order/session/save/{id}")
+    @PostMapping(path = "/order/session/save/{id}")
     public String submitReservation(@PathVariable("id") Long session,
                                     @ModelAttribute("cinemaHall") CinemaHallDto cinemaHallDto,
                                     Principal principal) {

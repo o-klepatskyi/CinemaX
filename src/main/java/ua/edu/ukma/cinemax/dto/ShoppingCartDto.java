@@ -1,6 +1,8 @@
 package ua.edu.ukma.cinemax.dto;
 
 import lombok.*;
+import ua.edu.ukma.cinemax.persistance.entity.Ticket;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 
 import java.util.List;
 
@@ -11,6 +13,6 @@ import java.util.List;
 @ToString
 public class ShoppingCartDto extends AbstractDto {
     private Long id;
-    private List<TicketDto> tickets;
-    private UserDto user;
+    private List<Ticket> tickets;
+    private User user;
 }

@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class Ticket extends AbstractEntity {
     private Long id;
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User user; // todo replace by Order
+    private User user;
     @ManyToOne
     @JoinColumn(name="session_id")
     private Session filmSession;

@@ -13,11 +13,7 @@ import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 
 @Component
-@AllArgsConstructor
 public class ShoppingCartConverterImpl implements ShoppingCartConverter {
-
-    private final TicketConverter ticketConverter;
-    private final UserConverter userConverter;
 
     @Override
     public ShoppingCart createFrom(ShoppingCartDto dto) {
@@ -31,8 +27,8 @@ public class ShoppingCartConverterImpl implements ShoppingCartConverter {
         ShoppingCartDto dto = new ShoppingCartDto();
         if (entity != null) {
             dto.setId(entity.getId());
-            dto.setTickets(ticketConverter.createFromEntities(entity.getTickets()));
-            dto.setUser(userConverter.createFrom(entity.getUser()));
+            dto.setTickets(entity.getTickets());
+            dto.setUser(entity.getUser());
         }
         return dto;
     }
