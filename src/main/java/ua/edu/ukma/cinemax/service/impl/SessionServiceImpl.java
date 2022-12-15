@@ -2,7 +2,6 @@ package ua.edu.ukma.cinemax.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,11 +19,13 @@ import ua.edu.ukma.cinemax.exception.InvalidSessionTime;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
+import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.service.SessionService;
 import org.springframework.stereotype.Service;
-import static ua.edu.ukma.cinemax.persistance.entity.TicketStatus.STATUS_BOUGHT;
-import static ua.edu.ukma.cinemax.persistance.entity.TicketStatus.STATUS_NONE;
+import ua.edu.ukma.cinemax.service.UserService;
+
+import static ua.edu.ukma.cinemax.dto.TicketStatus.STATUS_FREE;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class SessionServiceImpl implements SessionService {
     private final SessionRepository sessionRepository;
     private final SessionConverter converter;
     private final CinemaHallConverter cinemaHallConverter;
+    private final UserService userService;
 
     @Override
     public void add(SessionDto sessionDto) {
@@ -79,14 +81,36 @@ public class SessionServiceImpl implements SessionService {
         for (int i = 0; i < hall.getAisles(); i++) {
             List<Seat> aisle = new ArrayList<>();
             for (int j = 0; j < hall.getSeatsPerAisle(); j++) {
-                aisle.add(new Seat(i, j, STATUS_NONE));
+                aisle.add(new Seat(i, j, STATUS_FREE));
             }
             seats.add(aisle);
         }
         for (Ticket t : session.getTickets()) {
-            seats.get(t.getAisle()).get(t.getSeat()).setStatus(STATUS_BOUGHT);
+            seats.get(t.getAisle()).set(t.getSeat(), new Seat(t));
         }
         return seats;
+    }
+
+    @Override
+    public void createTickets(Long id, List<Integer> ticketsToRegister, String username) {
+        Session session = get(id);
+        User user = userService.getByUsername(username);
+        if (session.getTickets() == null) {
+            session.setTickets(new LinkedList<>());
+        }
+        CinemaHall cinemaHall = session.getCinemaHall();
+        for (Integer reserved : ticketsToRegister) {
+            int x = reserved % cinemaHall.getSeatsPerAisle();
+            int y = reserved / cinemaHall.getSeatsPerAisle();
+            Ticket ticket = new Ticket();
+            ticket.setUser(user);
+            ticket.setIsBought(false);
+            ticket.setFilmSession(session);
+            ticket.setAisle(y);
+            ticket.setSeat(x);
+            session.getTickets().add(ticket);
+        }
+        sessionRepository.save(session);
     }
 
     private void checkAvailableTime(SessionDto sessionDto) {
@@ -96,12 +120,12 @@ public class SessionServiceImpl implements SessionService {
                 .findByCinemaHall(cinemaHall)
                 .stream()
                 .map(Session::getDateTime)
-                .filter(x -> Math.abs(sessionDateTime.until(x, ChronoUnit.HOURS)) < SESSION_DURATION)
+                .filter(x -> Math.abs(sessionDateTime.until(x, ChronoUnit.HOURS)) < SESSION_DURATION_HOURS)
                 .collect(Collectors.toList());
         if (!sessionsTime.isEmpty()) {
             throw new InvalidSessionTime();
         }
     }
 
-    private static final long SESSION_DURATION = 2;
+    private static final long SESSION_DURATION_HOURS = 2;
 }

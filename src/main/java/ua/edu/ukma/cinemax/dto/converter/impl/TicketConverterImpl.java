@@ -1,24 +1,14 @@
 package ua.edu.ukma.cinemax.dto.converter.impl;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ua.edu.ukma.cinemax.dto.FilmDto;
-import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.TicketDto;
-import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
 import ua.edu.ukma.cinemax.dto.converter.TicketConverter;
-import ua.edu.ukma.cinemax.dto.converter.UserConverter;
-import ua.edu.ukma.cinemax.persistance.entity.Film;
-import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 
 @Component
 @AllArgsConstructor
 public class TicketConverterImpl implements TicketConverter {
-
-    private final UserConverter userConverter;
-    private final SessionConverter sessionConverter;
 
     @Override
     public Ticket createFrom(TicketDto dto) {
@@ -32,9 +22,11 @@ public class TicketConverterImpl implements TicketConverter {
         TicketDto dto = new TicketDto();
         if (entity != null) {
             dto.setId(entity.getId());
-            dto.setUser(userConverter.createFrom(entity.getUser()));
-            dto.setFilmSession(sessionConverter.createFrom(entity.getFilmSession()));
-
+            dto.setUser(entity.getUser());
+            dto.setFilmSession(entity.getFilmSession());
+            dto.setAisle(entity.getAisle());
+            dto.setSeat(entity.getSeat());
+            dto.setIsBought(entity.getIsBought());
         }
         return dto;
     }
@@ -46,10 +38,19 @@ public class TicketConverterImpl implements TicketConverter {
                 entity.setId(dto.getId());
             }
             if (dto.getUser() != null){
-                entity.setUser(userConverter.createFrom(dto.getUser()));
+                entity.setUser(dto.getUser());
             }
             if (dto.getFilmSession() != null){
-                entity.setFilmSession(sessionConverter.createFrom(dto.getFilmSession()));
+                entity.setFilmSession(dto.getFilmSession());
+            }
+            if (dto.getAisle() != null){
+                entity.setAisle(dto.getAisle());
+            }
+            if (dto.getSeat() != null){
+                entity.setSeat(dto.getSeat());
+            }
+            if (dto.getIsBought() != null){
+                entity.setIsBought(dto.getIsBought());
             }
         }
         return null;

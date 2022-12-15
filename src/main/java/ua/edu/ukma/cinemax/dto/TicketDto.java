@@ -16,8 +16,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @ToString
 public class TicketDto extends AbstractDto {
-
     private Long id;
-    private UserDto user;
-    private SessionDto filmSession;
+    private User user;
+    private Session filmSession;
+    private Integer aisle;
+    private Integer seat;
+    private Boolean isBought;
 }
