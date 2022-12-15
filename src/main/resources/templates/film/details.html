@@ -23,12 +23,12 @@
 <div th:replace="fragments/header :: header"></div>
 <div>
     <br/>
-    <div>
+    <table>
         <tr>
             <td>
                 <img th:src="${film.imageLink}" width="250"/>
             </td>
-            <td width="250">
+            <td>
                 <h3 th:text="${film.title}"></h3>
                 <p><b>Release year: </b><span th:text="${film.releaseYear}"></span></p>
                 <b>Description:</b>
@@ -58,7 +58,7 @@
                 </table>
             </td>
         </tr>
-    </div>
+    </table>
 </div>
 <br/>
 <br/>
