@@ -19,9 +19,9 @@ import javax.validation.constraints.NotNull;
 public class SessionDto extends AbstractDto {
     private Long id;
     @NotNull
-    private FilmDto film;
+    private Film film;
     @NotNull
-    private CinemaHallDto cinemaHall;
+    private CinemaHall cinemaHall;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
