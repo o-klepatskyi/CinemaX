@@ -30,16 +30,17 @@
             </td>
             <td width="250">
                 <h3 th:text="${film.title}"></h3>
-                <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>
+                <p><b>Release year: </b><span th:text="${film.releaseYear}"></span></p>
                 <b>Description:</b>
                 <p th:text="${film.description}"></p>
+                <b>Available Sessions:</b>
                 <table class="table table-bordered table-hover">
                     <thead class="table-dark">
                     <tr>
                         <th>Cinema Hall</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,7 +49,7 @@
                         <td th:text="${filmSession.date}"></td>
                         <td th:text="${filmSession.time}"></td>
                         <td>
-                            <a th:href="@{/film/all}">
+                            <a th:href="@{/order/session/{id}(id=${filmSession.id})}">
                                 <button class="btn btn-primary">Add In Shopping Cart</button>
                             </a>
                         </td>
