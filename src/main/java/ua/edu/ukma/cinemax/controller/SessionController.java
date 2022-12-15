@@ -102,9 +102,13 @@ public class SessionController {
         return String.format("redirect:/session/edit/%s?success", session.getId());
     }
 
-    @DeleteMapping(path = "/session/delete/{id}")
+    @GetMapping(path = "/session/delete/{id}")
     public String delete(@PathVariable Long id) {
-        sessionService.delete(id);
-        return "session/all";
+        try {
+            sessionService.delete(id);
+        } catch (Exception e) {
+            return "redirect:/session/all?delete_error";
+        }
+        return "redirect:/session/all?success";
     }
 }
