@@ -10,9 +10,7 @@ import ua.edu.ukma.cinemax.persistance.entity.Session;
 
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
-    @Query("FROM Ticket t LEFT JOIN FETCH t.filmSession fs " +
-            "LEFT JOIN FETCH fs.film f " +
-            "WHERE f.id = :id AND fs.date = :day")
+    @Query("FROM Session s LEFT JOIN FETCH s.film f WHERE f.id = :id AND s.date >= :day")
     List<Session> getAvailableSessions(@Param("id") Long filmId,
                                        @Param("day") LocalDate day);
 

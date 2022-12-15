@@ -1,5 +1,6 @@
 package ua.edu.ukma.cinemax.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -13,10 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.FilmDto;
+import ua.edu.ukma.cinemax.dto.SessionDto;
+import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
-import ua.edu.ukma.cinemax.service.FilmService;
-import ua.edu.ukma.cinemax.service.ImageService;
+import ua.edu.ukma.cinemax.persistance.entity.Session;
+import ua.edu.ukma.cinemax.service.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +27,8 @@ public class FilmController {
     private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
     private final FilmService filmService;
     private final ImageService imageService;
+    private final SessionService sessionService;
+    private final FilmConverter filmConverter;
 
     @GetMapping("/film/all")
     public String selectAll(Model model) {
@@ -60,7 +65,10 @@ public class FilmController {
     public ModelAndView select(@PathVariable Long id) {
         try {
             ModelAndView mav = new ModelAndView("film/details");
-            mav.addObject("film", filmService.get(id));
+            mav.addObject("film",
+                    filmConverter.createFrom(filmService.get(id)));
+            List<SessionDto> sessions = sessionService.getAvailableSessions(id, LocalDate.now());
+            mav.addObject("sessions", sessions);
             //mav.addObject("details", selectDetails(id));
             return mav;
         } catch (EntityNotFoundException e) {

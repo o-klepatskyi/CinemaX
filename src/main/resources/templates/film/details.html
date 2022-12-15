@@ -1,19 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>Selected Film</title>
+    <title>Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+<div>
+    <br/>
     <div>
-        <h1>Selected film</h1>
-        </hr>
-        <p th:text="'ID: ' + ${film.id}"></p>
-        <p th:text="'Title: ' + ${film.title}"></p>
-        <p th:text="'Release Year: ' + ${film.releaseYear}"></p>
-        <p th:text="'Description: ' + ${film.description}"></p>
-        <!--a th:href="@{/film/details/${film.id}}">See Details</a!-->
+        <tr>
+            <td>
+                <img th:src="${film.imageLink}" width="250"/>
+            </td>
+            <td width="250">
+                <h3 th:text="${film.title}"></h3>
+                <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>
+                <b>Description:</b>
+                <p th:text="${film.description}"></p>
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Cinema Hall</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="filmSession: ${sessions}">
+                        <td th:text="${filmSession.cinemaHall.name}"></td>
+                        <td th:text="${filmSession.date}"></td>
+                        <td th:text="${filmSession.time}"></td>
+                        <td>
+                            <a th:href="@{/film/all}">
+                                <button class="btn btn-primary">Add In Shopping Cart</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
     </div>
+</div>
+<br/>
+<br/>
+<br/>
 </body>
 </html>
