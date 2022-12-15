@@ -52,8 +52,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register/admin/**", "/users",
                         "/**/add/**", "/**/edit/**", "/**/delete/**",
-                        "/cinema-hall/**")
+                        "/cinema-hall/**", "/session/all")
                     .hasAuthority(ADMIN.name())
+                .antMatchers("/order/**")
+                    .authenticated()
                 .antMatchers("/register/**",
                         "/film/all",
                         "film/image/**",

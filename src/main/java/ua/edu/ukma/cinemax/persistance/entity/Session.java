@@ -34,7 +34,7 @@ public class Session extends AbstractEntity {
     private LocalDate date;
     @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
     private LocalTime time;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Ticket> tickets;
 
     public LocalDateTime getDateTime() {

@@ -6,24 +6,30 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tickets")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "tickets", uniqueConstraints =
+        {@UniqueConstraint(columnNames = {"session_id", "aisle", "seat"})}
+)
 public class Ticket extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private User user;
+    @JoinColumn(name="user_id")
+    private User user; // todo replace by Order
     @ManyToOne
+    @JoinColumn(name="session_id")
     private Session filmSession;
     @Column(nullable=false)
     private Integer aisle;
     @Column(nullable=false)
     private Integer seat;
+    @Column(nullable=false)
+    private Boolean isBought = false;
 
     @Override
     public boolean equals(Object o) {
