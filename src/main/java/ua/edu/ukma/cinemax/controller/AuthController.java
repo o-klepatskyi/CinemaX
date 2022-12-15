@@ -23,6 +23,11 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final UserService userService;
 
+    @GetMapping("/about")
+    public String aboutWindow() {
+        return "/about";
+    }
+
     @GetMapping("/login")
     public String loginForm() {
         return "login";
@@ -36,6 +41,11 @@ public class AuthController {
     @GetMapping("/403")
     public String error403() {
         return "/error/403";
+    }
+
+    @GetMapping("/404")
+    public String error404() {
+        return "/error/404";
     }
 
     @GetMapping("/register")

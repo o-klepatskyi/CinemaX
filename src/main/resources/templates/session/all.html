@@ -47,9 +47,6 @@
       <td th:text="${filmSession.date}"></td>
       <td th:text="${filmSession.time}"></td>
       <td>
-        <a th:href="@{/session/view/{id}(id=${filmSession.id})}">
-          <button class="btn btn-primary">View</button>
-        </a>
         <a th:href="@{/session/edit/{id}(id=${filmSession.id})}">
           <button class="btn btn-primary">Edit</button>
         </a>
