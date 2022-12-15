@@ -8,6 +8,7 @@ import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter
 import ua.edu.ukma.cinemax.dto.converter.SessionConverter
 import ua.edu.ukma.cinemax.dto.converters.impl.MockDTO
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository
+import ua.edu.ukma.cinemax.service.UserService
 import ua.edu.ukma.cinemax.service.impl.SessionServiceImpl
 import java.util.*
 
@@ -16,8 +17,9 @@ class SessionServiceTest {
     private val sessionRepository = Mockito.mock(SessionRepository::class.java)
     private val sessionConverter = Mockito.mock(SessionConverter::class.java)
     private val cinemaHallConverter = Mockito.mock(CinemaHallConverter::class.java)
+    private val userService = Mockito.mock(UserService::class.java)
 
-    private val instance = SessionServiceImpl(sessionRepository, sessionConverter, cinemaHallConverter)
+    private val instance = SessionServiceImpl(sessionRepository, sessionConverter, cinemaHallConverter, userService)
 
     @Test
     fun `Add Session`() {

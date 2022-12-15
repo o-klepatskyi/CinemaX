@@ -13,18 +13,13 @@ object MockDTO {
     val filmDto = FilmDto(1, "Test name", 1999, "Test desc", 2, "Test link")
     val film = Film(1, "Test name", 1999, "Test desc", 2)
 
-//    val cinemaHallDto = CinemaHallDto(1, "Test name", "Test desc", 2, 3)
-//    val cinema = CinemaHall(1, "Test name", "Test desc", 2, 3)
-//
-//    val sessionDto = SessionDto(1, filmDto, cinemaHallDto, LocalDate.MAX, LocalTime.MAX)
-//    val session = Session(1, film, cinema, LocalDate.MAX, LocalTime.MAX)
-//
-//    val ticketDto = TicketDto(1, userDto, sessionDto)
-//    val ticket = Ticket(1, user, session)
+    val cinemaHallDto = CinemaHallDto(1, "Test name", "Test desc", 2, 3, null)
+    val cinema = CinemaHall(1, "Test name", "Test desc", 2, 3)
 
-//    val orderDto = OrderDto(1, userDto, listOf(ticketDto), LocalDateTime.MAX)
-//    val order = Order(1, user, listOf(ticket), LocalDateTime.MAX)
-//
-//    val shoppingCartDto = ShoppingCartDto(1, listOf(ticketDto), userDto)
-//    val shoppingCart = ShoppingCart(1, listOf(ticket), user)
+    val sessionDto = SessionDto(1, film, cinema, LocalDate.MAX, LocalTime.MAX)
+    val session = Session(1, film, cinema, LocalDate.MAX, LocalTime.MAX, null)
+
+    val ticketDto = TicketDto(1, user, session, 0,0,false)
+    val ticket = Ticket(1, user, session, 0,0,false)
+
 }

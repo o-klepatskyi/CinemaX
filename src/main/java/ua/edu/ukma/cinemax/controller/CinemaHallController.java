@@ -78,7 +78,11 @@ public class CinemaHallController {
 
     @GetMapping(path = "cinema-hall/delete/{id}")
     public String delete(@PathVariable Long id) {
-        cinemaHallService.delete(id);
+        try {
+            cinemaHallService.delete(id);
+        } catch (Exception e) {
+            return "redirect:/cinema-hall/all?delete_error";
+        }
         return "redirect:/cinema-hall/all?success";
     }
 

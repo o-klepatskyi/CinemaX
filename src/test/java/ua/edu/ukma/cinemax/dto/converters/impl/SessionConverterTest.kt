@@ -32,32 +32,31 @@ class SessionConverterTest {
     private val cinemaHallConverter = CinemaHallConverterImpl()
     private val filmConverter = FilmConverterImpl()
     private val sessionConverter = SessionConverterImpl(cinemaHallConverter, filmConverter)
-//    private val tickerConvertor = TicketConverterImpl(userConverter, sessionConverter)
-//    private val orderConvert = OrderConverterImpl(userConverter, tickerConvertor)
+    private val tickerConvertor = TicketConverterImpl()
 
     @Test
     fun `From DTO to Model`() {
-//        val sessionDto = MockDTO.sessionDto
+        val sessionDto = MockDTO.sessionDto
 
         `when`(passwordEncoder.encode( MockDTO.userDto.password)).thenReturn("Encoded password")
         `when`(roleRepository.findByName("ROLE_USER")).thenReturn(Role(1, "USER"))
-//
-//        val session = sessionConverter.createFrom(sessionDto)
-//
-//        assert(session.id == sessionDto.id)
-//        assert(session.date == sessionDto.date)
-//        assert(session.time == sessionDto.time)
-//        assert(session.cinemaHall.id == sessionDto.cinemaHall.id)
+
+        val session = sessionConverter.createFrom(sessionDto)
+
+        assert(session.id == sessionDto.id)
+        assert(session.date == sessionDto.date)
+        assert(session.time == sessionDto.time)
+        assert(session.cinemaHall.id == sessionDto.cinemaHall.id)
     }
 
     @Test
     fun `From Model to DTO`() {
-//        val session = MockDTO.sessionDto
-//        val sessionDto = sessionConverter.createFrom(session)
+        val session = MockDTO.sessionDto
+        val sessionDto = sessionConverter.createFrom(session)
 
-//        assert(session.id == sessionDto.id)
-//        assert(session.date == sessionDto.date)
-//        assert(session.time == sessionDto.time)
-//        assert(session.film.tmdbId == sessionDto.film.tmdbId)
+        assert(session.id == sessionDto.id)
+        assert(session.date == sessionDto.date)
+        assert(session.time == sessionDto.time)
+        assert(session.film.tmdbId == sessionDto.film.tmdbId)
     }
 }

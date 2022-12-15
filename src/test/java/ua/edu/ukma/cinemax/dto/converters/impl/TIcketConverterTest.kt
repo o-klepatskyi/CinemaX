@@ -28,8 +28,8 @@ class TIcketConverterTest {
     private val cinemaHallConverter = CinemaHallConverterImpl()
     private val filmConverter = FilmConverterImpl()
     private val sessionConverter = SessionConverterImpl(cinemaHallConverter, filmConverter)
-    private val tickerConvertor = TicketConverterImpl(userConverter, sessionConverter)
-    private val shoppingCartConvert = ShoppingCartConverterImpl(tickerConvertor, userConverter)
+    private val tickerConvertor = TicketConverterImpl()
+    private val shoppingCartConvert = ShoppingCartConverterImpl()
 
     @Test
     fun `From DTO to Model`() {
