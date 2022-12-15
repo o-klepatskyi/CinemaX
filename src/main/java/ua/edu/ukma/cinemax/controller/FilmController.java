@@ -65,11 +65,11 @@ public class FilmController {
     public ModelAndView select(@PathVariable Long id) {
         try {
             ModelAndView mav = new ModelAndView("film/details");
-            mav.addObject("film",
-                    filmConverter.createFrom(filmService.get(id)));
+            FilmDto film = filmConverter.createFrom(filmService.get(id));
+            film.setImageLink(imageService.getImageLink(film.getId()));
+            mav.addObject("film", film);
             List<SessionDto> sessions = sessionService.getAvailableSessions(id, LocalDate.now());
             mav.addObject("sessions", sessions);
-            //mav.addObject("details", selectDetails(id));
             return mav;
         } catch (EntityNotFoundException e) {
             throw new InvalidIDException("There's no such film with id = " + id, e);
