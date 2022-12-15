@@ -49,7 +49,7 @@ public class OrderController {
         shoppingCartService.addSession(session, id);
     }
 
-    @GetMapping(path = "session/order/{id}")
+    @GetMapping(path = "order/session/{id}")
     public String getOrderPage(@PathVariable("id") Long sessionId, Model model) {
         List<List<Seat>> seats = sessionService.getTicketStatus(sessionId);
         Session session = sessionService.get(sessionId);
@@ -57,17 +57,17 @@ public class OrderController {
         model.addAttribute("cinemaSession", session);
         model.addAttribute("cinemaHall", cinemaHallDto);
         model.addAttribute("seats", seats);
-        return "session/order";
+        return "order/session";
     }
 
-    @PostMapping(path = "session/order/save/{id}")
+    @PostMapping(path = "order/session/save/{id}")
     public String submitReservation(@PathVariable("id") Long session,
                                     @ModelAttribute("cinemaHall") CinemaHallDto cinemaHallDto,
                                     Principal principal) {
         shoppingCartService.addTickets(session,
                 cinemaHallDto.getSeats(),
                 principal.getName());
-        return "redirect:/session/order/" + session;
+        return "redirect:/order/session/" + session;
     }
 
 }

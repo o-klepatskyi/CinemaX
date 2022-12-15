@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/**/add/**", "/**/edit/**", "/**/delete/**",
                         "/cinema-hall/**", "/session/all")
                     .hasAuthority(ADMIN.name())
-                .antMatchers("/**/order/**")
+                .antMatchers("/order/**")
                     .authenticated()
                 .antMatchers("/register/**",
                         "/film/all",
