@@ -48,6 +48,13 @@
             <p><b>Release year:</b><span th:text="${film.releaseYear}"></span></p>
             <b>Description:</b>
             <p th:text="${film.description}"></p>
+            <div class="container" sec:authorize="hasAuthority('USER')">
+              <p>
+                <a th:href="@{/film/{id}(id=${film.id})}">
+                  <button class="btn btn-primary">More</button>
+                </a>
+              </p>
+            </div>
             <div class="container" sec:authorize="hasAuthority('ADMIN')">
               <p>
                 <a th:href="@{/film/edit/{id}(id=${film.id})}">
