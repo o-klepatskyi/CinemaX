@@ -30,9 +30,9 @@ public class OrderController {
     private final OrderConverter orderConvertor;
     private final SessionConverter sessionConverter;
 
-    @GetMapping("/order/user/{id}")
-    ShoppingCartDto getCurrentOrder(@PathVariable Long id) {
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(id);
+    @GetMapping("/order/user/{username}")
+    ShoppingCartDto getCurrentOrder(@PathVariable String username) {
+        ShoppingCart shoppingCart = shoppingCartService.getByUsername(username);
         return shoppingCartConvertor.createFrom(shoppingCart);
     }
 
