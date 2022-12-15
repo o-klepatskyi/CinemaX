@@ -114,7 +114,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     private void checkAvailableTime(SessionDto sessionDto) {
-        CinemaHall cinemaHall = cinemaHallConverter.createFrom(sessionDto.getCinemaHall());
+        CinemaHall cinemaHall = sessionDto.getCinemaHall();
         LocalDateTime sessionDateTime = sessionDto.getDateTime();
         List<LocalDateTime> sessionsTime = sessionRepository
                 .findByCinemaHall(cinemaHall)

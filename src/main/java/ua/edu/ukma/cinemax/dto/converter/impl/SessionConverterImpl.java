@@ -30,8 +30,8 @@ public class SessionConverterImpl implements SessionConverter {
         SessionDto dto = new SessionDto();
         if (entity != null) {
             dto.setId(entity.getId());
-            dto.setFilm(filmConverter.createFrom(entity.getFilm()));
-            dto.setCinemaHall(cinemaHallConverter.createFrom(entity.getCinemaHall()));
+            dto.setFilm(entity.getFilm());
+            dto.setCinemaHall(entity.getCinemaHall());
             dto.setDate(entity.getDate());
             dto.setTime(entity.getTime());
         }
@@ -45,10 +45,10 @@ public class SessionConverterImpl implements SessionConverter {
                 entity.setId(dto.getId());
             }
             if (dto.getFilm() != null){
-                entity.setFilm(filmConverter.createFrom(dto.getFilm()));
+                entity.setFilm(dto.getFilm());
             }
             if (dto.getCinemaHall() != null){
-                entity.setCinemaHall(cinemaHallConverter.createFrom(dto.getCinemaHall()));
+                entity.setCinemaHall(dto.getCinemaHall());
             }
             if (dto.getDate() != null){
                 entity.setDate(dto.getDate());
