@@ -37,7 +37,7 @@
             <div class="card">
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
-                        Successfully bought tickets!
+                        Successfully reserved tickets! <a th:href="@{/film/all}">Go to Your shopping cart.</a>
                     </div>
                 </div>
                 <div th:if="${errorValue} != null">
