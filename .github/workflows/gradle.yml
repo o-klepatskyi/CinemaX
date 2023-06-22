@@ -29,17 +29,11 @@ jobs:
         with:
          files: |
            build/test-results/test/*.xml
-      - name: Publish Spotbugs Results
-        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+      - name: Checkstyle
+        if: always()
+        uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
-          name: Spotbugs
-          path: build/reports/spotbugs/*.xml
-      - name: Publish Sonarlint Results
-        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
-        with:
-          name: Sonarlint
-          title: Sonarlint report
-          path: build/reports/sonarlint/*.xml
+          path: 'build/reports/checkstyle'
       - uses: actions/upload-artifact@v3
         with:
           name: Package
