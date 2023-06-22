@@ -25,20 +25,25 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build
-        run: ./gradlew build
-
-      - name: Store reports
-        if: failure()
-        uses: actions/upload-artifact@v3
+      - run: ./gradlew build --no-daemon
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
         with:
-          name: reports
-          path: |
-            **/build/reports/
-            **/build/test-results/
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+         files: |
+           build/test-results/test/*.xml
+      - name: Publish Spotbugs Results
+        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
         with:
-          name: CinemaX
+          name: Spotbugs
+          path: build/reports/spotbugs/*.xml
+      - name: Publish Sonarlint Results
+        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+        with:
+          name: Sonarlint
+          title: Sonarlint report
+          path: build/reports/sonarlint/*.xml
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
           path: build/libs
