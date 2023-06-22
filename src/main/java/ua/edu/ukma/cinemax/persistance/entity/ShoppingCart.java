@@ -1,12 +1,12 @@
 package ua.edu.ukma.cinemax.persistance.entity;
 
-import java.util.List;
-import java.util.Objects;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
+
+import java.util.List;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor

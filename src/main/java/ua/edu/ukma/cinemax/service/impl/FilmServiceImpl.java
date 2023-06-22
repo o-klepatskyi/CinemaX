@@ -1,8 +1,5 @@
 package ua.edu.ukma.cinemax.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +15,16 @@ import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
-    @Value("${tmdb_api_key}")
-    private String TMDB_API_KEY;
-
     private final FilmRepository filmRepository;
     private final FilmConverter filmConverter;
+    @Value("${tmdb_api_key}")
+    private String tmdbApiKey;
 
     @Override
     public void add(FilmDto film) {
@@ -35,8 +34,9 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public Film get(Long id) {
         Optional<Film> maybeFilm = filmRepository.findById(id);
-        if (maybeFilm.isEmpty())
+        if (maybeFilm.isEmpty()) {
             throw new InvalidIDException("No film with id " + id, null);
+        }
         return maybeFilm.get();
     }
 
@@ -62,7 +62,7 @@ public class FilmServiceImpl implements FilmService {
         Film film = get(id);
         final String uri = String.format(
                 "https://api.themoviedb.org/3/movie/%d?api_key=%s",
-                film.getTmdbId(), TMDB_API_KEY);
+                film.getTmdbId(), tmdbApiKey);
         RestTemplate restTemplate = new RestTemplate();
         try {
             String result = restTemplate.getForObject(uri, String.class);

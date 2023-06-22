@@ -3,7 +3,6 @@ package ua.edu.ukma.cinemax.dto.converters.impl
 import ua.edu.ukma.cinemax.dto.*
 import ua.edu.ukma.cinemax.persistance.entity.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 object MockDTO {
@@ -19,7 +18,7 @@ object MockDTO {
     val sessionDto = SessionDto(1, film, cinema, LocalDate.MAX, LocalTime.MAX)
     val session = Session(1, film, cinema, LocalDate.MAX, LocalTime.MAX, null)
 
-    val ticketDto = TicketDto(1, user, session, 0,0,false)
-    val ticket = Ticket(1, user, session, 0,0,false)
+    val ticketDto = TicketDto(1, user, session, 0, 0, false)
+    val ticket = Ticket(1, user, session, 0, 0, false)
 
 }

@@ -1,7 +1,7 @@
 package ua.edu.ukma.cinemax.persistance.entity;
+
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,16 +20,16 @@ public class Ticket extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @JoinColumn(name="session_id")
+    @JoinColumn(name = "session_id")
     private Session filmSession;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Integer aisle;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Integer seat;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Boolean isBought = false;
 
     @Override

@@ -20,7 +20,9 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String getImageLink(Long id) {
         JsonObject filmDetails = filmService.getDetails(id);
-        if (filmDetails == null) return null; // todo default image???
+        if (filmDetails == null) {
+            return null; // todo default image???
+        }
         String posterPath = filmDetails.get("poster_path").getAsString();
         return String.format(
                 "https://image.tmdb.org/t/p/w500%s",

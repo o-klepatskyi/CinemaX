@@ -56,8 +56,8 @@ CREATE TABLE tickets
 
 CREATE TABLE logger
 (
-    id              BIGINT AUTO_INCREMENT NOT NULL,
-    message         TEXT
+    id      BIGINT AUTO_INCREMENT NOT NULL,
+    message TEXT
 );
 
 

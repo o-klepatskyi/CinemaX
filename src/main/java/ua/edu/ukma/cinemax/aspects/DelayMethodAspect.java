@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class DelayMethodAspect {
-    final static Logger logger = LoggerFactory.getLogger(DelayMethodAspect.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(DelayMethodAspect.class);
 
     @Around("@annotation(ua.edu.ukma.cinemax.aspects.DelayMethod)")
     public Object logTimeMethod(ProceedingJoinPoint point) throws Throwable {
         long startMethod = System.currentTimeMillis();
         Object resultMethod = point.proceed();
         long endMethod = System.currentTimeMillis();
-        logger.info("Method: " + point.getSignature().getName() + "; Delay: " + (endMethod - startMethod) + " millis");
+        LOGGER.info("Method: " + point.getSignature().getName() + "; Delay: " + (endMethod - startMethod) + " millis");
         return resultMethod;
     }
 }

@@ -3,7 +3,6 @@ package ua.edu.ukma.cinemax.dto.service
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import ua.edu.ukma.cinemax.dto.converter.UserConverter
-import ua.edu.ukma.cinemax.dto.converter.impl.UserConverterImpl
 import ua.edu.ukma.cinemax.dto.converters.impl.MockDTO
 import ua.edu.ukma.cinemax.persistance.repository.UserRepository
 import ua.edu.ukma.cinemax.service.impl.UserServiceImpl

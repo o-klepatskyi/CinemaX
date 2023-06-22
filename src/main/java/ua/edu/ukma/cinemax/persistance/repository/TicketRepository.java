@@ -12,8 +12,7 @@ import java.util.List;
 @Transactional
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query("Select t from Ticket t where " +
-            "t.user.id = :id and t.isBought = false")
+    @Query("Select t from Ticket t where t.user.id = :id and t.isBought = false")
     List<Ticket> getTicketsInShoppingCart(@Param("id") Long id);
 
 

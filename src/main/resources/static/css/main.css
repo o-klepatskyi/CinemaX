@@ -1,43 +1,43 @@
-h1{
+h1 {
     color: green;
     font-family: "Century Gothic", serif;
     font-weight: bold;
 }
 
-h2{
+h2 {
     color: seagreen;
     font-family: "Century Gothic", serif;
     font-weight: bold;
 }
 
-form{
+form {
     font-family: "Century Gothic", serif;
     font-weight: bold;
 }
 
-input{
+input {
     font-family: Calibri, serif;
 }
 
-button{
+button {
     background-color: lightgreen;
     font-family: "Century Gothic", serif;
     font-size: 20px;
     margin-top: 10px;
 }
 
-table{
+table {
     font-family: Calibri, serif;
 }
 
-thead{
+thead {
     background-color: lightgreen;
     font-weight: bold;
 }
 
-footer{
+footer {
     color: green;
     font-family: "Century Gothic", serif;
     font-weight: bold;
-    margin-top:60px;
+    margin-top: 60px;
 }

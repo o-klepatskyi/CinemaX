@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
     private final UserService userService;
 
     @GetMapping("/about")
@@ -49,14 +49,14 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model){
+    public String showRegistrationForm(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "register";
     }
 
     @GetMapping("/register/admin")
-    public String showAdminRegistrationForm(Model model){
+    public String showAdminRegistrationForm(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "admin-register";
@@ -73,7 +73,7 @@ public class AuthController {
         try {
             userService.add(user);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return "redirect:/register?error";
         }
         return "redirect:/register?success";
@@ -81,8 +81,8 @@ public class AuthController {
 
     @PostMapping("/register/admin/save")
     public String adminRegistration(@Valid @ModelAttribute("user") UserDto user,
-                               BindingResult result,
-                               Model model) {
+                                    BindingResult result,
+                                    Model model) {
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "admin-register";
@@ -91,14 +91,14 @@ public class AuthController {
         try {
             userService.add(user);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return "redirect:/register?error";
         }
         return "redirect:/register/admin?success";
     }
 
     @GetMapping("/users")
-    public ModelAndView users(Model model){
+    public ModelAndView users(Model model) {
         List<UserDto> users = userService.getAll();
         model.addAttribute("users", users);
         return new ModelAndView("users");

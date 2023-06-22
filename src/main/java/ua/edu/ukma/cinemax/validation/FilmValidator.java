@@ -7,9 +7,6 @@ import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-
 @Component
 @RequiredArgsConstructor
 public class FilmValidator implements Validator<FilmDto, Film> {
@@ -17,8 +14,8 @@ public class FilmValidator implements Validator<FilmDto, Film> {
 
     @Override
     public void validateFieldConstraints(FilmDto object, BindingResult result) {
-            checkUniqueFieldConstraint(object, result, filmRepository,
-                    "tmdbId",
-                    "There is already a film with this tmdbId");
+        checkUniqueFieldConstraint(object, result, filmRepository,
+                "tmdbId",
+                "There is already a film with this tmdbId");
     }
 }

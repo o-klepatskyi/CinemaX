@@ -1,11 +1,6 @@
 package ua.edu.ukma.cinemax.service;
 
-import ua.edu.ukma.cinemax.dto.ShoppingCartDto;
-import ua.edu.ukma.cinemax.dto.TicketDto;
-import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
-import ua.edu.ukma.cinemax.persistance.entity.Ticket;
-import ua.edu.ukma.cinemax.persistance.entity.User;
 
 import java.util.List;
 

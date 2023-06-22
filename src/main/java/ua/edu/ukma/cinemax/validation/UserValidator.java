@@ -7,8 +7,6 @@ import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.UserRepository;
 
-import java.util.Objects;
-
 @Component
 @RequiredArgsConstructor
 public class UserValidator implements Validator<UserDto, User> {

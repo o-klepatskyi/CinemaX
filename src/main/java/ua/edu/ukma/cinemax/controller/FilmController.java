@@ -1,30 +1,34 @@
 package ua.edu.ukma.cinemax.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
-import ua.edu.ukma.cinemax.persistance.entity.Session;
-import ua.edu.ukma.cinemax.service.*;
+import ua.edu.ukma.cinemax.service.FilmService;
+import ua.edu.ukma.cinemax.service.ImageService;
+import ua.edu.ukma.cinemax.service.SessionService;
+
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class FilmController {
-    private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FilmController.class);
     private final FilmService filmService;
     private final ImageService imageService;
     private final SessionService sessionService;
@@ -54,7 +58,7 @@ public class FilmController {
         try {
             filmService.add(film);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return "film/add?error"; // todo fix error
         }
 
@@ -91,14 +95,14 @@ public class FilmController {
     @PostMapping(path = "/film/edit/{id}")
     public String edit(@PathVariable Long id,
                        @Valid @ModelAttribute("film") FilmDto film,
-                     BindingResult result, Model model) {
+                       BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "film/edit";
         }
         try {
             filmService.update(film);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return String.format("redirect:/film/edit/%s?error", id);
         }
 

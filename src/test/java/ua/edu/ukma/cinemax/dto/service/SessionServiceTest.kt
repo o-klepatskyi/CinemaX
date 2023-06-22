@@ -32,7 +32,7 @@ class SessionServiceTest {
     }
 
     @Test
-    fun `Get session by id` () {
+    fun `Get session by id`() {
         `when`(sessionRepository.findById(MockDTO.session.id)).thenReturn(Optional.of(MockDTO.session))
         `when`(sessionConverter.createFrom(MockDTO.sessionDto)).thenReturn(MockDTO.session)
         `when`(sessionConverter.createFrom(MockDTO.session)).thenReturn(MockDTO.sessionDto)
@@ -79,7 +79,11 @@ class SessionServiceTest {
 
     @Test
     fun `Get available sessions`() {
-        `when`(sessionRepository.getAvailableSessions(MockDTO.session.id, MockDTO.session.date)).thenReturn(listOf(MockDTO.session))
+        `when`(sessionRepository.getAvailableSessions(MockDTO.session.id, MockDTO.session.date)).thenReturn(
+            listOf(
+                MockDTO.session
+            )
+        )
         `when`(sessionConverter.createFrom(MockDTO.sessionDto)).thenReturn(MockDTO.session)
         `when`(sessionConverter.createFrom(MockDTO.session)).thenReturn(MockDTO.sessionDto)
 

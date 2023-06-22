@@ -16,12 +16,12 @@ import javax.validation.constraints.Size;
 public class FilmDto extends AbstractDto {
     private Long id;
     @NotBlank
-    @Size(max=50)
+    @Size(max = 50)
     private String title;
     @Min(1900)
     @NotNull
     private Integer releaseYear;
-    @Size(max=200)
+    @Size(max = 200)
     private String description;
     @Min(0)
     @NotNull

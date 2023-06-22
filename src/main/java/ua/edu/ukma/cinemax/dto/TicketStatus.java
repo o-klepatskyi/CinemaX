@@ -5,5 +5,6 @@ public class TicketStatus {
     public static final int STATUS_RESERVED = 1;
     public static final int STATUS_BOUGHT = 2;
 
-    private TicketStatus() {}
+    private TicketStatus() {
+    }
 }

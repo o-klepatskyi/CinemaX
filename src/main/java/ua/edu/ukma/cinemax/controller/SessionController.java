@@ -1,16 +1,11 @@
 package ua.edu.ukma.cinemax.controller;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +17,15 @@ import ua.edu.ukma.cinemax.service.CinemaHallService;
 import ua.edu.ukma.cinemax.service.FilmService;
 import ua.edu.ukma.cinemax.service.SessionService;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class SessionController {
-    Logger logger = LoggerFactory.getLogger(SessionController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SessionController.class);
     private final SessionService sessionService;
     private final FilmService filmService;
     private final CinemaHallService cinemaHallService;
@@ -41,15 +41,15 @@ public class SessionController {
 
     @PostMapping("/session/add")
     public String submitNewSession(@Valid @ModelAttribute("session") SessionDto sessionDto,
-                                BindingResult result, Model model) {
-        logger.info(sessionDto.toString());
+                                   BindingResult result, Model model) {
+        LOGGER.info(sessionDto.toString());
         if (result.hasErrors()) {
             return "session/add";
         }
         try {
             sessionService.add(sessionDto);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             model.addAttribute("errorValue", "Cinema hall is occupied on that time.\n" +
                             "(Note: session duration is 2 hours)")
                     .addAttribute("session", sessionDto)
@@ -71,7 +71,7 @@ public class SessionController {
 
     @GetMapping("/session/all/{id}/{date}")
     public String selectAllAvailable(@PathVariable Long id,
-                                               @PathVariable LocalDate date) {
+                                     @PathVariable LocalDate date) {
         ModelAndView mav = new ModelAndView("list-sessions");
         List<SessionDto> sessions = sessionService.getAvailableSessions(id, date);
         mav.addObject("sessions", sessions);
@@ -83,7 +83,7 @@ public class SessionController {
         Session session = sessionService.get(id);
         model.addAttribute("session", session)
                 .addAttribute("films", filmService.getAll())
-                .addAttribute("cinemaHalls", cinemaHallService.getAll());;
+                .addAttribute("cinemaHalls", cinemaHallService.getAll());
         return "session/edit";
     }
 
@@ -96,7 +96,7 @@ public class SessionController {
         try {
             sessionService.update(session);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return String.format("redirect:/session/edit/%s?error", session.getId());
         }
         return String.format("redirect:/session/edit/%s?success", session.getId());

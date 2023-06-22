@@ -34,16 +34,16 @@ public class FilmConverterImpl implements FilmConverter {
             if (dto.getId() != null) {
                 entity.setId(dto.getId());
             }
-            if (dto.getTitle() != null){
+            if (dto.getTitle() != null) {
                 entity.setTitle(dto.getTitle());
             }
-            if (dto.getReleaseYear() != null){
+            if (dto.getReleaseYear() != null) {
                 entity.setReleaseYear(dto.getReleaseYear());
             }
-            if (dto.getDescription() != null){
+            if (dto.getDescription() != null) {
                 entity.setDescription(dto.getDescription());
             }
-            if (dto.getTmdbId() != null){
+            if (dto.getTmdbId() != null) {
                 entity.setTmdbId(dto.getTmdbId());
             }
         }

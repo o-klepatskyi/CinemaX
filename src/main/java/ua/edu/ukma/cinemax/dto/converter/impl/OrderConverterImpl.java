@@ -1,18 +1,12 @@
 package ua.edu.ukma.cinemax.dto.converter.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ua.edu.ukma.cinemax.dto.OrderDto;
-import ua.edu.ukma.cinemax.dto.SessionDto;
-import ua.edu.ukma.cinemax.dto.TicketDto;
 import ua.edu.ukma.cinemax.dto.converter.OrderConverter;
-import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
 import ua.edu.ukma.cinemax.dto.converter.TicketConverter;
 import ua.edu.ukma.cinemax.dto.converter.UserConverter;
 import ua.edu.ukma.cinemax.persistance.entity.Order;
-import ua.edu.ukma.cinemax.persistance.entity.Session;
-import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 
 @Component
 @RequiredArgsConstructor
@@ -45,13 +39,13 @@ public class OrderConverterImpl implements OrderConverter {
             if (dto.getId() != null) {
                 entity.setId(dto.getId());
             }
-            if (dto.getUser() != null){
+            if (dto.getUser() != null) {
                 entity.setUser(userConverter.createFrom(dto.getUser()));
             }
-            if (dto.getOrderTime() != null){
+            if (dto.getOrderTime() != null) {
                 entity.setOrderTime(dto.getOrderTime());
             }
-            if (dto.getTickets() != null){
+            if (dto.getTickets() != null) {
                 entity.setTickets(ticketConverter.createFromDtos(dto.getTickets()));
             }
         }

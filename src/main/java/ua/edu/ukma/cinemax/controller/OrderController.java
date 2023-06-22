@@ -5,8 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ua.edu.ukma.cinemax.dto.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import ua.edu.ukma.cinemax.dto.CinemaHallDto;
+import ua.edu.ukma.cinemax.dto.Seat;
 import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
 import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
 import ua.edu.ukma.cinemax.dto.converter.ShoppingCartConverter;
@@ -22,7 +26,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
     private final SessionService sessionService;
     private final CinemaHallConverter cinemaHallConverter;
     private final OrderService orderService;
@@ -33,7 +37,7 @@ public class OrderController {
     @GetMapping("/order/{username}")
     public String getCurrentOrder(@PathVariable String username, Model model) {
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(username);
-        logger.info(shoppingCart.toString());
+        LOGGER.info(shoppingCart.toString());
         model.addAttribute("shoppingCart", shoppingCart);
         return "/order/shopping-cart";
     }

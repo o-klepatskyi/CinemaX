@@ -3,10 +3,10 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Edit Session</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+          rel="stylesheet">
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -29,45 +29,47 @@
                           th:object="${session}">
                         <div class="form-group mb-3">
                             <label class="control-label">ID</label>
-                            <input type="text"
+                            <input class="form-control"
                                    id="id"
                                    name="id"
-                                   class="form-control"
+                                   readonly
                                    th:field="*{id}"
-                                   readonly/>
+                                   type="text"/>
                             <div class="form-group mb-3">
                                 <label class="control-label">Film</label>
                                 <div class="form-group blu-margin">
-                                    <select class="form-control" th:field="${session.film}" id="filmDropper">
+                                    <select class="form-control" id="filmDropper" th:field="${session.film}">
                                         <option value="0">Select Film</option>
-                                        <option th:each="film : ${films}" th:value="${film.id}" th:text="${film.title}"></option>
+                                        <option th:each="film : ${films}" th:text="${film.title}"
+                                                th:value="${film.id}"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="control-label">Cinema Hall</label>
                                 <div class="form-group blu-margin">
-                                    <select class="form-control" th:field="${session.cinemaHall}" id="cinemaHallDropper">
+                                    <select class="form-control" id="cinemaHallDropper"
+                                            th:field="${session.cinemaHall}">
                                         <option value="0">Select Cinema Hall</option>
-                                        <option th:each="cinemaHall : ${cinemaHalls}" th:value="${cinemaHall.id}"
-                                                th:text="${cinemaHall.name} + ' - ' + ${cinemaHall.description}"></option>
+                                        <option th:each="cinemaHall : ${cinemaHalls}" th:text="${cinemaHall.name} + ' - ' + ${cinemaHall.description}"
+                                                th:value="${cinemaHall.id}"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="control-label">Show Date</label>
                                 <div class="col-md-3">
-                                    <input type="date" th:field="${session.date}" id="date"/>
+                                    <input id="date" th:field="${session.date}" type="date"/>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="control-label">Show Time</label>
                                 <div class="col-md-3">
-                                    <input type="time" th:field="${session.time}" step="1800" id="time"/>
+                                    <input id="time" step="1800" th:field="${session.time}" type="time"/>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -3,21 +3,21 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 paths:
   /user/edit/{id}:
     put:
       tags:
-      - user-controller
+        - user-controller
       operationId: edit
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -38,15 +38,15 @@ paths:
   /session/edit/{id}:
     put:
       tags:
-      - session-controller
+        - session-controller
       operationId: edit_1
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -67,15 +67,15 @@ paths:
   /film/{id}:
     get:
       tags:
-      - film-controller
+        - film-controller
       operationId: select
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -93,15 +93,15 @@ paths:
                 $ref: '#/components/schemas/ApiFilm'
     put:
       tags:
-      - film-controller
+        - film-controller
       operationId: edit_2
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -121,15 +121,15 @@ paths:
           description: OK
     delete:
       tags:
-      - film-controller
+        - film-controller
       operationId: delete_2
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -144,15 +144,15 @@ paths:
   /cinema_hall/edit/{id}:
     put:
       tags:
-      - cinema-hall-controller
+        - cinema-hall-controller
       operationId: edit_3
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -173,7 +173,7 @@ paths:
   /user/add:
     post:
       tags:
-      - user-controller
+        - user-controller
       operationId: add
       requestBody:
         content:
@@ -195,7 +195,7 @@ paths:
   /session/add:
     post:
       tags:
-      - session-controller
+        - session-controller
       operationId: add_1
       requestBody:
         content:
@@ -217,7 +217,7 @@ paths:
   /film/add:
     post:
       tags:
-      - film-controller
+        - film-controller
       operationId: add_2
       requestBody:
         content:
@@ -239,7 +239,7 @@ paths:
   /cinema_hall/add:
     post:
       tags:
-      - cinema-hall-controller
+        - cinema-hall-controller
       operationId: add_3
       requestBody:
         content:
@@ -261,7 +261,7 @@ paths:
   /user/all:
     get:
       tags:
-      - user-controller
+        - user-controller
       operationId: selectAll
       responses:
         "400":
@@ -283,21 +283,21 @@ paths:
   /session/available/{id}/{date}:
     get:
       tags:
-      - session-controller
+        - session-controller
       operationId: selectAllAvailable
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: date
-        in: path
-        required: true
-        schema:
-          type: string
-          format: date
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
       responses:
         "400":
           description: Bad Request
@@ -318,7 +318,7 @@ paths:
   /session/all:
     get:
       tags:
-      - session-controller
+        - session-controller
       operationId: all
       responses:
         "400":
@@ -340,15 +340,15 @@ paths:
   /film/details/{id}:
     get:
       tags:
-      - film-controller
+        - film-controller
       operationId: selectDetails
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -367,7 +367,7 @@ paths:
   /film/all:
     get:
       tags:
-      - film-controller
+        - film-controller
       operationId: selectAll_1
       responses:
         "400":
@@ -389,7 +389,7 @@ paths:
   /cinema_hall/all:
     get:
       tags:
-      - cinema-hall-controller
+        - cinema-hall-controller
       operationId: selectAll_2
       responses:
         "400":
@@ -411,15 +411,15 @@ paths:
   /user/delete/{id}:
     delete:
       tags:
-      - user-controller
+        - user-controller
       operationId: delete
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -434,15 +434,15 @@ paths:
   /session/delete/{id}:
     delete:
       tags:
-      - session-controller
+        - session-controller
       operationId: delete_1
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -457,15 +457,15 @@ paths:
   /cinema_hall/delete/{id}:
     delete:
       tags:
-      - cinema-hall-controller
+        - cinema-hall-controller
       operationId: delete_3
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "400":
           description: Bad Request
@@ -480,7 +480,7 @@ paths:
   /stat:
     get:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_6
       responses:
         "400":
@@ -499,7 +499,7 @@ paths:
                 type: string
     put:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat
       responses:
         "400":
@@ -518,7 +518,7 @@ paths:
                 type: string
     post:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_5
       responses:
         "400":
@@ -537,7 +537,7 @@ paths:
                 type: string
     delete:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_3
       responses:
         "400":
@@ -556,7 +556,7 @@ paths:
                 type: string
     options:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_2
       responses:
         "400":
@@ -575,7 +575,7 @@ paths:
                 type: string
     head:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_1
       responses:
         "400":
@@ -594,7 +594,7 @@ paths:
                 type: string
     patch:
       tags:
-      - statistics-controller
+        - statistics-controller
       operationId: printStat_4
       responses:
         "400":
@@ -614,7 +614,7 @@ paths:
   /buy:
     get:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_6
       responses:
         "400":
@@ -629,7 +629,7 @@ paths:
           description: OK
     put:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket
       responses:
         "400":
@@ -644,7 +644,7 @@ paths:
           description: OK
     post:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_5
       responses:
         "400":
@@ -659,7 +659,7 @@ paths:
           description: OK
     delete:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_3
       responses:
         "400":
@@ -674,7 +674,7 @@ paths:
           description: OK
     options:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_2
       responses:
         "400":
@@ -689,7 +689,7 @@ paths:
           description: OK
     head:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_1
       responses:
         "400":
@@ -704,7 +704,7 @@ paths:
           description: OK
     patch:
       tags:
-      - cashier-contoller
+        - cashier-contoller
       operationId: buyTicket_4
       responses:
         "400":
@@ -771,7 +771,7 @@ components:
           format: int64
     ApiFilm:
       required:
-      - title
+        - title
       type: object
       properties:
         id:

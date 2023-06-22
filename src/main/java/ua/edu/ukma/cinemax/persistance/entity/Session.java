@@ -30,11 +30,11 @@ public class Session extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.TIME)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime time;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Ticket> tickets;
 

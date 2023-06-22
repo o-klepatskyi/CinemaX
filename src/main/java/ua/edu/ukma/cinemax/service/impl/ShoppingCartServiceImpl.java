@@ -1,8 +1,5 @@
 package ua.edu.ukma.cinemax.service.impl;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.persistance.entity.*;
@@ -10,6 +7,9 @@ import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.persistance.repository.TicketRepository;
 import ua.edu.ukma.cinemax.service.ShoppingCartService;
 import ua.edu.ukma.cinemax.service.UserService;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +43,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart getShoppingCart(String username) {
         User user = userService.getByUsername(username);
-        List<Ticket> tickets =  ticketRepository.getTicketsInShoppingCart(user.getId());
+        List<Ticket> tickets = ticketRepository.getTicketsInShoppingCart(user.getId());
         return new ShoppingCart(null, tickets, user);
     }
 

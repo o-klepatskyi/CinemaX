@@ -9,14 +9,14 @@ import ua.edu.ukma.cinemax.persistance.entity.AbstractEntity;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-public interface Validator <D extends AbstractDto, E extends AbstractEntity> {
+public interface Validator<D extends AbstractDto, E extends AbstractEntity> {
 
     void validateFieldConstraints(D object, BindingResult result);
 
     default void checkUniqueFieldConstraint(D object, BindingResult result,
-                                                JpaRepository<E, Long> repo,
-                                                String fieldName,
-                                                String failureMessage) {
+                                            JpaRepository<E, Long> repo,
+                                            String fieldName,
+                                            String failureMessage) {
         try {
             String getMethodName = "get" + StringUtils.capitalize(fieldName);
             Method getMethod = object.getClass().getMethod(getMethodName);
@@ -27,7 +27,7 @@ public interface Validator <D extends AbstractDto, E extends AbstractEntity> {
             if (existing != null && !Objects.equals(object.getId(), existing.getId())) {
                 result.rejectValue(fieldName, null, failureMessage);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new ValidationException(e);
         }
     }

@@ -1,21 +1,20 @@
 package ua.edu.ukma.cinemax.service.impl;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.persistance.entity.Order;
 import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 import ua.edu.ukma.cinemax.persistance.entity.User;
-import ua.edu.ukma.cinemax.persistance.repository.OrderRepository;
 import ua.edu.ukma.cinemax.persistance.repository.TicketRepository;
 import ua.edu.ukma.cinemax.service.OrderService;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-//    private final OrderRepository orderRepository;
+    //    private final OrderRepository orderRepository;
     private final TicketRepository ticketRepository;
 
     @Override

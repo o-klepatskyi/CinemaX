@@ -5,7 +5,6 @@ import org.mockito.Mockito
 import ua.edu.ukma.cinemax.dto.converter.impl.FilmConverterImpl
 import ua.edu.ukma.cinemax.dto.converters.impl.MockDTO
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository
-import ua.edu.ukma.cinemax.service.FilmService
 import ua.edu.ukma.cinemax.service.impl.FilmServiceImpl
 import java.util.*
 

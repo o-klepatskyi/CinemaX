@@ -2,15 +2,11 @@ package ua.edu.ukma.cinemax.dto.converter.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import ua.edu.ukma.cinemax.dto.CinemaHallDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.dto.converter.SessionConverter;
-import ua.edu.ukma.cinemax.dto.converter.TicketConverter;
-import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
-import ua.edu.ukma.cinemax.persistance.entity.Ticket;
 
 @Component
 @AllArgsConstructor
@@ -18,6 +14,7 @@ public class SessionConverterImpl implements SessionConverter {
 
     private final CinemaHallConverter cinemaHallConverter;
     private final FilmConverter filmConverter;
+
     @Override
     public Session createFrom(SessionDto dto) {
         Session entity = new Session();
@@ -44,16 +41,16 @@ public class SessionConverterImpl implements SessionConverter {
             if (dto.getId() != null) {
                 entity.setId(dto.getId());
             }
-            if (dto.getFilm() != null){
+            if (dto.getFilm() != null) {
                 entity.setFilm(dto.getFilm());
             }
-            if (dto.getCinemaHall() != null){
+            if (dto.getCinemaHall() != null) {
                 entity.setCinemaHall(dto.getCinemaHall());
             }
-            if (dto.getDate() != null){
+            if (dto.getDate() != null) {
                 entity.setDate(dto.getDate());
             }
-            if (dto.getTime() != null){
+            if (dto.getTime() != null) {
                 entity.setTime(dto.getTime());
             }
         }

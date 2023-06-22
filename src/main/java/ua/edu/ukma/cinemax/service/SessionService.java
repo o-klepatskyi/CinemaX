@@ -1,13 +1,11 @@
 package ua.edu.ukma.cinemax.service;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-
 import ua.edu.ukma.cinemax.dto.Seat;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
-import ua.edu.ukma.cinemax.persistance.entity.User;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public interface SessionService {
     void add(SessionDto session);

@@ -1,9 +1,10 @@
 package ua.edu.ukma.cinemax.service;
 
-import java.util.List;
 import ua.edu.ukma.cinemax.persistance.entity.Order;
 import ua.edu.ukma.cinemax.persistance.entity.ShoppingCart;
 import ua.edu.ukma.cinemax.persistance.entity.User;
+
+import java.util.List;
 
 public interface OrderService {
     Order completeOrder(ShoppingCart shoppingCart);

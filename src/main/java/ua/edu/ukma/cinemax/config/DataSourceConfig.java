@@ -1,11 +1,14 @@
 package ua.edu.ukma.cinemax.config;
 
-import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
@@ -17,9 +20,9 @@ import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.persistance.repository.RoleRepository;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.security.model.Roles;
-import ua.edu.ukma.cinemax.service.FilmService;
 import ua.edu.ukma.cinemax.service.UserService;
 
+import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -31,6 +34,8 @@ import java.util.stream.Collectors;
 @ComponentScan(basePackages = "ua.edu.ukma.cinemax")
 public class DataSourceConfig {
 
+    private static final LocalDate SESSION_DATE = LocalDate.of(2022, 12, 10);
+    private static final LocalTime SESSION_TIME = LocalTime.of(15, 0, 0);
     @Autowired
     private Environment environment;
 
@@ -53,15 +58,18 @@ public class DataSourceConfig {
                                  CinemaHallRepository cinemaHallRepository,
                                  SessionRepository sessionRepository) {
         return (String[] args) -> {
-            if (!ddl.startsWith("create")) return;
-            for (String name : Arrays.stream(Roles.values()).map(Roles::name).collect(Collectors.toList()))
+            if (!ddl.startsWith("create")) {
+                return;
+            }
+            for (String name : Arrays.stream(Roles.values()).map(Roles::name).collect(Collectors.toList())) {
                 addRoles(roleRepository, name);
+            }
             addUsers(userService);
             addFilms(filmRepository);
             addCinemaHalls(cinemaHallRepository);
             addSessions(sessionRepository, filmRepository, cinemaHallRepository);
-       };
-   }
+        };
+    }
 
     private void addSessions(SessionRepository sessionRepository,
                              FilmRepository filmRepository,
@@ -69,14 +77,14 @@ public class DataSourceConfig {
         Session session = new Session();
         session.setFilm(filmRepository.getReferenceById(1L));
         session.setCinemaHall(cinemaHallRepository.getReferenceById(1L));
-        session.setDate(LocalDate.of(2022, 12, 18));
-        session.setTime(LocalTime.of(15,0,0));
+        session.setDate(SESSION_DATE);
+        session.setTime(SESSION_TIME);
         sessionRepository.save(session);
         session = new Session();
         session.setFilm(filmRepository.getReferenceById(2L));
         session.setCinemaHall(cinemaHallRepository.getReferenceById(2L));
-        session.setDate(LocalDate.of(2022, 12, 18));
-        session.setTime(LocalTime.of(15,0,0));
+        session.setDate(SESSION_DATE);
+        session.setTime(SESSION_TIME);
         sessionRepository.save(session);
     }
 
@@ -99,9 +107,9 @@ public class DataSourceConfig {
         Role role = new Role();
         role.setName(name);
         roleRepository.save(role);
-   }
+    }
 
-   private void addUsers(UserService userService) {
+    private void addUsers(UserService userService) {
         UserDto user = new UserDto();
         user.setUsername("user");
         user.setEmail("user@cinemax.com");
@@ -114,28 +122,36 @@ public class DataSourceConfig {
         admin.setPassword("admin");
         admin.setRoles(List.of(Roles.ADMIN.name(), Roles.USER.name()));
         userService.add(admin);
-   }
+    }
 
     private void addFilms(FilmRepository filmRepository) {
         Film film = new Film();
         film.setTitle("American Psycho");
-        film.setTmdbId(1359L);
-        film.setDescription("A wealthy New York investment banking executive hides his alternate psychopathic ego from his co-workers and friends as he escalates deeper into his illogical, gratuitous fantasies.");
-        film.setReleaseYear(2000);
+        long tmdbId = 1359L;
+        film.setTmdbId(tmdbId);
+        film.setDescription("A wealthy New York investment banking executive" +
+                "hides his alternate psychopathic ego from his co-workers and" +
+                "friends as he escalates deeper into his illogical, gratuitous fantasies.");
+        int year = 2000;
+        film.setReleaseYear(year);
         filmRepository.save(film);
 
         film = new Film();
         film.setTitle("Batman Begins");
         film.setTmdbId(272L);
-        film.setDescription("Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.");
+        film.setDescription("Driven by tragedy, billionaire Bruce Wayne" +
+                "dedicates his life to uncovering and defeating the corruption" +
+                "that plagues his home, Gotham City.");
         film.setReleaseYear(2005);
         filmRepository.save(film);
 
         film = new Film();
         film.setTitle("Driver");
-        film.setTmdbId(64690L);
+        tmdbId = 64690L;
+        film.setTmdbId(tmdbId);
         film.setDescription("Driver is a skilled Hollywood stuntman who moonlights as a getaway driver for criminals.");
-        film.setReleaseYear(2011);
+        year = 2011;
+        film.setReleaseYear(year);
         filmRepository.save(film);
     }
 }

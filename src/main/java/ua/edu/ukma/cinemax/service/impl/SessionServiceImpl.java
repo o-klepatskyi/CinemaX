@@ -1,15 +1,7 @@
 package ua.edu.ukma.cinemax.service.impl;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.Seat;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
@@ -19,17 +11,24 @@ import ua.edu.ukma.cinemax.exception.InvalidSessionTime;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Session;
 import ua.edu.ukma.cinemax.persistance.entity.Ticket;
-import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.SessionRepository;
 import ua.edu.ukma.cinemax.service.SessionService;
-import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.service.UserService;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static ua.edu.ukma.cinemax.dto.TicketStatus.STATUS_FREE;
 
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
+    private static final long SESSION_DURATION_HOURS = 2;
     //private static final LocalTime END_OF_DAY = LocalTime.of(23, 59, 59);
     private final SessionRepository sessionRepository;
     private final SessionConverter converter;
@@ -45,8 +44,9 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public Session get(Long id) {
         Optional<Session> maybeSession = sessionRepository.findById(id);
-        if (maybeSession.isEmpty())
+        if (maybeSession.isEmpty()) {
             throw new InvalidIDException("No session with id " + id, null);
+        }
         return maybeSession.get();
     }
 
@@ -104,6 +104,4 @@ public class SessionServiceImpl implements SessionService {
             throw new InvalidSessionTime();
         }
     }
-
-    private static final long SESSION_DURATION_HOURS = 2;
 }

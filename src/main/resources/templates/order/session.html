@@ -4,26 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Ticket booking</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+          rel="stylesheet">
     <style>
         table, td {
             border: 1px solid;
             text-align: center;
         }
+
         td {
             width: 30px;
-            height:30px;
+            height: 30px;
         }
+
         .reserved {
             background-color: yellow;
         }
+
         .cell {
             width: 100%;
             height: 100%;
         }
+
         .bought {
             background-color: red;
         }
@@ -39,7 +43,7 @@
                     <div class="alert alert-info">
                         Successfully booked tickets!
                         <a th:href="@{/order/{username}(username=${#authentication.getPrincipal().getUsername()})}">
-                           Go to Your shopping cart.
+                            Go to Your shopping cart.
                         </a>
                     </div>
                 </div>
@@ -73,21 +77,21 @@
                                     <span th:text="${iStat.index} + 1"></span>
                                 </td>
                                 <td th:each="seat: ${aisle}">
-                                    <div th:if="${seat.status} == 0" class="cell">
+                                    <div class="cell" th:if="${seat.status} == 0">
                                         <input class="cell"
-                                               type="checkbox"
+                                               th:field="*{seats}"
                                                th:name="${seat.status}"
                                                th:value="${#lists.size(aisle)} * ${seat.row} + ${seat.column}"
-                                               th:field="*{seats}">
+                                               type="checkbox">
                                     </div>
-                                    <div th:unless="${seat.status == 0}"
-                                         th:class="${seat.status} == 1 ? 'cell reserved' : 'cell bought'">
+                                    <div th:class="${seat.status} == 1 ? 'cell reserved' : 'cell bought'"
+                                         th:unless="${seat.status == 0}">
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Reserve tickets</button>
+                            <button class="btn btn-primary" type="submit">Reserve tickets</button>
                         </div>
                     </form>
                 </div>

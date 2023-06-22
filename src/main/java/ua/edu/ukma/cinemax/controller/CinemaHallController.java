@@ -1,7 +1,5 @@
 package ua.edu.ukma.cinemax.controller;
 
-import java.util.List;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ua.edu.ukma.cinemax.dto.CinemaHallDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.service.CinemaHallService;
-import ua.edu.ukma.cinemax.service.SessionService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class CinemaHallController {
-    private static final Logger logger = LoggerFactory.getLogger(CinemaHallController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CinemaHallController.class);
     private final CinemaHallService cinemaHallService;
 
     @GetMapping("/cinema-hall/add")
@@ -32,14 +32,14 @@ public class CinemaHallController {
 
     @PostMapping("/cinema-hall/add")
     public String submitNewCinemaHall(@Valid @ModelAttribute("cinemaHall") CinemaHallDto cinemaHall,
-                                   BindingResult result, Model model) {
-        if(result.hasErrors()) {
+                                      BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "cinema-hall/add";
         }
         try {
             cinemaHallService.add(cinemaHall);
-        } catch(Exception ex) {
-            logger.debug(ex.getMessage());
+        } catch (Exception ex) {
+            LOGGER.debug(ex.getMessage());
             return "redirect:/cinema-hall/add?error";
         }
         return "redirect:/cinema-hall/add?success";
@@ -69,7 +69,7 @@ public class CinemaHallController {
         try {
             cinemaHallService.update(cinemaHall);
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
             return String.format("redirect:/cinema-hall/edit/%s?error", id);
         }
 

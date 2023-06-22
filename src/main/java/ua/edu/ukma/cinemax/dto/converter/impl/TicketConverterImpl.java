@@ -37,19 +37,19 @@ public class TicketConverterImpl implements TicketConverter {
             if (dto.getId() != null) {
                 entity.setId(dto.getId());
             }
-            if (dto.getUser() != null){
+            if (dto.getUser() != null) {
                 entity.setUser(dto.getUser());
             }
-            if (dto.getFilmSession() != null){
+            if (dto.getFilmSession() != null) {
                 entity.setFilmSession(dto.getFilmSession());
             }
-            if (dto.getAisle() != null){
+            if (dto.getAisle() != null) {
                 entity.setAisle(dto.getAisle());
             }
-            if (dto.getSeat() != null){
+            if (dto.getSeat() != null) {
                 entity.setSeat(dto.getSeat());
             }
-            if (dto.getIsBought() != null){
+            if (dto.getIsBought() != null) {
                 entity.setIsBought(dto.getIsBought());
             }
         }
