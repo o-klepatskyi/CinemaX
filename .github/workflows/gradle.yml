@@ -1,4 +1,4 @@
-name: CinemaX CI/CD
+name: CinemaX Gradle Build
 
 on:
   push:
@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-gradle:
 
     runs-on: ubuntu-latest
 
@@ -25,13 +25,14 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew build --scan
 
       - name: Run Unit Tests
-        run: ./gradlew test
+        run: ./gradlew check
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         if: success()
         with:
-          name: CinemaX JARs
+          name: CinemaX Artifacts
           path: build/libs
