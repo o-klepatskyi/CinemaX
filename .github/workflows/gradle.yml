@@ -28,12 +28,17 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - name: Run Unit Tests
-        run: ./gradlew test --rerun-tasks
+      - name: Store reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            **/build/reports/
+            **/build/test-results/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
-        if: success()
         with:
-          name: CinemaX Artifacts
+          name: CinemaX
           path: build/libs
