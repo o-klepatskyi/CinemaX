@@ -9,7 +9,7 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.programistich'
+group = 'ua.edu.ukma.cinemax'
 version = '0.0.1'
 sourceCompatibility = JavaVersion.VERSION_11
 
