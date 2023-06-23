@@ -44,6 +44,4 @@ jobs:
           arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
-      - name:
-        if: ${{ failure() }}
-        run: echo "Package was not deployed. Update artifact version and rerun."
+        continue-on-error: true
