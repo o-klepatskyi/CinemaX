@@ -6,6 +6,7 @@ plugins {
     id 'com.gradleup.static-analysis' version '1.4'
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'maven-publish'
 }
 
 group = 'com.programistich'
@@ -58,6 +59,20 @@ staticAnalysis {
         toolVersion '8.8'
         exclude project.fileTree('src/test/java')
         includeVariants { variant -> variant.name.contains('debug') }
+    }
+}
+
+publishing {
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/o-klepatskyi/CinemaX/"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 
