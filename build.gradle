@@ -77,10 +77,13 @@ publishing {
 
     publications {
         register("jar", MavenPublication) {
-            from(components["java"])
+            artifactId 'cinemax'
+
             pom {
                 url.set("https://github.com/o-klepatskyi/CinemaX.git")
             }
+
+            from components.java
         }
     }
 }
