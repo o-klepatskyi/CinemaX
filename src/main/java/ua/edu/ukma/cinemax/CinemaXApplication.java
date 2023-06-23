@@ -13,6 +13,7 @@ public class CinemaXApplication {
     public static void main(String[] args) throws IOException {
         SpringApplication.run(CinemaXApplication.class, args);
         openHomePage();
+        System.out.println("Welcome to cinemaX!");
     }
 
     private static void openHomePage() throws IOException {
