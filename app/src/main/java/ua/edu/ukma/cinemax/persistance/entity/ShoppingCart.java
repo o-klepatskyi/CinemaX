@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import java.util.List;
 import java.util.Objects;

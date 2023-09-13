@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.persistance.entity;
+package ua.edu.ukma.cinemax.commons;
 
 import java.io.Serializable;
 

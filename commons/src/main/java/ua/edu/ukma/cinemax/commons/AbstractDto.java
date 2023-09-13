@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.dto;
+package ua.edu.ukma.cinemax.commons;
 
 import java.io.Serializable;
 

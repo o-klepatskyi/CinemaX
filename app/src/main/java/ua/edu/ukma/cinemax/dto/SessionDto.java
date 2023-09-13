@@ -2,6 +2,7 @@ package ua.edu.ukma.cinemax.dto;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import ua.edu.ukma.cinemax.commons.AbstractDto;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 

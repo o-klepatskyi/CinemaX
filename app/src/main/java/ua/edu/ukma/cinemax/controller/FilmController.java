@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ua.edu.ukma.cinemax.commons.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
-import ua.edu.ukma.cinemax.exception.InvalidIDException;
+import ua.edu.ukma.cinemax.media.ImageService;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
-import ua.edu.ukma.cinemax.media.ImageService;
 import ua.edu.ukma.cinemax.service.SessionService;
 
 import javax.persistence.EntityNotFoundException;

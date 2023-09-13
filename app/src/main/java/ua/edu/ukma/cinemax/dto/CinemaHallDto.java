@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.dto;
 
 import lombok.*;
+import ua.edu.ukma.cinemax.commons.AbstractDto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

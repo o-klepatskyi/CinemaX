@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.CinemaHallDto;
 import ua.edu.ukma.cinemax.dto.converter.CinemaHallConverter;
-import ua.edu.ukma.cinemax.exception.InvalidIDException;
+import ua.edu.ukma.cinemax.commons.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 import ua.edu.ukma.cinemax.persistance.repository.CinemaHallRepository;
 import ua.edu.ukma.cinemax.service.CinemaHallService;

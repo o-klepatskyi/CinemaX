@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.dto;
 
 import lombok.*;
+import ua.edu.ukma.cinemax.commons.AbstractDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

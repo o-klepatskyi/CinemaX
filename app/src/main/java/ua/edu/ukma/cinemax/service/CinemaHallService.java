@@ -5,6 +5,7 @@ import ua.edu.ukma.cinemax.persistance.entity.CinemaHall;
 
 import java.util.List;
 
+
 public interface CinemaHallService {
     void add(CinemaHallDto cinemaHall);
 

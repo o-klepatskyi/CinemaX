@@ -5,7 +5,7 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
 import ua.edu.ukma.cinemax.dto.converter.impl.CinemaHallConverterImpl
 import ua.edu.ukma.cinemax.dto.converters.impl.MockDTO
-import ua.edu.ukma.cinemax.exception.InvalidIDException
+import ua.edu.ukma.cinemax.commons.exception.InvalidIDException
 import ua.edu.ukma.cinemax.persistance.repository.CinemaHallRepository
 import ua.edu.ukma.cinemax.service.impl.CinemaHallServiceImpl
 import java.util.*
@@ -35,7 +35,7 @@ class CinemaHallServiceTest {
     @Test
     fun `Get Cinema Hall By Id Error`() {
         `when`(cinemaHallRepository.findById(MockDTO.cinema.id)).thenReturn(Optional.empty())
-        assertThrows<InvalidIDException> {
+        assertThrows<ua.edu.ukma.cinemax.commons.exception.InvalidIDException> {
             instance.get(MockDTO.cinema.id)
 
         }

@@ -3,6 +3,7 @@ package ua.edu.ukma.cinemax.persistance.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;

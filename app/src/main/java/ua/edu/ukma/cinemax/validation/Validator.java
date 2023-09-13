@@ -3,8 +3,8 @@ package ua.edu.ukma.cinemax.validation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import ua.edu.ukma.cinemax.dto.AbstractDto;
-import ua.edu.ukma.cinemax.persistance.entity.AbstractEntity;
+import ua.edu.ukma.cinemax.commons.AbstractDto;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import java.lang.reflect.Method;
 import java.util.Objects;

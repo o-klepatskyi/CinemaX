@@ -2,6 +2,7 @@ package ua.edu.ukma.cinemax.persistance.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Objects;

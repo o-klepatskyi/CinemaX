@@ -3,6 +3,7 @@ package ua.edu.ukma.cinemax.persistance.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
+import ua.edu.ukma.cinemax.commons.AbstractEntity;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
