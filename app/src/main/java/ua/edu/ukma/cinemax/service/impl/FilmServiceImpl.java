@@ -1,13 +1,7 @@
 package ua.edu.ukma.cinemax.service.impl;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
@@ -23,8 +17,6 @@ import java.util.Optional;
 public class FilmServiceImpl implements FilmService {
     private final FilmRepository filmRepository;
     private final FilmConverter filmConverter;
-    @Value("${tmdb_api_key}")
-    private String tmdbApiKey;
 
     @Override
     public void add(FilmDto film) {
@@ -55,20 +47,5 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void delete(Long id) {
         filmRepository.deleteById(id);
-    }
-
-    @GetMapping(path = "/film/details/{id}")
-    public JsonObject getDetails(@PathVariable Long id) {
-        Film film = get(id);
-        final String uri = String.format(
-                "https://api.themoviedb.org/3/movie/%d?api_key=%s",
-                film.getTmdbId(), tmdbApiKey);
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            String result = restTemplate.getForObject(uri, String.class);
-            return JsonParser.parseString(result).getAsJsonObject();
-        } catch (Exception ignored) {
-            return null;
-        }
     }
 }

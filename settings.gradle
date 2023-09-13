@@ -1,3 +1,4 @@
 rootProject.name = "CinemaX"
 include 'app'
+include 'media-service'
 

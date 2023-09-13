@@ -17,7 +17,7 @@ import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
 import ua.edu.ukma.cinemax.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
-import ua.edu.ukma.cinemax.service.ImageService;
+import ua.edu.ukma.cinemax.media.ImageService;
 import ua.edu.ukma.cinemax.service.SessionService;
 
 import javax.persistence.EntityNotFoundException;
@@ -37,7 +37,7 @@ public class FilmController {
     @GetMapping("/film/all")
     public String selectAll(Model model) {
         List<FilmDto> films = filmService.getAll();
-        films.forEach(x -> x.setImageLink(imageService.getImageLink(x.getId())));
+        films.forEach(x -> x.setImageLink(imageService.getImageLink(x.getTmdbId())));
         model.addAttribute("films", films);
         return "film/all";
     }
@@ -70,7 +70,7 @@ public class FilmController {
         try {
             ModelAndView mav = new ModelAndView("film/details");
             FilmDto film = filmConverter.createFrom(filmService.get(id));
-            film.setImageLink(imageService.getImageLink(film.getId()));
+            film.setImageLink(imageService.getImageLink(film.getTmdbId()));
             mav.addObject("film", film);
             List<SessionDto> sessions = sessionService.getAvailableSessions(id, LocalDate.now());
             mav.addObject("sessions", sessions);
@@ -78,11 +78,6 @@ public class FilmController {
         } catch (EntityNotFoundException e) {
             throw new InvalidIDException("There's no such film with id = " + id, e);
         }
-    }
-
-    @GetMapping(path = "/film/details/{id}")
-    public String selectDetails(@PathVariable Long id) {
-        return filmService.getDetails(id).getAsString();
     }
 
     @GetMapping(path = "/film/edit/{id}")

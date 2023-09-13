@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import ua.edu.ukma.cinemax.service.ImageService;
+import ua.edu.ukma.cinemax.media.ImageService;
 
 @RestController
 @RequiredArgsConstructor

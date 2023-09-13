@@ -1,6 +1,5 @@
 package ua.edu.ukma.cinemax.service;
 
-import com.google.gson.JsonObject;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 
@@ -16,6 +15,4 @@ public interface FilmService {
     void update(FilmDto film);
 
     void delete(Long id);
-
-    JsonObject getDetails(Long id);
 }

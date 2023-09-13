@@ -1,4 +1,4 @@
-package ua.edu.ukma.cinemax.service;
+package ua.edu.ukma.cinemax.media;
 
 public interface ImageService {
     byte[] getFilmImageById(Long id);
