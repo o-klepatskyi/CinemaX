@@ -7,8 +7,6 @@ import java.io.IOException;
 
 @SpringBootApplication(scanBasePackages = {"ua.edu.ukma.cinemax"})
 public class CinemaXApplication {
-    private CinemaXApplication() {
-    }
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(CinemaXApplication.class, args);
