@@ -53,7 +53,7 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in excl
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:15)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:15)
 2022-11-22 17:47:58 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -104,7 +104,7 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:15)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:15)
 2022-11-22 17:47:59 jdbc[3]: null
 org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.get(DbException.java:205)
@@ -158,7 +158,7 @@ org.h2.message.DbException: The connection was not closed by the application and
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:15)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:15)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -572,7 +572,7 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The write format 1 is smaller than the supported format 2 [2.1.214/5]" [50000-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -631,7 +631,7 @@ org.h2.message.DbException: Unsupported database file version or invalid file he
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Unsupported database file version or invalid file header in file "D:/Study/2022-2023/2022-fall/spring/CinemaX/src/main/resources/cinema.db.mv.db" [90048-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -705,7 +705,7 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The write format 1 is smaller than the supported format 2 [2.1.214/5]" [50000-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -772,7 +772,7 @@ org.h2.message.DbException: Unsupported database file version or invalid file he
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Unsupported database file version or invalid file header in file "D:/Study/2022-2023/2022-fall/spring/CinemaX/src/main/resources/cinema.db.mv.db" [90048-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -845,7 +845,7 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The write format 1 is smaller than the supported format 2 [2.1.214/5]" [50000-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -911,7 +911,7 @@ org.h2.message.DbException: Unsupported database file version or invalid file he
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Unsupported database file version or invalid file header in file "D:/Study/2022-2023/2022-fall/spring/CinemaX/src/main/resources/cinema.db.mv.db" [90048-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)

@@ -80,7 +80,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The write format 2 is larger than the supported format 1, and the file was not opened in read-only mode [1.4.200/5]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -145,7 +145,7 @@ org.h2.message.DbException: File corrupted while reading record: null. Possible 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: File corrupted while reading record: null. Possible solution: use the recovery tool [90030-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -225,7 +225,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The write format 2 is larger than the supported format 1, and the file was not opened in read-only mode [1.4.200/5]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -298,7 +298,7 @@ org.h2.message.DbException: File corrupted while reading record: null. Possible 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: File corrupted while reading record: null. Possible solution: use the recovery tool [90030-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -377,7 +377,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The write format 2 is larger than the supported format 1, and the file was not opened in read-only mode [1.4.200/5]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -449,7 +449,7 @@ org.h2.message.DbException: File corrupted while reading record: null. Possible 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:11)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:11)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: File corrupted while reading record: null. Possible solution: use the recovery tool [90030-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -614,7 +614,7 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:12)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:12)
 2022-12-14 07:35:39 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
@@ -652,7 +652,7 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:12)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:12)
 2022-12-14 09:08:07 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
@@ -851,7 +851,7 @@ alter table cinema_halls add constraint UK_1f4woicansd090lpyqu3t9lei unique (nam
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:12)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:12)
 2022-12-14 12:24:20 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "NAME" not found; SQL statement:
 alter table cinema_halls add constraint UK_1f4woicansd090lpyqu3t9lei unique (name) [42122-214]
@@ -904,7 +904,7 @@ alter table cinema_halls add constraint UK_1f4woicansd090lpyqu3t9lei unique (nam
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at ua.edu.ukma.cinemax.CinemaXApplication.main(CinemaXApplication.java:12)
+	at ua.edu.ukma.cinemax.CinemaXMediaServiceApp.main(CinemaXApplication.java:12)
 2022-12-14 13:47:07 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
