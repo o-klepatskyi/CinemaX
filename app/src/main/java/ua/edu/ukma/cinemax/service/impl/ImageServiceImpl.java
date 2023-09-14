@@ -24,17 +24,19 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public String getImageLink(Long tmdbId) {
-        ResponseEntity<FilmImageUrlDto> responseEntity = restTemplate.getForEntity(
-                MEDIA_SERVICE_URL + "?id=" + tmdbId,
-                FilmImageUrlDto.class);
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            var body = responseEntity.getBody();
-            if (body == null) return null;
-            return body.getFilmImageUrl();
-        } else {
-            // Handle error or throw an exception if needed
-            System.out.println("Error occurred: " + responseEntity.getStatusCode());
-            return null;
+        try {
+            ResponseEntity<FilmImageUrlDto> responseEntity = restTemplate.getForEntity(
+                    MEDIA_SERVICE_URL + "?id=" + tmdbId,
+                    FilmImageUrlDto.class);
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                var body = responseEntity.getBody();
+                if (body == null) return null;
+                return body.getFilmImageUrl();
+            } else {
+                throw new Exception("Error occurred: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception ignored) {
+            return "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
         }
     }
 }
