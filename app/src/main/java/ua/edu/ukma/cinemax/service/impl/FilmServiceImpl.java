@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,12 +14,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String FILM_SERVICE_ENDPOINT = "http://localhost:15501/film/";
+    @Value("${film-service-url}")
+    private String FILM_SERVICE_URL;
 
     @Override
     public void add(FilmDto film) {
         ResponseEntity<FilmDto> response = restTemplate.postForEntity(
-                FILM_SERVICE_ENDPOINT,
+                FILM_SERVICE_URL,
                 film,
                 FilmDto.class
         );
@@ -30,7 +32,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public FilmDto get(Long id) {
         ResponseEntity<FilmDto> response = restTemplate.getForEntity(
-                FILM_SERVICE_ENDPOINT + id,
+                FILM_SERVICE_URL + id,
                 FilmDto.class
         );
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -42,7 +44,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public List<FilmDto> getAll() {
         ResponseEntity<FilmDto[]> response = restTemplate.getForEntity(
-                FILM_SERVICE_ENDPOINT,
+                FILM_SERVICE_URL,
                 FilmDto[].class
         );
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -54,7 +56,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void update(FilmDto film) {
         restTemplate.put(
-                FILM_SERVICE_ENDPOINT + film.getId(),
+                FILM_SERVICE_URL + film.getId(),
                 film,
                 FilmDto.class
         );
@@ -62,6 +64,6 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void delete(Long id) {
-        restTemplate.delete(FILM_SERVICE_ENDPOINT + id);
+        restTemplate.delete(FILM_SERVICE_URL + id);
     }
 }

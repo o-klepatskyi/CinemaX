@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,9 @@ public class ImageServiceImpl implements ImageService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+    @Value("${media-service-url}")
+    private String MEDIA_SERVICE_URL;
+
     @Override
     public byte[] getFilmImageById(Long tmdbId) {
         return restTemplate.getForObject(getImageLink(tmdbId), byte[].class);
@@ -21,7 +25,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String getImageLink(Long tmdbId) {
         ResponseEntity<FilmImageUrlDto> responseEntity = restTemplate.getForEntity(
-                "http://localhost:15500/film-image-url?id=" + tmdbId,
+                MEDIA_SERVICE_URL + "?id=" + tmdbId,
                 FilmImageUrlDto.class);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             var body = responseEntity.getBody();
