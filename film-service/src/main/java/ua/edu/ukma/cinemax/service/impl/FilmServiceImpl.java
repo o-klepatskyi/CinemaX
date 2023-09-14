@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
-import ua.edu.ukma.cinemax.commons.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.persistance.repository.FilmRepository;
 import ua.edu.ukma.cinemax.service.FilmService;
@@ -19,17 +18,13 @@ public class FilmServiceImpl implements FilmService {
     private final FilmConverter filmConverter;
 
     @Override
-    public void add(FilmDto film) {
-        filmRepository.save(filmConverter.createFrom(film));
+    public FilmDto add(FilmDto film) {
+        return filmConverter.createFrom(filmRepository.save(filmConverter.createFrom(film)));
     }
 
     @Override
-    public Film get(Long id) {
-        Optional<Film> maybeFilm = filmRepository.findById(id);
-        if (maybeFilm.isEmpty()) {
-            throw new InvalidIDException("No film with id " + id, null);
-        }
-        return maybeFilm.get();
+    public Optional<FilmDto> get(Long id) {
+        return filmRepository.findById(id).map(filmConverter::createFrom);
     }
 
     @Override
@@ -38,10 +33,10 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void update(FilmDto film) {
+    public FilmDto update(FilmDto film) {
         Film filmToUpdate = filmRepository.getReferenceById(film.getId());
         filmConverter.update(film, filmToUpdate);
-        filmRepository.save(filmToUpdate);
+        return filmConverter.createFrom(filmRepository.save(filmToUpdate));
     }
 
     @Override

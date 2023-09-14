@@ -14,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.edu.ukma.cinemax.commons.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
-import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
-import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
 import ua.edu.ukma.cinemax.service.ImageService;
 import ua.edu.ukma.cinemax.service.SessionService;
@@ -32,7 +30,6 @@ public class FilmController {
     private final FilmService filmService;
     private final ImageService imageService;
     private final SessionService sessionService;
-    private final FilmConverter filmConverter;
 
     @GetMapping("/film/all")
     public String selectAll(Model model) {
@@ -69,7 +66,7 @@ public class FilmController {
     public ModelAndView select(@PathVariable Long id) {
         try {
             ModelAndView mav = new ModelAndView("film/details");
-            FilmDto film = filmConverter.createFrom(filmService.get(id));
+            FilmDto film = filmService.get(id);
             film.setImageLink(imageService.getImageLink(film.getTmdbId()));
             mav.addObject("film", film);
             List<SessionDto> sessions = sessionService.getAvailableSessions(id, LocalDate.now());
@@ -82,7 +79,7 @@ public class FilmController {
 
     @GetMapping(path = "/film/edit/{id}")
     public String getEditPage(@PathVariable Long id, Model model) {
-        Film film = filmService.get(id);
+        FilmDto film = filmService.get(id);
         model.addAttribute("film", film);
         return "film/edit";
     }
@@ -97,7 +94,7 @@ public class FilmController {
         try {
             filmService.update(film);
         } catch (Exception e) {
-            LOGGER.debug(e.getMessage());
+            LOGGER.error(e.getMessage());
             return String.format("redirect:/film/edit/%s?error", id);
         }
 
@@ -109,6 +106,7 @@ public class FilmController {
         try {
             filmService.delete(id);
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return "redirect:/film/all?delete_error";
         }
         return "redirect:/film/all?success";

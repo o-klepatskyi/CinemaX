@@ -8,7 +8,6 @@ plugins {
 
 dependencies {
     implementation project(':commons')
-    implementation project(':film-service')
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
