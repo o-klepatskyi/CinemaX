@@ -6,6 +6,7 @@ plugins {
 }
 
 dependencies {
+    implementation project(':commons')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.google.code.gson:gson'
 }

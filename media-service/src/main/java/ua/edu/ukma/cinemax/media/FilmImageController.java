@@ -14,7 +14,7 @@ public class FilmImageController {
     private ImageService imageService;
 
     @GetMapping("/film-image-url")
-    public ResponseEntity<FilmImageResponse> getFilmImage(@RequestParam("id") Long id) {
-        return ResponseEntity.ok(new FilmImageResponse(imageService.getImageLink(id)));
+    public ResponseEntity<FilmImageUrlDto> getFilmImage(@RequestParam("id") Long id) {
+        return ResponseEntity.ok(new FilmImageUrlDto(imageService.getImageLink(id)));
     }
 }

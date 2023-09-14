@@ -15,9 +15,9 @@ import ua.edu.ukma.cinemax.commons.exception.InvalidIDException;
 import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.dto.SessionDto;
 import ua.edu.ukma.cinemax.dto.converter.FilmConverter;
-import ua.edu.ukma.cinemax.media.ImageService;
 import ua.edu.ukma.cinemax.persistance.entity.Film;
 import ua.edu.ukma.cinemax.service.FilmService;
+import ua.edu.ukma.cinemax.service.ImageService;
 import ua.edu.ukma.cinemax.service.SessionService;
 
 import javax.persistence.EntityNotFoundException;
