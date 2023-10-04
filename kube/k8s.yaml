@@ -1,3 +1,10 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: cinemax
+  labels:
+    name: cinemax
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
