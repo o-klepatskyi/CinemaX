@@ -17,26 +17,23 @@ public class ImageServiceImpl implements ImageService {
     @Value("${media-service-url}")
     private String MEDIA_SERVICE_URL;
 
+    private static final String DEFAULT_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+
     @Override
     public byte[] getFilmImageById(Long tmdbId) {
-        return restTemplate.getForObject(getImageLink(tmdbId), byte[].class);
+        try {
+            return restTemplate.getForObject(MEDIA_SERVICE_URL + "/film-image?id=" + tmdbId, byte[].class);
+        } catch(Exception ignored) {
+            return restTemplate.getForObject(DEFAULT_IMAGE, byte[].class);
+        }
     }
 
     @Override
     public String getImageLink(Long tmdbId) {
         try {
-            ResponseEntity<FilmImageUrlDto> responseEntity = restTemplate.getForEntity(
-                    MEDIA_SERVICE_URL + "?id=" + tmdbId,
-                    FilmImageUrlDto.class);
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                var body = responseEntity.getBody();
-                if (body == null) return null;
-                return body.getFilmImageUrl();
-            } else {
-                throw new Exception("Error occurred: " + responseEntity.getStatusCode());
-            }
+            return "/film/image/" + tmdbId;
         } catch (Exception ignored) {
-            return "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+            return DEFAULT_IMAGE;
         }
     }
 }
