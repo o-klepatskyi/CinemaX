@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/film")
+@RequestMapping("/api/film")
 public class FilmController {
     private final FilmService filmService;
 

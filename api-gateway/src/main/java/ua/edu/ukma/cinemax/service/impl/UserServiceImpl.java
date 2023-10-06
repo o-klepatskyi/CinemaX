@@ -1,5 +1,6 @@
 package ua.edu.ukma.cinemax.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,8 +9,6 @@ import ua.edu.ukma.cinemax.dto.converter.UserConverter;
 import ua.edu.ukma.cinemax.persistance.entity.User;
 import ua.edu.ukma.cinemax.persistance.repository.UserRepository;
 import ua.edu.ukma.cinemax.service.UserService;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
