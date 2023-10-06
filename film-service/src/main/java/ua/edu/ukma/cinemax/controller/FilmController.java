@@ -1,6 +1,7 @@
 package ua.edu.ukma.cinemax.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 public class FilmController {
     private final FilmService filmService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FilmDto>> getAllFilms() {
         return ResponseEntity.ok(filmService.getAll());
     }
