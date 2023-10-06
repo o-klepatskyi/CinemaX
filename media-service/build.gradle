@@ -9,4 +9,12 @@ dependencies {
     implementation project(':commons')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.google.code.gson:gson'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+}
+
+test {
+    jvmArgs '--enable-preview'
+    useJUnitPlatform()
 }
