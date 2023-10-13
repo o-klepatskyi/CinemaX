@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -111,6 +112,11 @@ public class FilmController {
             return "redirect:/film/all?delete_error";
         }
         return "redirect:/film/all?success";
+    }
+
+    @JmsListener(destination = "FilmsChangedTopic")
+    public void receiveFilmEvent(String message) {
+        LOGGER.info("Received film event: " + message);
     }
 
 }
