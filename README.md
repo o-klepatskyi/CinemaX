@@ -1,4 +1,19 @@
 # Cinema X
+
+### Lab 5
+- Підняти брокера JMS додатково можна Kafka
+  - activemq
+- Створити API мікросервісу через повідомлення JMS додатково можна Kafka
+  - film-service/FilmJmsController
+  - JmsListener listens to queue, receives messages and calls methods, returns data to another queue
+- Інтегрувати 2 сервіси через створений API та брокера через point-to-point та pub/sub механізми
+  - app/FilmJmsService <—> film-service/FilmJmsController point-to-point communication
+  - app/FilmController <— film-service/FilmServiceImpl pub/sub information about film changes 
+- Додати фільтрацію Message-ів
+  - film-service/FilmJmsController filters messages and does methods according to message type
+- Для налаштування використати свої сервіси та брокер(можна і вбудований)
+  - Aforementioned services and activemq, added to k8s
+
 ### Lab 4 TODO:
 - [x] Створити контролери у мікросервісах, якщо їх ще немає(мінімум 3 повинно бути)
 - [x] Використати для них mime типи (мінімум 3 різні):
