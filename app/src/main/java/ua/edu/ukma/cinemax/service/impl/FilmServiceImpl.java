@@ -10,7 +10,7 @@ import ua.edu.ukma.cinemax.service.FilmService;
 
 import java.util.List;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
     private final RestTemplate restTemplate = new RestTemplate();
