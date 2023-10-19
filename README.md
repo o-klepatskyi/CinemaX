@@ -1,4 +1,14 @@
 # Cinema X
+### Lab 6
+- [ ] Додати до своїх сервісів Spring Boot Actuator та налаштувати
+  * Додав залежності у build.gradle
+  * Додав у application.properties налаштування management.endpoints.web.base-path/management.endpoints.web.exposure.include
+- [ ] Додати до архітектури системи вузол із Spring Admin
+  * новий gradle module з сервер залежністю
+- [ ] Налаштувати всі сервіси на взаємодію з ним
+  * Додав залежність у build.gradle для кожного модулю
+  * Прописаний шлях до boot admin
+
 ### Lab 4 TODO:
 - [x] Створити контролери у мікросервісах, якщо їх ще немає(мінімум 3 повинно бути)
 - [x] Використати для них mime типи (мінімум 3 різні):
