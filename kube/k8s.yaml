@@ -5,6 +5,32 @@ metadata:
   labels:
     name: cinemax
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: cinemax
+  name: node-list-role
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: cinemax
+  name: node-list-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: cinemax
+roleRef:
+  kind: Role
+  name: node-list-role
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,12 +45,33 @@ spec:
       labels:
         app: cinemax
     spec:
+      volumes:
+        - name: filebeat-config-1
+          configMap:
+            name: filebeat-config-1
+        - name: shared-logs-1
+          emptyDir: { }
       containers:
         - name: app
           image: app:latest
           ports:
             - containerPort: 8080
           imagePullPolicy: Never
+          volumeMounts:
+            - name: shared-logs-1
+              mountPath: /var/log
+
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.17.0
+          args: [ "-c", "/etc/filebeat.yml", "-e" ]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: filebeat-config-1
+              mountPath: /etc/filebeat.yml
+              subPath: filebeat.yml
+            - name: shared-logs-1
+              mountPath: /var/log
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,12 +87,35 @@ spec:
       labels:
         app: film-service
     spec:
+      volumes:
+        - name: filebeat-config-2
+          configMap:
+            name: filebeat-config-2
+        - name: shared-logs-2
+          emptyDir: { }
       containers:
         - name: film-service
           image: film-service:latest
           ports:
             - containerPort: 8080
           imagePullPolicy: Never
+          volumeMounts:
+            - name: filebeat-config-2
+              mountPath: /etc/filebeat.yml
+              subPath: filebeat.yml
+            - name: shared-logs-2
+              mountPath: /var/log
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.17.0
+          args: [ "-c", "/etc/filebeat.yml", "-e" ]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: filebeat-config-2
+              mountPath: /etc/filebeat.yml
+              subPath: filebeat.yml
+            - name: shared-logs-2
+              mountPath: /var/log
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,12 +131,96 @@ spec:
       labels:
         app: media-service
     spec:
+      volumes:
+        - name: filebeat-config-3
+          configMap:
+            name: filebeat-config-3
+        - name: shared-logs-3
+          emptyDir: { }
       containers:
         - name: media-service
           image: media-service:latest
           ports:
             - containerPort: 8080
           imagePullPolicy: Never
+          volumeMounts:
+            - name: filebeat-config-3
+              mountPath: /etc/filebeat.yml
+              subPath: filebeat.yml
+            - name: shared-logs-3
+              mountPath: /var/log
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.17.0
+          args: [ "-c", "/etc/filebeat.yml", "-e" ]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: filebeat-config-3
+              mountPath: /etc/filebeat.yml
+              subPath: filebeat.yml
+            - name: shared-logs-3
+              mountPath: /var/log
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config-1
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: log
+      paths:
+        - /var/log/logger.txt
+      processors:
+        - add_fields:
+            target: ""
+            fields:
+              event.dataset: "cinemax"
+      
+    output.logstash:
+      hosts: ["host.docker.internal:5044"]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config-2
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: log
+      paths:
+        - /var/log/logger.txt
+      processors:
+        - add_fields:
+            target: ""
+            fields:
+              event.dataset: "film-service"
+    
+    output.logstash:
+      hosts: ["host.docker.internal:5044"]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config-3
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: log
+      paths:
+        - /var/log/logger.txt
+      processors:
+        - add_fields:
+            target: ""
+            fields:
+              event.dataset: "media-service"
+    
+    output.logstash:
+      hosts: ["host.docker.internal:5044"]
+#    - dissect:
+#                tokenizer: "[Level = %{loglevel} | Class = %{class} | Thread = %{thread} | Message = %{message} |  | Time = %{time} | ]"
+#                field: "message"
+#                target_prefix: ""
 ---
 apiVersion: v1
 kind: Service
