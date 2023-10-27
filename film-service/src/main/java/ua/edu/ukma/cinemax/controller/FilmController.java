@@ -1,6 +1,8 @@
 package ua.edu.ukma.cinemax.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,11 @@ import java.util.List;
 @RequestMapping("/film")
 public class FilmController {
     private final FilmService filmService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FilmController.class);
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FilmDto>> getAllFilms() {
+        LOGGER.info("Getting all films");
         return ResponseEntity.ok(filmService.getAll());
     }
 
@@ -30,17 +34,20 @@ public class FilmController {
 
     @PostMapping
     public ResponseEntity<FilmDto> createFilm(@RequestBody FilmDto Film) {
+        LOGGER.info("Creating film");
         return ResponseEntity.ok(filmService.add(Film));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<FilmDto> updateFilm(@PathVariable Long id, @RequestBody FilmDto updatedFilm) {
+        LOGGER.info("Updating film with id: " + id);
         updatedFilm.setId(id);
         return ResponseEntity.ok(filmService.update(updatedFilm));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
+        LOGGER.info("Deleting film with id: " + id);
         filmService.delete(id);
         return ResponseEntity.ok().build();
     }
