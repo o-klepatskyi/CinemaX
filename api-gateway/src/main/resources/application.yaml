@@ -10,15 +10,15 @@ spring:
         - id: film-service
           uri: lb://film-service
           predicates:
-            - Path=/film/**
+            - Path=/api/film/**  # All requests that start with /film/ will be routed to the film-service
         - id: media-service
           uri: lb://media-service
           predicates:
-            - Path=/media/**
+            - Path=/film-image-url, /film-image  # Requests for film images will be routed to the media-service
         - id: app
           uri: lb://app
           predicates:
-            - Path=/app/**
+            - Path=/**  # Catch-all for any other routes not specified above
     discovery:
       client:
         simple:

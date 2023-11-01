@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/film")
+@RequestMapping("/api/film")
 public class FilmController {
     private final FilmService filmService;
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmController.class);
