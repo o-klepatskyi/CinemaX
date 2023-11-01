@@ -14,6 +14,10 @@ public class ApiGatewayApplication {
                 .route("film-service", r ->
                         r.path("/film/**")
                                 .uri("lb://film-service")
+                ).
+                route("media-service", r ->
+                        r.path("/film-image-url/", "/film-image")
+                                .uri("lb://media-service")
                 )
                 .build();
     }

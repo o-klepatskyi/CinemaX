@@ -31,6 +31,7 @@ public class FilmController {
     private String appName;
 
     @GetMapping("/greeting")
+    @ResponseBody
     public String greeting() {
         return String.format(
                 "Hello from '%s'!", eurekaClient.getApplication(appName).getName());
