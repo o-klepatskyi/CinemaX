@@ -18,7 +18,7 @@ public class FilmImageController {
     private ImageService imageService;
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmImageController.class);
 
-    @GetMapping("/film-image-url")
+    @GetMapping(" ")
     public ResponseEntity<FilmImageUrlDto> getFilmImageURL(@RequestParam("id") Long id) {
         LOGGER.info("Getting message with id: " + id);
         return ResponseEntity.ok(new FilmImageUrlDto(imageService.getImageLink(id)));
