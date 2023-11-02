@@ -18,7 +18,7 @@ public class ApiGatewayApplication {
         return builder.routes()
                 .route("film-service", r -> r.path("/api/film/**")
                         .uri("lb://film-service"))
-                .route("media-service", r -> r.path("/film-image-url/", "/film-image/")
+                .route("media-service", r -> r.path("/media/**")
                         .uri("lb://media-service"))
                 .route("app", r -> r.path("/**")
                         .uri("lb://app"))

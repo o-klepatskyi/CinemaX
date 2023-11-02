@@ -8,17 +8,21 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequiredArgsConstructor
-@AllArgsConstructor
+@RequestMapping("/media")
 public class FilmImageController {
-    private ImageService imageService;
+    private final ImageService imageService;
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmImageController.class);
 
-    @GetMapping(" ")
+    public FilmImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
+
+    @GetMapping("/film-image-url")
     public ResponseEntity<FilmImageUrlDto> getFilmImageURL(@RequestParam("id") Long id) {
         LOGGER.info("Getting message with id: " + id);
         return ResponseEntity.ok(new FilmImageUrlDto(imageService.getImageLink(id)));
