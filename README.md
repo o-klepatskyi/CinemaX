@@ -1,4 +1,11 @@
 # Cinema X
+
+### Lab 08
+Використати щонайменше 3 модулі Spring Cloud у своїх сервісах чи додати нові сервіси
+* Eureka
+* Gateway
+* Feign Client
+
 ### Lab 07
 1) Обрати систему візуалізації та розгорнути(Grafana, Kibana тощо)
     - Kibana
