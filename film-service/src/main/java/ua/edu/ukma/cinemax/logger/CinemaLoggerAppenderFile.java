@@ -14,6 +14,7 @@ public class CinemaLoggerAppenderFile extends ACinemaLoggerAppender {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
+//        Path root = Paths.get(".").normalize().toAbsolutePath();
         Path root = Paths.get("/var/log").normalize().toAbsolutePath();
         String path = root + "/logger.txt";
         File file = new File(path);

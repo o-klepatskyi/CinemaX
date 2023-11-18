@@ -1,29 +1,33 @@
 package ua.edu.ukma.cinemax.media;
 
-import com.example.grpc.TestServiceProto;
-import io.grpc.Status;
-import io.grpc.StatusRuntimeException;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import ua.edu.ukma.cinemax.grpc.TestClient;
-
-import java.util.Iterator;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequiredArgsConstructor
+@RequestMapping("/media")
 public class FilmImageController {
-    @Autowired
-    private ImageService imageService;
+    private final ImageService imageService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FilmImageController.class);
+
+    public FilmImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @Autowired
     private TestClient testClient;
 
     @GetMapping("/film-image-url")
     public ResponseEntity<FilmImageUrlDto> getFilmImageURL(@RequestParam("id") Long id) {
+        LOGGER.info("Getting message with id: " + id);
         return ResponseEntity.ok(new FilmImageUrlDto(imageService.getImageLink(id)));
     }
 
@@ -32,6 +36,7 @@ public class FilmImageController {
             produces = MediaType.IMAGE_JPEG_VALUE
     )
     public @ResponseBody byte[] getFilmImage(@RequestParam("id") Long id) {
+        LOGGER.info("Getting message with id: " + id);
         return imageService.getFilmImageById(id);
     }
 
