@@ -48,9 +48,11 @@ public class UserConverterImpl implements UserConverter {
             if (dto.getUsername() != null) {
                 entity.setUsername(dto.getUsername());
             }
+
             if (dto.getPassword() != null) {
                 entity.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
+
             if (dto.getRoles() != null) {
                 entity.setRoles(dto.getRoles().stream().map(roleRepository::findByName).collect(Collectors.toList()));
             }

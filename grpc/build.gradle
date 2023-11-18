@@ -1,0 +1,22 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id "com.google.protobuf" version "0.9.4"
+}
+
+dependencies {
+    implementation project(':commons')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'net.devh:grpc-spring-boot-starter:2.15.0.RELEASE'
+    implementation 'com.google.code.gson:gson'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+}
+
+test {
+    jvmArgs '--enable-preview'
+    useJUnitPlatform()
+}
