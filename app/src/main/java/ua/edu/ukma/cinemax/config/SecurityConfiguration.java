@@ -17,6 +17,7 @@ import ua.edu.ukma.cinemax.security.config.CustomAccessDeniedHandler;
 
 import static ua.edu.ukma.cinemax.security.model.Roles.ADMIN;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

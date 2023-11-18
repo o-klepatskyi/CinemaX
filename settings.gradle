@@ -4,4 +4,4 @@ include 'media-service'
 include 'film-service'
 include 'commons'
 include 'grpc'
-
+include 'api-gateway'
