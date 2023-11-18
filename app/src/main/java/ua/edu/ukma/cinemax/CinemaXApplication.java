@@ -12,4 +12,5 @@ public class CinemaXApplication {
         SpringApplication.run(CinemaXApplication.class, args);
         System.out.println("Welcome to cinemaX!");
     }
+
 }

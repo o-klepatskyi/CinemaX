@@ -17,6 +17,7 @@ public class ImageServiceImpl implements ImageService {
     @Value("${media-service-url}")
     private String MEDIA_SERVICE_URL;
 
+
     private static final String DEFAULT_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
 
     @Override

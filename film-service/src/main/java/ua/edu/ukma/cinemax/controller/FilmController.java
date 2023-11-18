@@ -17,6 +17,7 @@ public class FilmController {
     private final FilmService filmService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity<List<FilmDto>> getAllFilms() {
         return ResponseEntity.ok(filmService.getAll());
     }

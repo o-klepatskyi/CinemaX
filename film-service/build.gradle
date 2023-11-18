@@ -21,4 +21,3 @@ test {
     jvmArgs '--enable-preview'
     useJUnitPlatform()
 }
-
