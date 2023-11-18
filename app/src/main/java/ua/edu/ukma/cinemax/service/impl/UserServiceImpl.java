@@ -1,5 +1,6 @@
 package ua.edu.ukma.cinemax.service.impl;
 
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.cinemax.dto.UserDto;
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> getById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override

@@ -3,6 +3,7 @@ package ua.edu.ukma.cinemax.controller;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,7 @@ public class FilmController {
     private final ImageService imageService;
     private final SessionService sessionService;
 
-    @GetMapping("/film/all")
+    @GetMapping(value = "/film/all", produces = MediaType.TEXT_HTML_VALUE)
     public String selectAll(Model model) {
         List<FilmDto> films = filmService.getAll();
         films.forEach(x -> x.setImageLink(imageService.getImageLink(x.getTmdbId())));
