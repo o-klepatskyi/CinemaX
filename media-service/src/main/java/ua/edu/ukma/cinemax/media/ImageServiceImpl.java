@@ -12,6 +12,9 @@ import org.springframework.web.client.RestTemplate;
 public class ImageServiceImpl implements ImageService {
     @Value("${tmdb_api_key}")
     private String tmdbApiKey;
+
+    private static final String DEFAULT_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+
     @Override
     public byte[] getFilmImageById(Long tmdbId) {
         return new RestTemplate().getForObject(getImageLink(tmdbId), byte[].class);
@@ -21,7 +24,7 @@ public class ImageServiceImpl implements ImageService {
     public String getImageLink(Long tmdbId) {
         JsonObject filmDetails = getDetails(tmdbId);
         if (filmDetails == null) {
-            return null; // todo default image???
+            return DEFAULT_IMAGE;
         }
         String posterPath = filmDetails.get("poster_path").getAsString();
         return String.format("https://image.tmdb.org/t/p/w500%s", posterPath);
