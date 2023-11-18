@@ -1,0 +1,7 @@
+rootProject.name = "CinemaX"
+include 'app'
+include 'media-service'
+include 'film-service'
+include 'commons'
+include 'api-gateway'
+

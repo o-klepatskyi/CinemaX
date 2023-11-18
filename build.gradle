@@ -1,0 +1,83 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id 'com.gradleup.static-analysis' version '1.4'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'maven-publish'
+}
+
+allprojects {
+    group = 'ua.edu.ukma.cinemax'
+    version = '0.0.2'
+    sourceCompatibility = JavaVersion.VERSION_11
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly.extendsFrom annotationProcessor
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    }
+
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = "UTF-8"
+        }
+    }
+}
+
+staticAnalysis {
+    penalty {
+        maxErrors = 0
+        maxWarnings = 0
+    }
+
+    checkstyle {
+        toolVersion '8.8'
+        exclude project.fileTree('src/test/java')
+        includeVariants { variant -> variant.name.contains('debug') }
+    }
+}
+
+publishing {
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/o-klepatskyi/CinemaX/"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+    publications {
+        register("jar", MavenPublication) {
+            artifactId 'cinemax'
+
+            pom {
+                url.set("https://github.com/o-klepatskyi/CinemaX.git")
+            }
+
+            from components.java
+        }
+    }
+}
+
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjsr305=strict']
+        jvmTarget = '11'
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

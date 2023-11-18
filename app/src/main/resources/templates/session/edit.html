@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Edit Session</title>
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        Session was edited! <a th:href="@{/session/all}">See all sessions</a>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h2 class="text-center">Edit session</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post"
+                          role="form"
+                          th:action="@{'/session/edit/' + ${session.id}}"
+                          th:object="${session}">
+                        <div class="form-group mb-3">
+                            <label class="control-label">ID</label>
+                            <input class="form-control"
+                                   id="id"
+                                   name="id"
+                                   readonly
+                                   th:field="*{id}"
+                                   type="text"/>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Film</label>
+                                <div class="form-group blu-margin">
+                                    <select class="form-control" id="filmDropper" th:field="${session.film}">
+                                        <option value="0">Select Film</option>
+                                        <option th:each="film : ${films}" th:text="${film.title}"
+                                                th:value="${film.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Cinema Hall</label>
+                                <div class="form-group blu-margin">
+                                    <select class="form-control" id="cinemaHallDropper"
+                                            th:field="${session.cinemaHall}">
+                                        <option value="0">Select Cinema Hall</option>
+                                        <option th:each="cinemaHall : ${cinemaHalls}" th:text="${cinemaHall.name} + ' - ' + ${cinemaHall.description}"
+                                                th:value="${cinemaHall.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Show Date</label>
+                                <div class="col-md-3">
+                                    <input id="date" th:field="${session.date}" type="date"/>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Show Time</label>
+                                <div class="col-md-3">
+                                    <input id="time" step="1800" th:field="${session.time}" type="time"/>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: cinemax
+  labels:
+    name: cinemax
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinemax
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cinemax
+  template:
+    metadata:
+      labels:
+        app: cinemax
+    spec:
+      containers:
+        - name: app
+          image: app:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: film-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: film-service
+  template:
+    metadata:
+      labels:
+        app: film-service
+    spec:
+      containers:
+        - name: film-service
+          image: film-service:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media-service
+  template:
+    metadata:
+      labels:
+        app: media-service
+    spec:
+      containers:
+        - name: media-service
+          image: media-service:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cinemax
+spec:
+  selector:
+    app: cinemax
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: film-service
+spec:
+  selector:
+    app: film-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-service
+spec:
+  selector:
+    app: media-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
