@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpc";
+option java_outer_classname = "TestServiceProto";
+
+service TestService {
+  rpc TestMethod (TestRequest) returns (TestResponse);
+  rpc TestMethodStream (TestRequest) returns (stream TestResponse);
+}
+
+message TestRequest {
+  string data = 1;
+  string index = 2;
+}
+
+message TestResponse {
+  string result = 1;
+}
