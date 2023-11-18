@@ -32,7 +32,7 @@ public class FilmController {
     private final ImageService imageService;
     private final SessionService sessionService;
 
-    @GetMapping(value = "/film/all", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping("/film/all")
     public String selectAll(Model model) {
         List<FilmDto> films = filmService.getAll();
         films.forEach(x -> x.setImageLink(imageService.getImageLink(x.getTmdbId())));

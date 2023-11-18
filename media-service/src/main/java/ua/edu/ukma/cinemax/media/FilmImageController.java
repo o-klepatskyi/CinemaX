@@ -22,6 +22,9 @@ public class FilmImageController {
         this.imageService = imageService;
     }
 
+    @Autowired
+    private TestClient testClient;
+
     @GetMapping("/film-image-url")
     public ResponseEntity<FilmImageUrlDto> getFilmImageURL(@RequestParam("id") Long id) {
         LOGGER.info("Getting message with id: " + id);
@@ -35,5 +38,33 @@ public class FilmImageController {
     public @ResponseBody byte[] getFilmImage(@RequestParam("id") Long id) {
         LOGGER.info("Getting message with id: " + id);
         return imageService.getFilmImageById(id);
+    }
+
+    @GetMapping("/grpc/data={data}/index={index}")
+    public @ResponseBody String testMethod(@PathVariable("data") String data, @PathVariable("index") String index) {
+        System.out.println("data: " + data + ", index: " + index);
+        try {
+            final TestServiceProto.TestResponse response = testClient.testMethod(data, index);
+            return response.getResult();
+        } catch (StatusRuntimeException exception) {
+            final Status.Code code = exception.getStatus().getCode();
+            return "Exception on level grpc with code: " + code + ", description: " + exception.getStatus().getDescription();
+        }
+    }
+
+    @GetMapping("/grpc/stream/data={data}/index={index}")
+    public @ResponseBody String testMethodStream(@PathVariable("data") String data, @PathVariable("index") String index) {
+        System.out.println("data: " + data + ", index: " + index);
+        try {
+            StringBuilder result = new StringBuilder();
+            final Iterator<TestServiceProto.TestResponse> response = testClient.testMethodStream(data, index);
+            while (response.hasNext()) {
+                result.append(response.next().getResult());
+            }
+            return result.toString();
+        } catch (StatusRuntimeException exception) {
+            final Status.Code code = exception.getStatus().getCode();
+            return "Exception on level grpc with code: " + code + ", description: " + exception.getStatus().getDescription();
+        }
     }
 }

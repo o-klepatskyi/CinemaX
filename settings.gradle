@@ -5,4 +5,3 @@ include 'film-service'
 include 'commons'
 include 'eureka-server'
 include 'api-gateway'
-

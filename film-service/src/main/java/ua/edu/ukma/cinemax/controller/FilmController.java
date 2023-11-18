@@ -38,6 +38,7 @@ public class FilmController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity<List<FilmDto>> getAllFilms() {
         LOGGER.info("Getting all films");
         return ResponseEntity.ok(filmService.getAll());

@@ -20,4 +20,12 @@ public class ImageController {
     public @ResponseBody byte[] getFilmImage(@PathVariable Long id) {
         return imageService.getFilmImageById(id);
     }
+
+    @GetMapping(
+            value = "/film/image/link/{id}"
+    )
+    public String getImageLink(@PathVariable Long id) {
+        return imageService.getImageLink(id);
+    }
+
 }

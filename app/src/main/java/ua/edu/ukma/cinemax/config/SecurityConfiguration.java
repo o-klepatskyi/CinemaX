@@ -52,8 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register/**",
                         "/film/all",
-                        "/film/image/**",
-                        "/film/image/link/**")
+                        "film/image/**",
+                        "film/image/link/**")
                 .permitAll()
                 .antMatchers("/register/admin/**", "/users",
                         "/**/add/**", "/**/edit/**", "/**/delete/**",
@@ -75,5 +75,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .permitAll())
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
-
 }

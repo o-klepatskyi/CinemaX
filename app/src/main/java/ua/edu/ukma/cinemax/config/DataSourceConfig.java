@@ -1,5 +1,6 @@
 package ua.edu.ukma.cinemax.config;
 
+import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,10 +52,12 @@ public class DataSourceConfig {
             if (!ddl.startsWith("create")) {
                 return;
             }
+
             for (String name : Arrays.stream(Roles.values()).map(Roles::name).toList()) {
                 addRoles(roleRepository, name);
             }
             addUsers(userService);
+
             addCinemaHalls(cinemaHallRepository);
         };
     }
