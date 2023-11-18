@@ -1,10 +1,9 @@
 package ua.edu.ukma.cinemax.service;
 
+import java.util.List;
 import java.util.Optional;
 import ua.edu.ukma.cinemax.dto.UserDto;
 import ua.edu.ukma.cinemax.persistance.entity.User;
-
-import java.util.List;
 
 public interface UserService {
     void add(UserDto user);
