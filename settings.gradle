@@ -3,5 +3,7 @@ include 'app'
 include 'media-service'
 include 'film-service'
 include 'commons'
+include 'admin'
 include 'eureka-server'
 include 'api-gateway'
+

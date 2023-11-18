@@ -1,0 +1,21 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+}
+
+dependencies {
+    implementation project(':commons')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'de.codecentric:spring-boot-admin-starter-server:2.7.4'
+
+    // KEKW
+    implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', classifier: 'osx-aarch_64'
+}
+
+test {
+    jvmArgs '--enable-preview'
+    useJUnitPlatform()
+}
+
