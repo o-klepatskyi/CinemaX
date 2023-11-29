@@ -7,7 +7,7 @@ import ua.edu.ukma.cinemax.dto.FilmDto;
 import ua.edu.ukma.cinemax.feign.FilmServiceClient;
 import ua.edu.ukma.cinemax.service.FilmService;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
     private final FilmServiceClient filmServiceClient;
