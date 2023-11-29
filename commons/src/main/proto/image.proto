@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_package = "ua.edu.ukma.cinemax.media";
+option java_outer_classname = "ImageServiceProto";
+
+service ImageService {
+  rpc GetImageMethod (ImageRequest) returns (ImageResponse);
+  rpc GetDefaultImageMethod (DefaultImageRequest) returns (ImageResponse);
+}
+
+message DefaultImageRequest {
+  string path = 1;
+}
+
+message ImageRequest {
+  string path = 1;
+}
+
+message ImageResponse {
+  string url = 1;
+}

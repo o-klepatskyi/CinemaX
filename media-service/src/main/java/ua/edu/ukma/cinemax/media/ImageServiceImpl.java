@@ -1,8 +1,10 @@
 package ua.edu.ukma.cinemax.media;
 
+import com.example.grpc.TestServiceGrpc;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
+import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,7 +15,8 @@ public class ImageServiceImpl implements ImageService {
     @Value("${tmdb_api_key}")
     private String tmdbApiKey;
 
-    private static final String DEFAULT_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+    @GrpcClient("grpc-server")
+    private ImageServiceGrpc.ImageServiceBlockingStub imageServiceBlockingStub;
 
     @Override
     public byte[] getFilmImageById(Long tmdbId) {
@@ -24,10 +27,14 @@ public class ImageServiceImpl implements ImageService {
     public String getImageLink(Long tmdbId) {
         JsonObject filmDetails = getDetails(tmdbId);
         if (filmDetails == null) {
-            return DEFAULT_IMAGE;
+            return imageServiceBlockingStub.getDefaultImageMethod(ImageServiceProto.DefaultImageRequest.newBuilder().build()).getUrl();
         }
         String posterPath = filmDetails.get("poster_path").getAsString();
-        return String.format("https://image.tmdb.org/t/p/w500%s", posterPath);
+        return imageServiceBlockingStub.getImageMethod(
+                ImageServiceProto.ImageRequest.newBuilder()
+                        .setPath(posterPath)
+                        .build()
+        ).getUrl();
     }
 
     private JsonObject getDetails(Long tmdbId) {
