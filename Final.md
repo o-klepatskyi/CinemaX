@@ -1,16 +1,13 @@
-1) Сервіс, що відповідає за аутентифікацію в системі
-    * // TODO
-2) Gateway
+1) Сервіс, що відповідає за аутентифікацію в системі ??
+2) Gateway ??
 3) Service registry (DONE)
-    * admin module з health check film,media,app service
-4) Щонайменше 2 мікросервіси бізнес-логіки
-   * // Film and media
+4) Щонайменше 2 мікросервіси бізнес-логіки (DONE)
 5) REST API (DONE)
 6) JMS API (i Topic i Queue) (DONE)
-7) Сервіс збору і показу телеметрії
-8) 2 модулі зі Spring Cloud
-9) gRPC API з використанням Protobuffer
-10) Тестування між серверної взаємодії
+7) Сервіс збору і показу телеметрії (DONE)
+8) 2 модулі зі Spring Cloud ??
+9) gRPC API з використанням Protobuffer (Rewrite test response)
+10) Тестування між серверної взаємодії ??
 
 * Максимальна оцінка за залік 30 балів.
 * Мінімальна - 0 балів. 
