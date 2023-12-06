@@ -5,6 +5,4 @@ include 'film-service'
 include 'commons'
 include 'admin'
 include 'eureka-server'
-include 'api-gateway'
 include 'grpc'
-

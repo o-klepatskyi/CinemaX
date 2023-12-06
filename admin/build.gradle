@@ -9,9 +9,16 @@ dependencies {
     implementation project(':commons')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'de.codecentric:spring-boot-admin-starter-server:2.7.4'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     // KEKW
     implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', classifier: 'osx-aarch_64'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.3"
+    }
 }
 
 test {
