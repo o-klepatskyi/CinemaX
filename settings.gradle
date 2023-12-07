@@ -6,3 +6,5 @@ include 'commons'
 include 'admin'
 include 'eureka-server'
 include 'grpc'
+include 'api-gateway'
+
