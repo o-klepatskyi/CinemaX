@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import ua.edu.ukma.cinemax.grpc.TestClient;
 import ua.edu.ukma.cinemax.media.FilmImageController;
 import ua.edu.ukma.cinemax.media.ImageService;
 
@@ -22,6 +23,9 @@ public class FilmImageControllerTest {
 
     @MockBean
     private ImageService imageService;
+
+    @MockBean
+    private TestClient testClient;
 
     @Test
     void getFilmImage_ShouldReturnImage() throws Exception {

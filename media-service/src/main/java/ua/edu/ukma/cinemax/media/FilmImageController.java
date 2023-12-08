@@ -17,15 +17,13 @@ import java.util.Iterator;
 @Controller
 @RequestMapping("/media")
 public class FilmImageController {
-    private final ImageService imageService;
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmImageController.class);
-
-    public FilmImageController(ImageService imageService) {
-        this.imageService = imageService;
-    }
 
     @Autowired
     private TestClient testClient;
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/film-image-url")
     public ResponseEntity<FilmImageUrlDto> getFilmImageURL(@RequestParam("id") Long id) {
